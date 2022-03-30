@@ -20,6 +20,7 @@ const userSchema = Yup.object({
   twitterProfile: Yup.string().trim().url('Url invalide'),
   facebookProfile: Yup.string().trim().url('Url invalide'),
   instagramProfile: Yup.string().trim().url('Url invalide'),
+  profilePic: Yup.required('Veuillez ajouter une image'),
 });
 
 exports.userValidation = catchAsync(async (req, res, next) => {
