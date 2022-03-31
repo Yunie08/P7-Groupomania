@@ -11,4 +11,7 @@ export const PrimaryButton = styled.button`
     border-color: ${colors.secondaryDark};
     text-decoration: none;
   }
+  &:focus:not(:hover) {
+    background-color: ${colors.primary};
+  }
 `;

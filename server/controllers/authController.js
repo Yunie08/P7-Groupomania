@@ -24,7 +24,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 // LOGIN
-exports.login = async (req, res, next) => {
+exports.login = catchAsync(async (req, res, next) => {
   const userEmail = req.body.email;
   const user = await User.findOne({
     where: {
@@ -33,7 +33,10 @@ exports.login = async (req, res, next) => {
   });
   // if user exists
   if (!user) {
-    return next(new AppError('Email incorrect', 401));
+    // return next(new AppError('Email incorrect', 401));
+    return res
+      .status(401)
+      .json({ message: 'Combinaison email / mot de passe invalide' });
   }
 
   const passwordIsValid = await bcrypt.compare(
@@ -43,7 +46,10 @@ exports.login = async (req, res, next) => {
 
   // and password is valid
   if (!passwordIsValid) {
-    return next(new AppError('Mot de passe incorrect', 401));
+    // return next(new AppError('Mot de passe incorrect', 401
+    return res
+      .status(401)
+      .json({ message: 'Combinaison email / mot de passe invalide' });
   }
 
   // send authentication token
@@ -53,7 +59,7 @@ exports.login = async (req, res, next) => {
       expiresIn: process.env.TOKEN_EXPIRES_IN,
     }),
   });
-};
+});
 
 // TODO: LOGOUT
 // TODO: FORGOTTEN PASSWORD
