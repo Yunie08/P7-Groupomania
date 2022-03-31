@@ -8,6 +8,8 @@ import Profile from "./pages/Profile";
 import MainHeader from "./components/Header";
 import React from "react";
 
+import ProtectedRoutes from "./components/ProtectedRoutes";
+
 // Style
 import GlobalStyle from "./utils/style/GlobalStyle";
 
@@ -19,9 +21,11 @@ function App() {
         <MainHeader />
         <Routes>
           <Route path="/auth" element={<Auth />} />
-          <Route path="/home" index element={<Home />} />
-          <Route path="/post" element={<Post />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/home" index element={<Home />} />
+            <Route path="/post" element={<Post />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </React.Fragment>
