@@ -5,7 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Input from "react-bootstrap/InputGroup";
-import { PrimaryButton } from "../utils/style/styles";
+import { StyledButton } from "../utils/style/styles";
 
 // Validation schema
 import { userSchema } from "../utils/validation/userSchema";
@@ -229,12 +229,12 @@ const ProfileForm = () => {
           </Row>
 
           <div className="form-group d-flex flex-column align-items-center">
-            <PrimaryButton
+            <StyledButton
               type="submit"
               className="btn btn-primary mt-4 rounded-pill mb-2"
             >
               Mettre à jour mon profil
-            </PrimaryButton>
+            </StyledButton>
           </div>
         </Form>
       )}

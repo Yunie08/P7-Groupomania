@@ -1,15 +1,48 @@
-import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
+import axios from "../utils/api/axiosConfig";
 
 // React-bootsrap components
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { PrimaryButton } from "../utils/style/styles";
+import { StyledButton } from "../utils/style/styles";
 
 // Yup validation schema
 import { signupSchema } from "../utils/validation/signupSchema";
 
+const SIGNUP_URL = "/auth/signup";
+
 const SignupForm = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [isRegistered, setRegistered] = useState(false);
+
+  // Send registering request to API
+  // TODO: separate services in another folder
+  const signup = async ({
+    firstname,
+    lastname,
+    email,
+    password,
+    passwordConfirm,
+  }) => {
+    try {
+      setRegistered(false);
+      await axios.post(SIGNUP_URL, {
+        firstname,
+        lastname,
+        email,
+        password,
+        passwordConfirm,
+      });
+      setRegistered(true);
+      setTimeout(() => navigate("/login"), 2000);
+    } catch (err) {
+      setError(err.response.data.message);
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -20,16 +53,21 @@ const SignupForm = () => {
         passwordConfirm: "",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 1000);
+        signup(values);
       }}
       validationSchema={signupSchema}
     >
       {(formik, isSubmitting) => (
         <Form>
           <Row>
+            {isRegistered && (
+              <div className="text-success text-center py-2">
+                Compte créé ! Vous allez être redirigé pour vous connecter.
+              </div>
+            )}
+            {error && (
+              <div className="text-danger text-center py-2">{error}</div>
+            )}
             <Col lg={6}>
               <div className="form-group">
                 <label htmlFor="signupFirstName" className="mt-3">
@@ -78,6 +116,25 @@ const SignupForm = () => {
           </Row>
 
           <div className="form-group">
+            <label htmlFor="signupEmail" className="mt-3">
+              Email
+            </label>
+            <Field
+              name="email"
+              id="signupEmail"
+              className={
+                formik.touched.email && formik.errors.email
+                  ? "form-control is-invalid"
+                  : "form-control"
+              }
+              type="text"
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <div className="invalid-feedback">{formik.errors.email}</div>
+            ) : null}
+          </div>
+
+          <div className="form-group">
             <label htmlFor="signupPassword" className="mt-3">
               Mot de passe
             </label>
@@ -117,32 +174,13 @@ const SignupForm = () => {
             ) : null}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="signupEmail" className="mt-3">
-              Email
-            </label>
-            <Field
-              name="email"
-              id="signupEmail"
-              className={
-                formik.touched.email && formik.errors.email
-                  ? "form-control is-invalid"
-                  : "form-control"
-              }
-              type="text"
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="invalid-feedback">{formik.errors.email}</div>
-            ) : null}
-          </div>
-
           <div className="form-group d-flex flex-column align-items-center">
-            <PrimaryButton
+            <StyledButton
               type="submit"
               className="btn btn-primary mt-4 rounded-pill mb-2"
             >
               S'inscrire
-            </PrimaryButton>
+            </StyledButton>
           </div>
         </Form>
       )}

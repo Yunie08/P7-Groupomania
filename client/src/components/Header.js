@@ -36,7 +36,7 @@ function MainHeader() {
   return (
     <Styles>
       <header>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
           <Container>
             <Navbar.Brand as={Link} to="/home">
               <Image alt="Groupomania" src={HeaderLogo} />

@@ -1,17 +1,60 @@
 import styled from "styled-components";
 import colors from "./colors";
 
-export const PrimaryButton = styled.button`
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+
+const primaryColor = colors.primary;
+const secondaryDarkColor = colors.secondaryDark;
+
+export const MainCard = styled(Card)`
+  max-width: ${(props) => (props.auth ? "900px" : "750px")};
+`;
+
+export const StyledButton = styled(Button)`
   min-width: 180px;
-  background-color: ${colors.primary};
-  border: 2px solid transparent;
+  color: ${(props) => props.outline && "inherit"};
+  background-color: ${(props) =>
+    props.outline ? "transparent" : primaryColor};
+  border: 2px solid;
+  border-color: ${(props) => (props.outline ? primaryColor : "transparent")};
   &:hover {
     background-color: white;
-    color: ${colors.secondaryDark};
-    border-color: ${colors.secondaryDark};
+    color: ${secondaryDarkColor};
+    border-color: ${secondaryDarkColor};
     text-decoration: none;
   }
-  &:focus:not(:hover) {
-    background-color: ${colors.primary};
+  &:focus {
+    &:not(:hover) {
+      background-color: ${(props) =>
+        props.outline ? "transparent" : primaryColor};
+      border-color: ${primaryColor};
+      color: ${(props) => props.outline && primaryColor};
+    }
   }
+`;
+
+export const LinkStyledButton = styled.button`
+  border: none;
+  background: transparent;
+  color: inherit;
+  &:hover {
+    color: ${colors.secondaryDark};
+    text-decoration: underline;
+  }
+`;
+
+export const ProfilePic = styled.img`
+  max-width: ${(props) => (props.comment ? "40px" : "85px")};
+  max-height: ${(props) => (props.comment ? "40px" : "85px")};
+`;
+
+export const Username = styled.p`
+  font-size: ${(props) => (props.comment ? "16px" : "1.2rem")};
+  font-weight: bold;
+`;
+
+export const PublishedTime = styled.p`
+  font-size: ${(props) => (props.comment ? "0.75em" : "0.9em")};
+  color: ${colors.gray};
 `;

@@ -21,10 +21,11 @@ function App() {
         <MainHeader />
         <Routes>
           <Route path="/auth" element={<Auth />} />
+          <Route path="/home" index element={<Home />} />
           <Route element={<ProtectedRoutes />}>
-            <Route path="/home" index element={<Home />} />
             <Route path="/post" element={<Post />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<Home />} />
           </Route>
         </Routes>
       </BrowserRouter>

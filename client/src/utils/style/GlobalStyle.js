@@ -15,7 +15,7 @@ body {
 
   min-height: 100vh;
 
-  font-family: "TruenoLight", Arial, Helvetica, sans-serif !important;
+  font-family: "TruenoLight", Arial, Helvetica, sans-serif;
   color: ${colors.primary};
 }
 
@@ -23,6 +23,8 @@ h1 {
   text-align: center;
   margin-top : 50px;
 }
+
+
 
 a {
   text-decoration: none !important;

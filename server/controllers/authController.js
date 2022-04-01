@@ -18,7 +18,12 @@ exports.signup = catchAsync(async (req, res, next) => {
     },
   });
   if (!created) {
-    return next(new AppError('Cet email est déjà utilisé', 400));
+    return next(
+      new AppError(
+        'Compte déjà existant. Veuillez vous connecter ou choisir un autre email',
+        400
+      )
+    );
   }
   res.status(201).json({ message: 'Utilisateur créé' });
 });

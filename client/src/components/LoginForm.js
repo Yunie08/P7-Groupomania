@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Formik, Field, Form } from "formik";
-import { PrimaryButton } from "../utils/style/styles";
-import axios from "../utils/api/axiosConfig";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Formik, Field, Form } from "formik";
+import axios from "../utils/api/axiosConfig";
+import { StyledButton } from "../utils/style/styles";
 // Validation schema
 import { loginSchema } from "../utils/validation/loginSchema";
 
@@ -13,6 +13,7 @@ const LoginForm = () => {
   const [error, setError] = useState(null);
 
   // Send login request to API
+  // TODO: separate services in another folder
   const login = async ({ email, password }) => {
     try {
       const response = await axios.post(LOGIN_URL, {
@@ -21,7 +22,7 @@ const LoginForm = () => {
       });
       console.log(response);
       if (response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("token", response.data.token);
         navigate("/home");
       }
     } catch (err) {
@@ -79,12 +80,12 @@ const LoginForm = () => {
           </div>
 
           <div className="form-group d-flex flex-column align-items-center">
-            <PrimaryButton
+            <StyledButton
               type="submit"
               className="btn btn-primary mt-4 rounded-pill mb-2"
             >
               Se connecter
-            </PrimaryButton>
+            </StyledButton>
           </div>
         </Form>
       )}
