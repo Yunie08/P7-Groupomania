@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 });
 
 // Maximal authorized file size
-const maxSize = 2097152; // 2Mo
+const maxSize = 2097152 * 2; // 4Mo
 
 const upload = multer({
   storage,

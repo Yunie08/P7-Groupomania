@@ -21,15 +21,15 @@ module.exports = (Model) =>
     }
 
     // We get the document the user is willing to access
-    console.log(documentId);
     const document = await Model.findOne({
       where: {
         id: documentId,
       },
     });
     console.log(document);
+    const ownerId = Model === User ? document.id : document.userId;
     // If the user who's sending the request and the user who created the document are the same
-    if (document.userId !== reqUserId && !adminAccess) {
+    if (ownerId !== reqUserId && !adminAccess) {
       return next(new AppError('Requête non autorisée', 403));
     }
 
