@@ -5,8 +5,8 @@ const catchAsync = require('../../utils/catchAsync');
 const commentSchema = Yup.object({
   content: Yup.string()
     .trim()
-    .min(20, 'Le titre doit contenir au moins 20 caractères')
-    .max(300, 'Le titre doit contenir moins de 300 caractères')
+    .min(3, 'Le titre doit contenir au moins 3 caractères')
+    .max(400, 'Le titre doit contenir moins de 400 caractères')
     .required('Veuillez renseigner du texte'),
 });
 

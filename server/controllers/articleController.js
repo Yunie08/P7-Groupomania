@@ -6,7 +6,7 @@ const { Article, User } = require('../models');
 // GET ALL ARTICLES
 exports.getAllArticle = catchAsync(async (req, res, next) => {
   const articles = await Article.findAll({
-    attributes: ['id', 'title', 'content', 'createdAt', 'updatedAt'],
+    attributes: ['id', 'title', 'content', 'createdAt'],
     include: [
       {
         model: User,
@@ -16,7 +16,7 @@ exports.getAllArticle = catchAsync(async (req, res, next) => {
     order: [['createdAt', 'DESC']],
   });
 
-  res.status(200).json({ articles });
+  res.status(200).json(articles);
 });
 
 // CREATE ARTICLE
