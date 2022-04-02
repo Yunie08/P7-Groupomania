@@ -22,7 +22,6 @@ const AddComment = ({ articleId }) => {
 
   const postComment = async ({ content }) => {
     try {
-      console.log(articleId);
       await axios.post(
         `${ARTICLE_URL}/${articleId}/comment`,
         {
@@ -40,8 +39,9 @@ const AddComment = ({ articleId }) => {
   return (
     <Formik
       initialValues={{ content: "" }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         postComment(values);
+        resetForm();
       }}
       validateOnChange={false}
       validateOnBlur={false}

@@ -13,7 +13,10 @@ const {
   commentValidation,
 } = require('../middleware/validation/commentValidation');
 
-router.route('/').post(authentication, commentController.createComment);
+router
+  .route('/')
+  .post(authentication, commentController.createComment)
+  .get(authentication, commentController.getAllComment);
 
 router
   .route('/:commentId')

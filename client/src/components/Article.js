@@ -51,7 +51,7 @@ function Article({ data }) {
             <i className="fa-solid fa-thumbs-up fa-lg"></i>
             J'aime
           </LinkStyledButton>
-          <ToggleComments />
+          <ToggleComments articleId={data.id} />
           <AddComment articleId={data.id} />
         </Card.Footer>
       </Card.Body>

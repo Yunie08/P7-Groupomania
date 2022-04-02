@@ -33,7 +33,6 @@ exports.updateUser = catchAsync(async (req, res, next) => {
   const imageUrl = req.file
     ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     : undefined;
-  console.log(imageUrl);
 
   const user = await User.update(
     { ...updatedData, profilePic: imageUrl },

@@ -3,6 +3,24 @@ const { Comment, Article, User } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
+// GET ALL COMMENTS FROM ARTICLE
+exports.getAllComment = catchAsync(async (req, res, next) => {
+  const { articleId } = req.params;
+  const comments = await Comment.findAll({
+    where: {
+      articleId: articleId,
+    },
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'firstname', 'lastname', 'profilePic'],
+      },
+    ],
+    order: [['createdAt', 'DESC']],
+  });
+  res.status(200).json(comments);
+});
+
 // CREATE COMMENT
 exports.createComment = catchAsync(async (req, res, next) => {
   const commentData = req.body;
