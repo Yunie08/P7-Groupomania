@@ -15,15 +15,10 @@ const Home = () => {
     const getArticles = async () => {
       setDataLoading(true);
       const token = localStorage.getItem("token");
-
       const response = await axios.get(ARTICLE_URL, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      //TODO:
-
       setArticlesList(response.data);
-
       setDataLoading(false);
     };
     getArticles();

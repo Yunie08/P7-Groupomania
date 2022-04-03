@@ -15,7 +15,7 @@ const FormGroup = styled.div`
   }
 `;
 
-const AddComment = ({ articleId }) => {
+const AddComment = ({ setCommentRefresh, articleId }) => {
   const [error, setError] = useState(null);
 
   const token = localStorage.getItem("token");
@@ -31,6 +31,7 @@ const AddComment = ({ articleId }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      setCommentRefresh(true);
     } catch (err) {
       setError(err.response.data.message);
     }
@@ -42,6 +43,7 @@ const AddComment = ({ articleId }) => {
       onSubmit={(values, { setSubmitting, resetForm }) => {
         postComment(values);
         resetForm();
+        setCommentRefresh(false);
       }}
       validateOnChange={false}
       validateOnBlur={false}
@@ -50,13 +52,17 @@ const AddComment = ({ articleId }) => {
       {(formik, isSubmitting) => (
         <Form className="mt-3">
           <FormGroup className="form-group">
-            <label htmlFor="content" className="sr-only">
+            <label htmlFor={`commentInput-${articleId}`} className="sr-only">
               Laisser un commentaire
             </label>
-            <FloatingLabel label="Laisser un commentaire..." className="mb-1">
+            <FloatingLabel
+              htmlFor="content"
+              label="Laisser un commentaire..."
+              className="mb-1"
+            >
               <Field
                 name="content"
-                id="content"
+                id={`commentInput-${articleId}`}
                 className={
                   formik.touched.content && formik.errors.content
                     ? "form-control is-invalid bg-light"
@@ -64,13 +70,14 @@ const AddComment = ({ articleId }) => {
                 }
                 placeholder="Laisser un commentaire"
                 as="textarea"
+                maxLength="400"
               />
-
-              {formik.touched.content && formik.errors.content ? (
-                <div className="invalid-feedback">{formik.errors.content}</div>
-              ) : null}
-              {error && <div className="invalid-feedback">{error}</div>}
             </FloatingLabel>
+
+            {formik.touched.content && formik.errors.content ? (
+              <div className="invalid-feedback">{formik.errors.content}</div>
+            ) : null}
+            {error && <div className="invalid-feedback">{error}</div>}
           </FormGroup>
 
           <div className="form-group d-flex flex-column align-items-center">

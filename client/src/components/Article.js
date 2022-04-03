@@ -1,3 +1,4 @@
+import { useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/fr";
@@ -19,6 +20,8 @@ dayjs.locale("fr");
 const ARTICLE_URL = "/article";
 
 function Article({ data }) {
+  const [commentRefresh, setCommentRefresh] = useState(false);
+
   return (
     <MainCard
       as="article"
@@ -28,7 +31,7 @@ function Article({ data }) {
         <Card.Header className="bg-white border-bottom-0 d-flex">
           <ProfilePic
             src={data.User.profilePic}
-            alt={`Photo de profil de ${data.firstname} ${data.lastname}`}
+            alt={`Photo de profil de ${data.User.firstname} ${data.User.lastname}`}
             className="img-fluid rounded-circle"
           />
           <div className="col d-flex flex-column justify-content-center border-bottom border-3 ms-3">
@@ -51,8 +54,15 @@ function Article({ data }) {
             <i className="fa-solid fa-thumbs-up fa-lg"></i>
             J'aime
           </LinkStyledButton>
-          <ToggleComments articleId={data.id} />
-          <AddComment articleId={data.id} />
+          <ToggleComments
+            setCommentRefresh={setCommentRefresh}
+            commentRefresh={commentRefresh}
+            articleId={data.id}
+          />
+          <AddComment
+            setCommentRefresh={setCommentRefresh}
+            articleId={data.id}
+          />
         </Card.Footer>
       </Card.Body>
     </MainCard>

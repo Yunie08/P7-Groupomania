@@ -3,6 +3,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/fr";
 import Card from "react-bootstrap/Card";
 import { ProfilePic, Username, PublishedTime } from "../utils/style/styles";
+import DeleteButton from "./DeleteButton";
 import styled from "styled-components";
 import avatar from "../assets/temp/user2.jpg";
 
@@ -16,7 +17,9 @@ const StyledCard = styled(Card)`
   border-left: 3px solid ${colors.secondaryDark};
 `;
 
-const Comment = ({ data }) => {
+const Comment = ({ data, setCommentRefresh }) => {
+  const userId = JSON.parse(localStorage.getItem("userId"));
+
   return (
     <StyledCard className="shadow-sm my-3 ">
       <Card.Body>
@@ -35,6 +38,13 @@ const Comment = ({ data }) => {
               {dayjs(data.createdAt).fromNow()}
             </PublishedTime>
           </div>
+          {userId === data.userId && (
+            <DeleteButton
+              articleId={data.articleId}
+              id={data.id}
+              setCommentRefresh={setCommentRefresh}
+            />
+          )}
         </Card.Header>
         <Card.Text>{data.content}</Card.Text>
       </Card.Body>

@@ -23,6 +23,7 @@ const LoginForm = () => {
       console.log(response);
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.userId);
         navigate("/home");
       }
     } catch (err) {
