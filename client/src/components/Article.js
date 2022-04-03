@@ -30,13 +30,13 @@ function Article({ data }) {
       <Card.Body className="bg-white">
         <Card.Header className="bg-white border-bottom-0 d-flex">
           <ProfilePic
-            src={data.User.profilePic}
-            alt={`Photo de profil de ${data.User.firstname} ${data.User.lastname}`}
+            src={data.user.profilePic}
+            alt={`Photo de profil de ${data.user.firstname} ${data.user.lastname}`}
             className="img-fluid rounded-circle"
           />
           <div className="col d-flex flex-column justify-content-center border-bottom border-3 ms-3">
             <Username className="mb-1">
-              {data.User.firstname} {data.User.lastname}
+              {data.user.firstname} {data.user.lastname}
             </Username>
             <PublishedTime className="m-0">
               publié {dayjs(data.createdAt).fromNow()}
@@ -61,6 +61,7 @@ function Article({ data }) {
           />
           <AddComment
             setCommentRefresh={setCommentRefresh}
+            commentRefresh={commentRefresh}
             articleId={data.id}
           />
         </Card.Footer>

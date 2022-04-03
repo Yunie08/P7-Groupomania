@@ -13,6 +13,7 @@ exports.getAllComment = catchAsync(async (req, res, next) => {
     include: [
       {
         model: User,
+        as: 'user',
         attributes: ['id', 'firstname', 'lastname', 'profilePic'],
       },
     ],

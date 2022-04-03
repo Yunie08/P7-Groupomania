@@ -17,7 +17,7 @@ const StyledCard = styled(Card)`
   border-left: 3px solid ${colors.secondaryDark};
 `;
 
-const Comment = ({ data, setCommentRefresh }) => {
+const Comment = ({ data, commentRefresh, setCommentRefresh }) => {
   const userId = JSON.parse(localStorage.getItem("userId"));
 
   return (
@@ -26,13 +26,13 @@ const Comment = ({ data, setCommentRefresh }) => {
         <Card.Header className="bg-white border-bottom-0 d-flex p-0 mb-2">
           <ProfilePic
             comment
-            src={data.User.profilePic}
+            src={data.user.profilePic}
             alt={`Photo de profil de ${data.firstname} ${data.lastname}`}
             className="img-fluid rounded-circle"
           />
           <div className="col d-flex flex-column justify-content-center ms-2">
             <Username comment className="mb-0">
-              {data.User.firstname} {data.User.lastname}
+              {data.user.firstname} {data.user.lastname}
             </Username>
             <PublishedTime comment className="m-0">
               {dayjs(data.createdAt).fromNow()}
@@ -43,6 +43,7 @@ const Comment = ({ data, setCommentRefresh }) => {
               articleId={data.articleId}
               id={data.id}
               setCommentRefresh={setCommentRefresh}
+              commentRefresh={commentRefresh}
             />
           )}
         </Card.Header>
