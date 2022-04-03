@@ -1,9 +1,17 @@
+import { useEffect } from "react";
 import axios from "../utils/api/axiosConfig";
 import { LinkStyledButton } from "../utils/style/styles";
 
 const ARTICLE_URL = "/article";
 
-const DeleteButton = ({ articleId, id, setCommentRefresh }) => {
+const DeleteButton = ({
+  articleId,
+  id,
+  commentRefresh,
+  setCommentRefresh,
+  commentsCount,
+  setCommentsCount,
+}) => {
   const token = localStorage.getItem("token");
   const deleteItem = async () => {
     try {
@@ -11,6 +19,7 @@ const DeleteButton = ({ articleId, id, setCommentRefresh }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCommentRefresh(true);
+      setCommentsCount(commentsCount - 1);
     } catch (error) {}
   };
 

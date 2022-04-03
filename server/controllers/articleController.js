@@ -1,17 +1,29 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-const { Article, User } = require('../models');
+const { Article, User, Comment, Sequelize } = require('../models');
 
 // GET ALL ARTICLES
 exports.getAllArticle = catchAsync(async (req, res, next) => {
   const articles = await Article.findAll({
-    attributes: ['id', 'title', 'content', 'createdAt'],
+    attributes: [
+      'id',
+      'title',
+      'content',
+      'createdAt',
+      [Sequelize.fn('COUNT', Sequelize.col('articleId')), 'commentsCount'],
+    ],
+    group: ['id'],
     include: [
       {
         model: User,
         as: 'user',
         attributes: ['id', 'firstname', 'lastname', 'profilePic'],
+      },
+      {
+        model: Comment,
+        as: 'comment',
+        attributes: [],
       },
     ],
     order: [['createdAt', 'DESC']],

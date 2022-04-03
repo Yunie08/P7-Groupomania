@@ -15,7 +15,13 @@ const FormGroup = styled.div`
   }
 `;
 
-const AddComment = ({ setCommentRefresh, articleId }) => {
+const AddComment = ({
+  articleId,
+  commentRefresh,
+  setCommentRefresh,
+  setCommentsCount,
+  commentsCount,
+}) => {
   const [error, setError] = useState(null);
 
   const token = localStorage.getItem("token");
@@ -31,7 +37,8 @@ const AddComment = ({ setCommentRefresh, articleId }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setCommentRefresh(true);
+      setCommentRefresh(!commentRefresh);
+      setCommentsCount(commentsCount + 1);
     } catch (err) {
       setError(err.response.data.message);
     }
@@ -42,8 +49,8 @@ const AddComment = ({ setCommentRefresh, articleId }) => {
       initialValues={{ content: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         postComment(values);
+        console.log(`fin de addComponent: ${commentRefresh}`);
         resetForm();
-        setCommentRefresh(false);
       }}
       validateOnChange={false}
       validateOnBlur={false}

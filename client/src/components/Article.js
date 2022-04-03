@@ -21,6 +21,7 @@ const ARTICLE_URL = "/article";
 
 function Article({ data }) {
   const [commentRefresh, setCommentRefresh] = useState(false);
+  const [commentsCount, setCommentsCount] = useState(data.commentsCount);
 
   return (
     <MainCard
@@ -58,11 +59,15 @@ function Article({ data }) {
             setCommentRefresh={setCommentRefresh}
             commentRefresh={commentRefresh}
             articleId={data.id}
+            commentsCount={commentsCount}
+            setCommentsCount={setCommentsCount}
           />
           <AddComment
             setCommentRefresh={setCommentRefresh}
             commentRefresh={commentRefresh}
             articleId={data.id}
+            commentsCount={commentsCount}
+            setCommentsCount={setCommentsCount}
           />
         </Card.Footer>
       </Card.Body>

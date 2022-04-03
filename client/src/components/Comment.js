@@ -17,7 +17,13 @@ const StyledCard = styled(Card)`
   border-left: 3px solid ${colors.secondaryDark};
 `;
 
-const Comment = ({ data, commentRefresh, setCommentRefresh }) => {
+const Comment = ({
+  data,
+  commentRefresh,
+  setCommentRefresh,
+  commentsCount,
+  setCommentsCount,
+}) => {
   const userId = JSON.parse(localStorage.getItem("userId"));
 
   return (
@@ -44,6 +50,8 @@ const Comment = ({ data, commentRefresh, setCommentRefresh }) => {
               id={data.id}
               setCommentRefresh={setCommentRefresh}
               commentRefresh={commentRefresh}
+              commentsCount={commentsCount}
+              setCommentsCount={setCommentsCount}
             />
           )}
         </Card.Header>
