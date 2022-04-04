@@ -20,13 +20,13 @@ module.exports = (Model) =>
       documentId = req.params.commentId;
     }
 
-    // We get the document the user is willing to access
+    // We get the document the user is willing to access to
     const document = await Model.findOne({
       where: {
         id: documentId,
       },
     });
-    console.log(document);
+    // Configuration of the id we want to check, depending on Model
     const ownerId = Model === User ? document.id : document.userId;
     // If the user who's sending the request and the user who created the document are the same
     if (ownerId !== reqUserId && !adminAccess) {

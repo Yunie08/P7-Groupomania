@@ -79,12 +79,12 @@ const AddComment = ({
                 as="textarea"
                 maxLength="400"
               />
-            </FloatingLabel>
 
-            {formik.touched.content && formik.errors.content ? (
-              <div className="invalid-feedback">{formik.errors.content}</div>
-            ) : null}
-            {error && <div className="invalid-feedback">{error}</div>}
+              {formik.touched.content && formik.errors.content ? (
+                <div className="invalid-feedback">{formik.errors.content}</div>
+              ) : null}
+              {error && <div className="invalid-feedback">{error}</div>}
+            </FloatingLabel>
           </FormGroup>
 
           <div className="form-group d-flex flex-column align-items-center">

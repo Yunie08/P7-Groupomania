@@ -37,7 +37,7 @@ export const StyledButton = styled(Button)`
 export const LinkStyledButton = styled.button`
   border: none;
   background: transparent;
-  color: inherit;
+  color: ${(props) => (props.likedByUser ? secondaryDarkColor : "inherit")};
   &:hover {
     color: ${colors.secondaryDark};
     text-decoration: underline;

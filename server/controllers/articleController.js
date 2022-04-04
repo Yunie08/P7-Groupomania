@@ -1,7 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-const { Article, User, Comment, Sequelize } = require('../models');
+const { Article, User, Comment, Like, Sequelize } = require('../models');
 
 // GET ALL ARTICLES
 exports.getAllArticle = catchAsync(async (req, res, next) => {
@@ -11,7 +11,11 @@ exports.getAllArticle = catchAsync(async (req, res, next) => {
       'title',
       'content',
       'createdAt',
-      [Sequelize.fn('COUNT', Sequelize.col('articleId')), 'commentsCount'],
+      [
+        Sequelize.fn('COUNT', Sequelize.col('comment.articleId')),
+        'commentsCount',
+      ],
+      [Sequelize.fn('COUNT', Sequelize.col('like.articleId')), 'likesCount'],
     ],
     group: ['id'],
     include: [
@@ -25,9 +29,18 @@ exports.getAllArticle = catchAsync(async (req, res, next) => {
         as: 'comment',
         attributes: [],
       },
+      {
+        model: Like,
+        as: 'like',
+        attributes: [],
+      },
     ],
     order: [['createdAt', 'DESC']],
   });
+
+  if (!articles) {
+    return next(new AppError('Aucun article pour le moment.', 400));
+  }
 
   res.status(200).json(articles);
 });

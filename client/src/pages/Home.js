@@ -19,6 +19,7 @@ const Home = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setArticlesList(response.data);
+      console.log(response.data);
       setDataLoading(false);
     };
     getArticles();

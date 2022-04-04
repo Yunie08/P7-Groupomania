@@ -31,7 +31,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      profilePic: Sequelize.STRING,
+      profilePic: {
+        type: Sequelize.STRING,
+        defaultValue: 'http://localhost:8080/images/default-profile.png',
+      },
       linkedinProfile: Sequelize.STRING,
       twitterProfile: Sequelize.STRING,
       facebookProfile: Sequelize.STRING,

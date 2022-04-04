@@ -6,12 +6,12 @@ import Card from "react-bootstrap/Card";
 import ToggleComments from "./ToggleComments";
 import AddComment from "./AddComment";
 import {
-  LinkStyledButton,
   ProfilePic,
   Username,
   PublishedTime,
   MainCard,
 } from "../utils/style/styles";
+import LikeButton from "./LikeButton";
 
 // TODO: Move Time in a separate file / Component
 dayjs.extend(relativeTime);
@@ -20,8 +20,11 @@ dayjs.locale("fr");
 const ARTICLE_URL = "/article";
 
 function Article({ data }) {
+  const userId = JSON.parse(localStorage.getItem("userId"));
   const [commentRefresh, setCommentRefresh] = useState(false);
   const [commentsCount, setCommentsCount] = useState(data.commentsCount);
+  const [likesCount, setLikesCount] = useState(data.likesCount);
+  const [likedByUser, setLikedByUser] = useState();
 
   return (
     <MainCard
@@ -51,21 +54,24 @@ function Article({ data }) {
           {data.content}
         </Card.Text>
         <Card.Footer className="bg-white border-top-0 px-0">
-          <LinkStyledButton className="me-3">
-            <i className="fa-solid fa-thumbs-up fa-lg"></i>
-            J'aime
-          </LinkStyledButton>
-          <ToggleComments
-            setCommentRefresh={setCommentRefresh}
-            commentRefresh={commentRefresh}
+          <LikeButton
             articleId={data.id}
+            likesCount={likesCount}
+            setLikesCount={setLikesCount}
+            likedByUser={likedByUser}
+            setLikedByUser={setLikedByUser}
+          />
+          <ToggleComments
+            articleId={data.id}
+            commentRefresh={commentRefresh}
+            setCommentRefresh={setCommentRefresh}
             commentsCount={commentsCount}
             setCommentsCount={setCommentsCount}
           />
           <AddComment
-            setCommentRefresh={setCommentRefresh}
-            commentRefresh={commentRefresh}
             articleId={data.id}
+            commentRefresh={commentRefresh}
+            setCommentRefresh={setCommentRefresh}
             commentsCount={commentsCount}
             setCommentsCount={setCommentsCount}
           />
