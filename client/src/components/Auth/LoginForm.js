@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
-import axios from "../utils/api/axiosConfig";
-import { StyledButton } from "../utils/style/styles";
+import axios from "../../utils/api/axiosConfig";
+import { StyledButton } from "../../utils/style/styles";
 // Validation schema
-import { loginSchema } from "../utils/validation/loginSchema";
+import { loginSchema } from "../../utils/validation/loginSchema";
 
 const LOGIN_URL = "/auth/login";
 

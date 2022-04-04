@@ -1,14 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 
 // React-bootsrap components
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-import Image from "react-bootstrap/Image";
 
 // Components
-import ProfileForm from "../components/ProfileForm";
+import ProfileForm from "../components/Profile/ProfileForm";
 
 const Profile = () => {
   return (

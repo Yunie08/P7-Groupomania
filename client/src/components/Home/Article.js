@@ -1,26 +1,14 @@
 import { useState } from "react";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/fr";
 import Card from "react-bootstrap/Card";
+
 import ToggleComments from "./ToggleComments";
 import AddComment from "./AddComment";
-import {
-  ProfilePic,
-  Username,
-  PublishedTime,
-  MainCard,
-} from "../utils/style/styles";
+import PublishedTime from "./PublishedTime";
+import ArticleImage from "./ArticleImage";
+import { ProfilePic, Username, MainCard } from "../../utils/style/styles";
 import LikeButton from "./LikeButton";
 
-// TODO: Move Time in a separate file / Component
-dayjs.extend(relativeTime);
-dayjs.locale("fr");
-
-const ARTICLE_URL = "/article";
-
 function Article({ data }) {
-  const userId = JSON.parse(localStorage.getItem("userId"));
   const [commentRefresh, setCommentRefresh] = useState(false);
   const [commentsCount, setCommentsCount] = useState(data.commentsCount);
   const [likesCount, setLikesCount] = useState(data.likesCount);
@@ -42,18 +30,26 @@ function Article({ data }) {
             <Username className="mb-1">
               {data.user.firstname} {data.user.lastname}
             </Username>
-            <PublishedTime className="m-0">
-              publié {dayjs(data.createdAt).fromNow()}
-            </PublishedTime>
+            <PublishedTime
+              inArticle
+              createdAt={data.createdAt}
+              className="m-0"
+            />
           </div>
         </Card.Header>
-        <Card.Title as="h2" className="px-md-4 my-3">
-          {data.title}
-        </Card.Title>
-        <Card.Text className="px-md-4 border-bottom border-3 pb-3">
-          {data.content}
-        </Card.Text>
-        <Card.Footer className="bg-white border-top-0 px-0">
+        <div className="px-md-4 d-flex flex-column">
+          <Card.Title as="h2" className="my-3">
+            {data.title}
+          </Card.Title>
+          {data?.image && (
+            <ArticleImage title={data.title} source={data.image} />
+          )}
+
+          <Card.Text className="border-bottom border-3 pb-3">
+            {data.content}
+          </Card.Text>
+        </div>
+        <Card.Footer className="bg-white border-top-0 px-3 pt-3">
           <LikeButton
             articleId={data.id}
             likesCount={likesCount}

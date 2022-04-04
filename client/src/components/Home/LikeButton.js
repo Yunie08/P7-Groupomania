@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "../utils/api/axiosConfig";
-import { LinkStyledButton } from "../utils/style/styles";
+import axios from "../../utils/api/axiosConfig";
+import { LinkStyledButton } from "../../utils/style/styles";
 
 const ARTICLE_URL = "/article";
 

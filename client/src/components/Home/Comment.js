@@ -1,17 +1,9 @@
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/fr";
 import Card from "react-bootstrap/Card";
-import { ProfilePic, Username, PublishedTime } from "../utils/style/styles";
-import DeleteButton from "./DeleteButton";
+import { ProfilePic, Username } from "../../utils/style/styles";
+import DeleteButton from "../Shared/DeleteButton";
+import PublishedTime from "./PublishedTime";
 import styled from "styled-components";
-import avatar from "../assets/temp/user2.jpg";
-
-import colors from "../utils/style/colors";
-
-// TODO: Move Time in a separate file / Component
-dayjs.extend(relativeTime);
-dayjs.locale("fr");
+import colors from "../../utils/style/colors";
 
 const StyledCard = styled(Card)`
   border-left: 3px solid ${colors.secondaryDark};
@@ -40,9 +32,7 @@ const Comment = ({
             <Username comment className="mb-0">
               {data.user.firstname} {data.user.lastname}
             </Username>
-            <PublishedTime comment className="m-0">
-              {dayjs(data.createdAt).fromNow()}
-            </PublishedTime>
+            <PublishedTime createdAt={data.createdAt} className="m-0" />
           </div>
           {userId === data.userId && (
             <DeleteButton

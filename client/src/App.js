@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Components
@@ -5,10 +6,11 @@ import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import Post from "./pages/Post";
 import Profile from "./pages/Profile";
-import MainHeader from "./components/Header";
-import React from "react";
+import MainHeader from "./components/Shared/Header";
+import ProtectedRoutes from "./components/Shared/ProtectedRoutes";
 
-import ProtectedRoutes from "./components/ProtectedRoutes";
+// Contexts
+import { UserContext } from "./utils/context/UserContext";
 
 // Style
 import GlobalStyle from "./utils/style/GlobalStyle";

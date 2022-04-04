@@ -1,16 +1,14 @@
 import React, { useRef } from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form } from "formik";
 
 // React-bootsrap components
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Input from "react-bootstrap/InputGroup";
-import { StyledButton } from "../utils/style/styles";
+import { StyledButton } from "../../utils/style/styles";
 
 // Validation schema
-import { userSchema } from "../utils/validation/userSchema";
-import PreviewImage from "./PreviewImage";
-import Button from "react-bootstrap/Button";
+import { userSchema } from "../../utils/validation/userSchema";
+import PreviewImage from "../Shared/PreviewImage";
 
 const ProfileForm = () => {
   const fileRef = useRef(null);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../utils/api/axiosConfig";
-import Article from "../components/Article";
+import Article from "../components/Home/Article";
 
 import { StyledButton } from "../utils/style/styles";
 

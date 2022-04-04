@@ -53,8 +53,3 @@ export const Username = styled.p`
   font-size: ${(props) => (props.comment ? "16px" : "1.2rem")};
   font-weight: bold;
 `;
-
-export const PublishedTime = styled.p`
-  font-size: ${(props) => (props.comment ? "0.75em" : "0.9em")};
-  color: ${colors.gray};
-`;

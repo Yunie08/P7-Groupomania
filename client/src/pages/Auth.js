@@ -11,8 +11,8 @@ import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 
 // Components
-import LoginForm from "../components/LoginForm";
-import SignupForm from "../components/SignupForm";
+import LoginForm from "../components/Auth/LoginForm";
+import SignupForm from "../components/Auth/SignupForm";
 import { MainCard } from "../utils/style/styles";
 
 // Assets

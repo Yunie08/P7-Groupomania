@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
-import axios from "../utils/api/axiosConfig";
+import axios from "../../utils/api/axiosConfig";
 
 // React-bootsrap components
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { StyledButton } from "../utils/style/styles";
+import { StyledButton } from "../../utils/style/styles";
 
 // Yup validation schema
-import { signupSchema } from "../utils/validation/signupSchema";
+import { signupSchema } from "../../utils/validation/signupSchema";
 
 const SIGNUP_URL = "/auth/signup";
 

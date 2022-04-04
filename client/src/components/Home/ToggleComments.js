@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "../utils/api/axiosConfig";
+import axios from "../../utils/api/axiosConfig";
 
 import Collapse from "react-bootstrap/Collapse";
 import Comment from "./Comment";
-import { LinkStyledButton } from "../utils/style/styles";
+import { LinkStyledButton } from "../../utils/style/styles";
 
 const ARTICLE_URL = "/article";
 

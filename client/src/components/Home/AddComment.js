@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Formik, Field, Form } from "formik";
-import axios from "../utils/api/axiosConfig";
+import axios from "../../utils/api/axiosConfig";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { commentSchema } from "../utils/validation/commentSchema";
-import { StyledButton } from "../utils/style/styles";
+import { commentSchema } from "../../utils/validation/commentSchema";
+import { StyledButton } from "../../utils/style/styles";
 import styled from "styled-components";
 
 const ARTICLE_URL = "/article";

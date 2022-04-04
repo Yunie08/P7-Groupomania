@@ -3,9 +3,9 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
-import HeaderLogo from "../assets/icon-left-font-monochrome-white.svg";
+import HeaderLogo from "../../assets/icon-left-font-monochrome-white.svg";
 import styled from "styled-components";
-import colors from "../utils/style/colors";
+import colors from "../../utils/style/colors";
 import { Link } from "react-router-dom";
 
 const Styles = styled.div`

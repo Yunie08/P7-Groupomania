@@ -10,6 +10,7 @@ exports.getAllArticle = catchAsync(async (req, res, next) => {
       'id',
       'title',
       'content',
+      'image',
       'createdAt',
       [
         Sequelize.fn('COUNT', Sequelize.col('comment.articleId')),
