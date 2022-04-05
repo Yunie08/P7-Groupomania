@@ -31,6 +31,8 @@ const AddArticleForm = ({ setModalShow, setArticleAdded }) => {
       const isMultipart = values?.image ? true : false;
       const response = await articleService.addArticle(data, isMultipart);
       console.log(response);
+      setArticleAdded(true);
+      setModalShow(false);
     } catch (err) {
       setError(err.response.data.message);
     }
@@ -38,11 +40,9 @@ const AddArticleForm = ({ setModalShow, setArticleAdded }) => {
 
   return (
     <Formik
-      initialValues={{ title: "", content: "" }}
+      initialValues={{ title: "", content: "", image: null }}
       onSubmit={(values, { setSubmitting }) => {
         postArticle(values);
-        setArticleAdded(true);
-        setModalShow(false);
       }}
       validationSchema={articleSchema}
     >
@@ -62,8 +62,8 @@ const AddArticleForm = ({ setModalShow, setArticleAdded }) => {
               type="text"
               onClick={() => setError(null)}
             />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="invalid-feedback">{formik.errors.email}</div>
+            {formik.touched.title && formik.errors.title ? (
+              <div className="invalid-feedback">{formik.errors.title}</div>
             ) : null}
           </div>
 
@@ -82,8 +82,8 @@ const AddArticleForm = ({ setModalShow, setArticleAdded }) => {
               as="textarea"
               onClick={() => setError(null)}
             />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="invalid-feedback">{formik.errors.password}</div>
+            {formik.touched.content && formik.errors.content ? (
+              <div className="invalid-feedback">{formik.errors.content}</div>
             ) : null}
           </div>
           {formik.values.image && (

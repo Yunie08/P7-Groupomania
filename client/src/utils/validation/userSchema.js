@@ -26,11 +26,11 @@ export const userSchema = Yup.object({
     .test(
       "FILE_SIZE",
       "L'image doit faire moins de 2Mo",
-      (value) => !value || (value && value.size <= 209)
+      (value) => !value || (value && value?.size <= 209)
     )
     .test(
       "FILE_FORMAT",
-      "Formats d'images acceptés : jpg, jpg et png",
+      "Formats acceptés : jpeg, jpg et png",
       (value) => !value || (value && SUPPORTED_FORMATS.includes(value?.type))
     ),
 });

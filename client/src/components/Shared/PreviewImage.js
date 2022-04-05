@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const StyledImage = styled.img`
+  max-width: 400px;
+`;
 
 const PreviewImage = ({ file }) => {
   const [preview, setPreview] = useState(null);
@@ -9,9 +14,9 @@ const PreviewImage = ({ file }) => {
   };
 
   return (
-    <div>
+    <div className="d-flex justify-content-center">
       {preview ? (
-        <img src={preview} alt="profil" className="img-fluid mt-3" />
+        <StyledImage src={preview} alt="profil" className=" mt-3" />
       ) : (
         "loading..."
       )}

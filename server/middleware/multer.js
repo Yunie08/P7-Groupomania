@@ -20,10 +20,18 @@ const storage = multer.diskStorage({
 });
 
 // Maximal authorized file size
-const maxSize = 2097152 * 2; // 4Mo
+const maxSize = 2 * 1024 * 1024; // 2Mo
 
 const upload = multer({
   storage,
+  fileFilter: (req, file, cb) => {
+    if (`${file.mimetype}` in MIME_TYPES) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error('Formats acceptés : png, jpeg et jpg'));
+    }
+  },
   limits: { fileSize: maxSize },
 }).single('image');
 

@@ -1,5 +1,7 @@
 import * as Yup from "yup";
 
+const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
+
 export const articleSchema = Yup.object({
   title: Yup.string()
     .trim()
@@ -11,4 +13,16 @@ export const articleSchema = Yup.object({
     .min(20, "L'article doit contenir au moins 20 caractères")
     .max(5000, "L'article doit contenir moins de 5000 caractères")
     .required("Veuillez renseigner du contenu pour votre article"),
+  image: Yup.mixed()
+    .nullable()
+    .test(
+      "FILE_SIZE",
+      "L'image doit faire moins de 2Mo",
+      (value) => !value || (value && value.size <= 2 * 1024 * 1024)
+    )
+    .test(
+      "FILE_FORMAT",
+      "Formats d'images acceptés : jpg, jpg et png",
+      (value) => !value || (value && SUPPORTED_FORMATS.includes(value?.type))
+    ),
 });
