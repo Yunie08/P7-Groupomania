@@ -37,7 +37,8 @@ const AddComment = ({
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setCommentRefresh(!commentRefresh);
+      // FIXME: !commentRefresh => true
+      setCommentRefresh(true);
       setCommentsCount(commentsCount + 1);
     } catch (err) {
       setError(err.response.data.message);

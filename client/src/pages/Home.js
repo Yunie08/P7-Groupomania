@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../utils/api/axiosConfig";
 import Article from "../components/Home/Article";
+import AddArticleModal from "../components/Home/AddArticleModal";
 
 import { StyledButton } from "../utils/style/styles";
 
@@ -10,6 +11,8 @@ const Home = () => {
   const [isDataLoading, setDataLoading] = useState();
   const [error, setError] = useState(false);
   const [articlesList, setArticlesList] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [articleAdded, setArticleAdded] = React.useState(true);
 
   useEffect(() => {
     const getArticles = async () => {
@@ -19,11 +22,13 @@ const Home = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setArticlesList(response.data);
-      console.log(response.data);
       setDataLoading(false);
     };
-    getArticles();
-  }, []);
+    if (articleAdded) {
+      getArticles();
+    }
+    setArticleAdded(false);
+  }, [articleAdded]);
 
   if (error) {
     return <span>{error}</span>;
@@ -32,9 +37,20 @@ const Home = () => {
   return (
     <main className="d-flex flex-column align-items-center">
       <h1>Un espace d'échange avec vos collègues</h1>
-      <StyledButton outline className="rounded-pill my-4">
+      <StyledButton
+        outline
+        className="rounded-pill my-4"
+        onClick={() => setModalShow(true)}
+      >
         Publier un article
       </StyledButton>
+      <AddArticleModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        setModalShow={setModalShow}
+        setArticleAdded={setArticleAdded}
+      />
+
       {isDataLoading ? (
         <div>Patience, ça charge</div>
       ) : (

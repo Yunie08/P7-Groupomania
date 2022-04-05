@@ -36,8 +36,12 @@ const ToggleComments = ({
 
   // If new comment added, show comments
   useEffect(() => {
-    getComments();
-    !open && commentRefresh && setOpen(true);
+    if (commentRefresh) {
+      getComments();
+      !open && commentRefresh && setOpen(true);
+      setCommentRefresh(false);
+    }
+
     return () => setCommentRefresh(false);
   }, [commentRefresh]);
 

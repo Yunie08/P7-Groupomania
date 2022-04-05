@@ -35,7 +35,7 @@ const LikeButton = ({
         });
         const isLikedByUser = checkLikes(response.data, userId);
         setLikedByUser(isLikedByUser);
-        console.log(response);
+        setLikesCount(response.data.length);
       } catch (err) {
         console.log(err);
       }

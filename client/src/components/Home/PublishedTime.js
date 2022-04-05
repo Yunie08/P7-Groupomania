@@ -12,6 +12,7 @@ dayjs.locale("fr");
 const PublishedTimeStyled = styled.p`
   font-size: ${(props) => (props.inArticle ? "0.9em" : "0.75em")};
   color: ${colors.gray};
+  margin-bottom: 0px;
 `;
 
 // Functional Component

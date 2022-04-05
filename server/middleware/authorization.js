@@ -8,8 +8,7 @@ module.exports = (Model) =>
   catchAsync(async (req, res, next) => {
     const reqUserId = req.auth.userId;
     const adminAccess = req.auth.isAdmin;
-    console.log(`user Id de la requête : ${reqUserId}`);
-    console.log(`isAdmin : ${adminAccess}`);
+
     let documentId;
     // Depending on the type of document the user is trying to access, we specify the parameter to check
     if (Model === User) {

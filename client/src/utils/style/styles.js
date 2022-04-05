@@ -8,7 +8,7 @@ const primaryColor = colors.primary;
 const secondaryDarkColor = colors.secondaryDark;
 
 export const MainCard = styled(Card)`
-  max-width: ${(props) => (props.auth ? "900px" : "750px")};
+  max-width: ${(props) => (props.auth ? "900px" : "700px")};
 `;
 
 export const StyledButton = styled(Button)`

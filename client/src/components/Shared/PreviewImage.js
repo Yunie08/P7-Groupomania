@@ -9,7 +9,13 @@ const PreviewImage = ({ file }) => {
   };
 
   return (
-    <div>{preview ? <img src={preview} alt="profil" /> : "loading..."}</div>
+    <div>
+      {preview ? (
+        <img src={preview} alt="profil" className="img-fluid mt-3" />
+      ) : (
+        "loading..."
+      )}
+    </div>
   );
 };
 

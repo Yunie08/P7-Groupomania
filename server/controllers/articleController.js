@@ -13,10 +13,9 @@ exports.getAllArticle = catchAsync(async (req, res, next) => {
       'image',
       'createdAt',
       [
-        Sequelize.fn('COUNT', Sequelize.col('comment.articleId')),
+        Sequelize.fn('COUNT', Sequelize.col('Comment.articleId')),
         'commentsCount',
       ],
-      [Sequelize.fn('COUNT', Sequelize.col('like.articleId')), 'likesCount'],
     ],
     group: ['id'],
     include: [
@@ -28,11 +27,6 @@ exports.getAllArticle = catchAsync(async (req, res, next) => {
       {
         model: Comment,
         as: 'comment',
-        attributes: [],
-      },
-      {
-        model: Like,
-        as: 'like',
         attributes: [],
       },
     ],
@@ -49,7 +43,7 @@ exports.getAllArticle = catchAsync(async (req, res, next) => {
 // CREATE ARTICLE
 exports.createArticle = catchAsync(async (req, res, next) => {
   const { userId } = req.auth;
-  const articleData = req.body;
+  const { title, content } = req.body;
 
   // If an image is attached, provide image URL
   const imageUrl = req.file
@@ -57,7 +51,8 @@ exports.createArticle = catchAsync(async (req, res, next) => {
     : undefined;
 
   const article = await Article.create({
-    ...articleData,
+    title: title,
+    content: content,
     image: imageUrl,
     userId: userId,
   });
@@ -108,7 +103,7 @@ exports.deleteArticle = catchAsync(async (req, res, next) => {
       id: articleId,
     },
   });
-  console.log(deletedArticle);
+
   if (!deletedArticle) {
     return next(new AppError('No article found with that ID', 404));
   }

@@ -18,19 +18,21 @@ import GlobalStyle from "./utils/style/GlobalStyle";
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
-        <GlobalStyle />
-        <MainHeader />
-        <Routes>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/home" index element={<Home />} />
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/post" element={<Post />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <React.StrictMode>
+        <BrowserRouter>
+          <GlobalStyle />
+          <MainHeader />
+          <Routes>
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/home" index element={<Home />} />
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/post" element={<Post />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="*" element={<Home />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </React.StrictMode>
     </React.Fragment>
   );
 }

@@ -26,7 +26,7 @@ const DeleteButton = ({
   return (
     <LinkStyledButton onClick={() => deleteItem()} className="align-self-start">
       <i className="fa-solid fa-xmark" aria-hidden="true"></i>
-      <span className="sr-only">Supprimer le commentaire</span>
+      <span className="sr-only">Supprimer</span>
     </LinkStyledButton>
   );
 };
