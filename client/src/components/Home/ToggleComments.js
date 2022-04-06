@@ -33,7 +33,7 @@ const ToggleComments = ({
       setDataLoading(false);
     }
   };
-
+  console.log(`Comment refresh ? ${commentRefresh}`);
   // If new comment added, show comments
   useEffect(() => {
     if (commentRefresh) {

@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Formik, Field, Form } from "formik";
 import axios from "../../utils/api/axiosConfig";
+import { Formik, Field, Form } from "formik";
 import { StyledButton } from "../../utils/style/styles";
+
+// Context
+import { AuthContext } from "../../utils/context/AuthContext";
+
 // Validation schema
 import { loginSchema } from "../../utils/validation/loginSchema";
 
 const LOGIN_URL = "/auth/login";
 
 const LoginForm = () => {
+  const { setCurrentUser, setAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
@@ -20,14 +25,19 @@ const LoginForm = () => {
         email,
         password,
       });
-      console.log(response);
-      if (response.data.token) {
+      if (response?.data?.token) {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.userId);
+        setAuthenticated(true);
+        setCurrentUser({
+          userId: response.data.userId,
+          isAdmin: response.data.isAdmin,
+        });
+
+        console.log(response.data);
         navigate("/home");
       }
     } catch (err) {
-      setError(err.response.data.message);
+      setError(err?.response?.data?.message);
     }
   };
 

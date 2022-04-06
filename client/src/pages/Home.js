@@ -12,7 +12,7 @@ const Home = () => {
   const [error, setError] = useState(false);
   const [articlesList, setArticlesList] = useState([]);
   const [modalShow, setModalShow] = React.useState(false);
-  const [articleAdded, setArticleAdded] = React.useState(true);
+  const [articleListEdited, setArticleListEdited] = React.useState(true);
 
   useEffect(() => {
     const getArticles = async () => {
@@ -24,13 +24,14 @@ const Home = () => {
       setArticlesList(response.data);
       setDataLoading(false);
     };
-    if (articleAdded) {
+    if (articleListEdited) {
       getArticles();
     }
-    setArticleAdded(false);
-  }, [articleAdded]);
+    setArticleListEdited(false);
+  }, [articleListEdited]);
 
   if (error) {
+    setError(error);
     return <span>{error}</span>;
   }
 
@@ -38,7 +39,7 @@ const Home = () => {
     <main className="d-flex flex-column align-items-center">
       <h1>Un espace d'échange avec vos collègues</h1>
       <StyledButton
-        outline
+        $outline
         className="rounded-pill my-4"
         onClick={() => setModalShow(true)}
       >
@@ -48,7 +49,7 @@ const Home = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         setModalShow={setModalShow}
-        setArticleAdded={setArticleAdded}
+        setArticleListEdited={setArticleListEdited}
       />
 
       {isDataLoading ? (

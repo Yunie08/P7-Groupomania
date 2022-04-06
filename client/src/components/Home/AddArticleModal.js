@@ -4,9 +4,11 @@ import axios from "../../utils/api/axiosConfig";
 import AddArticleForm from "./AddArticleForm";
 
 const AddArticleModal = (props) => {
+  const { setModalShow, setArticleListEdited, ...rest } = props;
+
   return (
     <Modal
-      {...props}
+      {...rest}
       as="section"
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -19,8 +21,8 @@ const AddArticleModal = (props) => {
       </Modal.Header>
       <Modal.Body className="px-5">
         <AddArticleForm
-          setModalShow={props.setModalShow}
-          setArticleAdded={props.setArticleAdded}
+          setModalShow={setModalShow}
+          setArticleListEdited={setArticleListEdited}
         />
       </Modal.Body>
     </Modal>

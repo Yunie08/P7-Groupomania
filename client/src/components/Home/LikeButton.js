@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "../../utils/api/axiosConfig";
 import { LinkStyledButton } from "../../utils/style/styles";
-
+import { AuthContext } from "../../utils/context/AuthContext";
 const ARTICLE_URL = "/article";
 
 const LikeButton = ({
@@ -13,7 +13,7 @@ const LikeButton = ({
 }) => {
   const [error, setError] = useState(false);
   const token = localStorage.getItem("token");
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  const { currentUser } = useContext(AuthContext);
 
   // Check if a user likes this article
   const checkLikes = (likes, user) => {
@@ -28,12 +28,13 @@ const LikeButton = ({
 
   // Get list of users liking article
   useEffect(() => {
+    console.log(`From auth context : ${currentUser.userId}`);
     const getIsLiked = async () => {
       try {
         const response = await axios.get(`${ARTICLE_URL}/${articleId}/like`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const isLikedByUser = checkLikes(response.data, userId);
+        const isLikedByUser = checkLikes(response.data, currentUser.userId);
         setLikedByUser(isLikedByUser);
         setLikesCount(response.data.length);
       } catch (err) {

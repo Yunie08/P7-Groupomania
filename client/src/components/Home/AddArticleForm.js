@@ -8,7 +8,7 @@ import { articleSchema } from "../../utils/validation/articleSchema";
 
 import articleService from "../../services/articleService";
 
-const AddArticleForm = ({ setModalShow, setArticleAdded }) => {
+const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
   const [error, setError] = useState(null);
 
   const dataFormatter = (data) => {
@@ -31,7 +31,7 @@ const AddArticleForm = ({ setModalShow, setArticleAdded }) => {
       const isMultipart = values?.image ? true : false;
       const response = await articleService.addArticle(data, isMultipart);
       console.log(response);
-      setArticleAdded(true);
+      setArticleListEdited(true);
       setModalShow(false);
     } catch (err) {
       setError(err.response.data.message);
@@ -90,7 +90,10 @@ const AddArticleForm = ({ setModalShow, setArticleAdded }) => {
             <PreviewImage file={formik.values.image} className="image-fluid" />
           )}
           <div className="form-group">
-            <label htmlFor="articleImage"></label>
+            <label htmlFor="articleImage" className="mt-3">
+              Image <small>(option)</small>
+            </label>
+
             <input
               id="articleImage"
               name="image"

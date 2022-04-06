@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Card from "react-bootstrap/Card";
 
 import ToggleComments from "./ToggleComments";
@@ -7,13 +7,20 @@ import PublishedTime from "./PublishedTime";
 import ArticleImage from "./ArticleImage";
 import { ProfilePic, Username, MainCard } from "../../utils/style/styles";
 import LikeButton from "./LikeButton";
+import DeleteButton from "../Shared/DeleteButton";
+
+import { AuthContext } from "../../utils/context/AuthContext";
 
 function Article({ data }) {
   const [commentRefresh, setCommentRefresh] = useState(false);
   const [commentsCount, setCommentsCount] = useState(data.commentsCount);
   const [likesCount, setLikesCount] = useState(data.likesCount);
   const [likedByUser, setLikedByUser] = useState();
-
+  const { currentUser } = useContext(AuthContext);
+  // TODO: refactor delete button logic
+  const canEdit = currentUser.userId === data.user.id || currentUser.isAdmin;
+  console.log(`Article ${data.id}, can edit : ${canEdit}`);
+  console.log(data);
   return (
     <MainCard
       as="article"
@@ -36,6 +43,16 @@ function Article({ data }) {
               className="m-0"
             />
           </div>
+          {canEdit && (
+            <DeleteButton
+              componentToDelete="article"
+              articleId={data.id}
+              setCommentRefresh={setCommentRefresh}
+              commentRefresh={commentRefresh}
+              commentsCount={commentsCount}
+              setCommentsCount={setCommentsCount}
+            />
+          )}
         </Card.Header>
         <div className="px-md-4 d-flex flex-column">
           <Card.Title as="h2" className="my-3">
