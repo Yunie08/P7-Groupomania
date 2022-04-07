@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -7,6 +7,8 @@ import Image from "react-bootstrap/Image";
 import HeaderLogo from "../../assets/icon-left-font-monochrome-white.svg";
 import styled from "styled-components";
 import colors from "../../utils/style/colors";
+
+import { AuthContext } from "../../utils/context/AuthContext";
 
 const Styles = styled.div`
   .navbar {
@@ -32,6 +34,13 @@ const Styles = styled.div`
 `;
 
 function MainHeader() {
+  const { setCurrentUser, setAuthenticated } = useContext(AuthContext);
+  const logout = () => {
+    setCurrentUser(null);
+    setAuthenticated(false);
+    localStorage.clear();
+  };
+
   return (
     <>
       <Styles>
@@ -50,7 +59,12 @@ function MainHeader() {
                   <Nav.Link as={Link} eventKey={2} to="/profile">
                     Profil
                   </Nav.Link>
-                  <Nav.Link as={Link} eventKey={3} to="/auth">
+                  <Nav.Link
+                    as={Link}
+                    eventKey={3}
+                    onClick={() => logout()}
+                    to="/auth"
+                  >
                     Déconnexion
                   </Nav.Link>
                 </Nav>
