@@ -11,7 +11,7 @@ import DeleteButton from "../Shared/DeleteButton";
 
 import { AuthContext } from "../../utils/context/AuthContext";
 
-function Article({ data }) {
+function Article({ data, articleListEdited, setArticleListEdited }) {
   const [commentRefresh, setCommentRefresh] = useState(false);
   const [commentsCount, setCommentsCount] = useState(data.commentsCount);
   const [likesCount, setLikesCount] = useState(data.likesCount);
@@ -47,10 +47,8 @@ function Article({ data }) {
             <DeleteButton
               componentToDelete="article"
               articleId={data.id}
-              setCommentRefresh={setCommentRefresh}
-              commentRefresh={commentRefresh}
-              commentsCount={commentsCount}
-              setCommentsCount={setCommentsCount}
+              articleListEdited={articleListEdited}
+              setArticleListEdited={setArticleListEdited}
             />
           )}
         </Card.Header>

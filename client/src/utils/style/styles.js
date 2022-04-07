@@ -13,11 +13,12 @@ export const MainCard = styled(Card)`
 
 export const StyledButton = styled(Button)`
   min-width: 180px;
-  color: ${(props) => props.outline && "inherit"};
+  color: ${(props) => props.$outline && "inherit"};
   background-color: ${(props) =>
-    props.outline ? "transparent" : primaryColor};
+    props.$outline ? "transparent" : primaryColor};
+  background-color: ${(props) => props.$danger && secondaryDarkColor};
   border: 2px solid;
-  border-color: ${(props) => (props.outline ? primaryColor : "transparent")};
+  border-color: ${(props) => (props.$outline ? primaryColor : "transparent")};
   &:hover {
     background-color: white;
     color: ${secondaryDarkColor};
@@ -27,9 +28,9 @@ export const StyledButton = styled(Button)`
   &:focus {
     &:not(:hover) {
       background-color: ${(props) =>
-        props.outline ? "transparent" : primaryColor};
+        props.$outline ? "transparent" : primaryColor};
       border-color: ${primaryColor};
-      color: ${(props) => props.outline && primaryColor};
+      color: ${(props) => props.$outline && primaryColor};
     }
   }
 `;

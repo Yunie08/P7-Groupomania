@@ -11,8 +11,8 @@ const Home = () => {
   const [isDataLoading, setDataLoading] = useState();
   const [error, setError] = useState(false);
   const [articlesList, setArticlesList] = useState([]);
-  const [modalShow, setModalShow] = React.useState(false);
-  const [articleListEdited, setArticleListEdited] = React.useState(true);
+  const [modalShow, setModalShow] = useState(false);
+  const [articleListEdited, setArticleListEdited] = useState(true);
 
   useEffect(() => {
     const getArticles = async () => {
@@ -56,7 +56,12 @@ const Home = () => {
         <div>Patience, ça charge</div>
       ) : (
         articlesList.map((article) => (
-          <Article key={`article-${article.id}`} data={article} />
+          <Article
+            key={`article-${article.id}`}
+            data={article}
+            articleListEdited={articleListEdited}
+            setArticleListEdited={setArticleListEdited}
+          />
         ))
       )}
     </main>

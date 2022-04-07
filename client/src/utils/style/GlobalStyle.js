@@ -27,6 +27,10 @@ h2 {
   font-size: 1.4em;
   font-weight: 600;
 }
+h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+}
 
 a {
   text-decoration: none !important;
