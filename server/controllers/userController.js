@@ -69,14 +69,14 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   res.status(200).json({ message: 'Utilisateur supprimé' });
 });
 
-/*
-// GET USER
+// GET CURRENT USER
 exports.getCurrentUser = catchAsync(async (req, res, next) => {
   console.log(req.auth.userId);
   const user = await User.findOne({
     where: {
       id: req.auth.userId,
     },
+    attributes: ['id', 'isAdmin'],
   });
 
   if (!user) {
@@ -86,6 +86,7 @@ exports.getCurrentUser = catchAsync(async (req, res, next) => {
   res.status(200).json({ user });
 });
 
+/*
 // UPDATE CURRENT USER
 exports.updateCurrentUser = catchAsync(async (req, res, next) => {
   const updatedData = req.body;

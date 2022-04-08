@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 
 import ToggleComments from "./ToggleComments";
@@ -17,8 +17,12 @@ function Article({ data, articleListEdited, setArticleListEdited }) {
   const [likesCount, setLikesCount] = useState(data.likesCount);
   const [likedByUser, setLikedByUser] = useState();
   const { currentUser } = useContext(AuthContext);
-  // TODO: refactor delete button logic
-  const canEdit = currentUser.userId === data.user.id || currentUser.isAdmin;
+  const [canEdit, setCanEdit] = useState(false);
+
+  useEffect(() => {
+    setCanEdit(currentUser.userId === data.user.id || currentUser.isAdmin);
+  }, []);
+
   console.log(`Article ${data.id}, can edit : ${canEdit}`);
   console.log(data);
   return (

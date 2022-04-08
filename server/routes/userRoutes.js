@@ -11,6 +11,7 @@ const multer = require('../middleware/multer');
 const { User } = require('../models');
 
 router.route('/').get(authentication, userCtrl.getAllUser);
+router.route('/current').get(authentication, userCtrl.getCurrentUser);
 
 router
   .route('/:userId')

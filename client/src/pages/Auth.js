@@ -31,7 +31,7 @@ const TabsStyled = styled(Tabs)`
 
 function Auth() {
   return (
-    <main className="my-2 d-flex justify-content-center align-items-center vh-100">
+    <main className="d-flex justify-content-center align-items-center vh-100">
       <MainCard className="rounded-3 shadow px-md-4 py-2">
         <Card.Body>
           <Row className="py-md-5">
