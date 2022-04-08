@@ -34,13 +34,15 @@ const Styles = styled.div`
 `;
 
 function MainHeader() {
-  const { setCurrentUser, setAuthenticated } = useContext(AuthContext);
+  const { currentUser, setCurrentUser, setAuthenticated } =
+    useContext(AuthContext);
   const logout = () => {
     setCurrentUser(null);
     setAuthenticated(false);
     localStorage.clear();
   };
 
+  //TODO: Change style implementation
   return (
     <>
       <Styles>
@@ -56,7 +58,11 @@ function MainHeader() {
                   <Nav.Link as={Link} eventKey={1} to="/home">
                     Accueil
                   </Nav.Link>
-                  <Nav.Link as={Link} eventKey={2} to="/profile">
+                  <Nav.Link
+                    as={Link}
+                    eventKey={2}
+                    to={`/profile/${currentUser.userId}`}
+                  >
                     Profil
                   </Nav.Link>
                   <Nav.Link

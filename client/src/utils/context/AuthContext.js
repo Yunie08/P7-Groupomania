@@ -7,7 +7,17 @@ import setHeader from "../api/headerConfig";
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const response = await axios.get("/user/current", setHeader());
+      console.log(response.data);
+      return {
+        userId: response.data.user.id,
+        isAdmin: response.data.user.isAdmin,
+      };
+    }
+  });
   const [isAuthenticated, setAuthenticated] = useState(() => {
     const token = localStorage.getItem("token");
     return token !== null;
@@ -28,6 +38,7 @@ export const AuthProvider = ({ children }) => {
     };
     checkToken();
   }, [setAuthenticated]);
+
   console.log(`Current user from AuthContext: ${currentUser?.userId}`);
   console.log(`isAuthenticated from AuthContext: ${isAuthenticated}`);
   const value = {

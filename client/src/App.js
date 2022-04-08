@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Contexts
 import { AuthProvider } from "./utils/context/AuthContext";
@@ -21,21 +21,21 @@ function App() {
     <React.Fragment>
       <React.StrictMode>
         <AuthProvider>
-          <BrowserRouter>
+          <Router>
             <GlobalStyle />
             <Routes>
               <Route path="/auth" element={<Auth />} />
               <Route element={<ProtectedRoutes />}>
                 <Route element={<MainHeader />}>
                   <Route path="/post" element={<Post />} />
-                  <Route path="/profile" element={<Profile />}>
+                  <Route path="/profile/:userId" element={<Profile />}>
                     <Route path="update" element={<ProfileUpdate />} />
                   </Route>
                   <Route path="*" element={<Home />} />
                 </Route>
               </Route>
             </Routes>
-          </BrowserRouter>
+          </Router>
         </AuthProvider>
       </React.StrictMode>
     </React.Fragment>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Formik, Field, Form } from "formik";
-import axios from "../../utils/api/axiosConfig";
 import { StyledButton } from "../../utils/style/styles";
 import PreviewImage from "../Shared/PreviewImage";
 
