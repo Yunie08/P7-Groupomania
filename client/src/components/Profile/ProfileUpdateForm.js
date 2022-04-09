@@ -1,27 +1,27 @@
 import React, { useRef } from "react";
-import { Formik, Field, Form } from "formik";
-import { ProfilePic, MainCard } from "../../utils/style/styles";
 
+// Components
+import { Formik, Field, Form } from "formik";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { StyledButton } from "../../utils/style/styles";
+import PreviewImage from "../Shared/PreviewImage";
 
 // Validation schema
 import { userSchema } from "../../utils/validation/userSchema";
-import PreviewImage from "../Shared/PreviewImage";
 
-const ProfileForm = () => {
+const ProfileForm = ({ profile }) => {
   const fileRef = useRef(null);
   return (
     <Formik
       initialValues={{
-        firstname: "Ambre",
-        lastname: "",
-        bio: "",
-        linkedinProfile: "",
-        twitterProfile: "",
-        facebookProfile: "",
-        instagramProfile: "",
+        firstname: profile.firstname,
+        lastname: profile.lastname,
+        bio: profile.bio,
+        linkedinProfile: profile.linkedinProfile,
+        twitterProfile: profile.twitterProfile,
+        facebookProfile: profile.facebookProfile,
+        instagramProfile: profile.instagramProfile,
         profilePic: null,
       }}
       onSubmit={(values, { setSubmitting }, errors) => {}}
@@ -30,7 +30,13 @@ const ProfileForm = () => {
       {(formik, isSubmitting, values) => (
         <Form>
           <div className="form-group">
-            <label htmlFor="profilePic"></label>
+            <label htmlFor="profilePic">
+              <PreviewImage
+                src={profile.profilePic}
+                file={formik.values.profilePic}
+              />
+              <span className="sr-only">Changer de photo de profil</span>
+            </label>
             <input
               ref={fileRef}
               id="profilePic"
@@ -41,14 +47,11 @@ const ProfileForm = () => {
               }}
               className={
                 formik.touched.firstname && formik.errors.firstname
-                  ? "form-control is-invalid"
-                  : "form-control"
+                  ? "form-control is-invalid visually-hidden"
+                  : "form-control visually-hidden"
               }
             />
 
-            {formik.values.profilePic && (
-              <ProfilePic file={formik.values.profilePic} />
-            )}
             {formik.touched.profilePic && formik.errors.profilePic ? (
               <div className="invalid-feedback">{formik.errors.profilePic}</div>
             ) : null}

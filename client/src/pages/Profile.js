@@ -7,7 +7,6 @@ import { AuthContext } from "../utils/context/AuthContext";
 import userService from "../services/userService";
 
 // Components
-import ProfileForm from "../components/Profile/ProfileUpdateForm";
 import ProfileCard from "../components/Profile/ProfileCard";
 import { StyledButton } from "../utils/style/styles";
 

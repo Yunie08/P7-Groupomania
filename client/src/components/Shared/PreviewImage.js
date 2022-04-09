@@ -1,26 +1,27 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 
-const StyledImage = styled.img`
-  max-width: 400px;
-`;
+import { ProfilePic } from "../../utils/style/styles";
 
-const PreviewImage = ({ file }) => {
-  const [preview, setPreview] = useState(null);
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    setPreview(reader.result);
-  };
+const PreviewImage = ({ file, src }) => {
+  const [preview, setPreview] = useState(src);
+
+  useEffect(() => {
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setPreview(reader.result);
+      };
+    }
+  }, [file]);
 
   return (
-    <div className="d-flex justify-content-center">
-      {preview ? (
-        <StyledImage src={preview} alt="profil" className=" mt-3" />
-      ) : (
-        "loading..."
-      )}
-    </div>
+    <ProfilePic
+      $profile
+      src={preview}
+      alt="Aperçu photo de profil"
+      className="rounded-circle mt-3"
+    />
   );
 };
 
