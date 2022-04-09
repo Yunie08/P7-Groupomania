@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Formik, Field, Form } from "formik";
+import { ProfilePic, MainCard } from "../../utils/style/styles";
 
-// React-bootsrap components
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { StyledButton } from "../../utils/style/styles";
@@ -24,9 +24,7 @@ const ProfileForm = () => {
         instagramProfile: "",
         profilePic: null,
       }}
-      onSubmit={(values, { setSubmitting }, errors) => {
-        console.log(values);
-      }}
+      onSubmit={(values, { setSubmitting }, errors) => {}}
       validationSchema={userSchema}
     >
       {(formik, isSubmitting, values) => (
@@ -49,7 +47,7 @@ const ProfileForm = () => {
             />
 
             {formik.values.profilePic && (
-              <PreviewImage file={formik.values.profilePic} />
+              <ProfilePic file={formik.values.profilePic} />
             )}
             {formik.touched.profilePic && formik.errors.profilePic ? (
               <div className="invalid-feedback">{formik.errors.profilePic}</div>

@@ -20,10 +20,10 @@ const Comment = ({
   setCommentsCount,
 }) => {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+
   // TODO: refactor delete button logic
   const canEdit = currentUser.userId === data.userId || currentUser.isAdmin;
-  console.log(canEdit);
+
   return (
     <StyledCard className="shadow-sm my-3 ">
       <Card.Body>

@@ -17,7 +17,6 @@ const articleSchema = Yup.object({
 
 exports.articleValidation = catchAsync(async (req, res, next) => {
   const dataToValidate = req.file ? req.body : req.body;
-  console.log(dataToValidate);
   const value = await articleSchema.validate(
     { ...dataToValidate },
     { abortEarly: false, stripUnknown: true }

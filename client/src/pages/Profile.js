@@ -1,33 +1,30 @@
 import { useState, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 // Context
 import { AuthContext } from "../utils/context/AuthContext";
 
 // API request config
 import userService from "../services/userService";
 
-// React-bootsrap components
-import Card from "react-bootstrap/Card";
-
 // Components
-import ProfileForm from "../components/Profile/ProfileForm";
+import ProfileForm from "../components/Profile/ProfileUpdateForm";
 import ProfileCard from "../components/Profile/ProfileCard";
+import { StyledButton } from "../utils/style/styles";
 
 const Profile = () => {
   const [error, setError] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const { userId } = useParams();
   const { currentUser } = useContext(AuthContext);
+
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
-      setLoading(true);
       try {
-        console.log("💥💥💥💥");
+        setLoading(true);
         const response = await userService.getUser(userId);
-        console.log(`L'utilisateur de ce profil ${response.data}`);
-        setProfile(response.data.user);
+        setProfile(response?.data?.user);
       } catch (error) {
         if (error.response?.status === "404") {
           setError("Oups! Le profil que vous cherchez n'existe pas.");
@@ -39,21 +36,30 @@ const Profile = () => {
       }
     };
     getUser();
-  }, [userId]);
+  }, []);
+
+  const ProfileContent =
+    userId * 1 === currentUser.userId ? (
+      <>
+        <ProfileCard as="section" profile={profile} />
+        <StyledButton
+          as={Link}
+          to={`/profile/${currentUser.userId}/update`}
+          $outline
+          className="rounded-pill text-center py-1"
+        >
+          Modifier mon profil
+        </StyledButton>
+      </>
+    ) : (
+      <ProfileCard as="section" profile={profile} />
+    );
 
   return (
-    <main className="d-flex flex-column align-items-center">
-      <ProfileCard profile={profile} />
+    <main className="d-flex flex-column align-items-center mt-5">
+      {isLoading ? <span>Patience ça charge</span> : ProfileContent}
     </main>
   );
 };
-
-/* TODO: old profile form
- <Card className="rounded-3 shadow px-4 py-2">
-          <Card.Body>
-            <ProfileForm />
-          </Card.Body>
-        </Card>
-*/
 
 export default Profile;

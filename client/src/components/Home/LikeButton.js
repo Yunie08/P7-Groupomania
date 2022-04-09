@@ -28,7 +28,6 @@ const LikeButton = ({
 
   // Get list of users liking article
   useEffect(() => {
-    console.log(`From auth context : ${currentUser.userId}`);
     const getIsLiked = async () => {
       try {
         const response = await axios.get(`${ARTICLE_URL}/${articleId}/like`, {

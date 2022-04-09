@@ -22,9 +22,6 @@ function Article({ data, articleListEdited, setArticleListEdited }) {
   useEffect(() => {
     setCanEdit(currentUser.userId === data.user.id || currentUser.isAdmin);
   }, []);
-
-  console.log(`Article ${data.id}, can edit : ${canEdit}`);
-  console.log(data);
   return (
     <MainCard
       as="article"

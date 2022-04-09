@@ -10,15 +10,14 @@ import colors from "../../utils/style/colors";
 
 import { AuthContext } from "../../utils/context/AuthContext";
 
-const Styles = styled.div`
-  .navbar {
-    background-color: #072049ff !important;
-  }
+const NavbarStyled = styled(Navbar)`
+  background-color: #072049ff !important;
+`;
 
-  img {
-    max-width: 250px;
-  }
-
+const Logo = styled(Image)`
+  max-width: 250px;
+`;
+const NavStyled = styled(Nav)`
   .nav-link {
     color: white !important;
     margin-left: 15px;
@@ -45,40 +44,42 @@ function MainHeader() {
   //TODO: Change style implementation
   return (
     <>
-      <Styles>
-        <header>
-          <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
-            <Container>
-              <Navbar.Brand as={Link} to="/home">
-                <Image alt="Groupomania" src={HeaderLogo} />
-              </Navbar.Brand>
-              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-              <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="ms-auto">
-                  <Nav.Link as={Link} eventKey={1} to="/home">
-                    Accueil
-                  </Nav.Link>
-                  <Nav.Link
-                    as={Link}
-                    eventKey={2}
-                    to={`/profile/${currentUser.userId}`}
-                  >
-                    Profil
-                  </Nav.Link>
-                  <Nav.Link
-                    as={Link}
-                    eventKey={3}
-                    onClick={() => logout()}
-                    to="/auth"
-                  >
-                    Déconnexion
-                  </Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
-        </header>
-      </Styles>
+      <NavbarStyled
+        collapseOnSelect
+        expand="md"
+        bg="dark"
+        variant="dark"
+        className="sticky-top"
+      >
+        <Container>
+          <Navbar.Brand as={Link} to="/home">
+            <Logo alt="Groupomania" src={HeaderLogo} />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <NavStyled className="ms-auto">
+              <Nav.Link as={Link} eventKey={1} to="/home">
+                Accueil
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                eventKey={2}
+                to={`/profile/${currentUser.userId}`}
+              >
+                Profil
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                eventKey={3}
+                onClick={() => logout()}
+                to="/auth"
+              >
+                Déconnexion
+              </Nav.Link>
+            </NavStyled>
+          </Navbar.Collapse>
+        </Container>
+      </NavbarStyled>
       <Outlet />
     </>
   );

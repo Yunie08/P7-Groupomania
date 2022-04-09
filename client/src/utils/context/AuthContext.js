@@ -7,16 +7,13 @@ import setHeader from "../api/headerConfig";
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const response = await axios.get("/user/current", setHeader());
-      console.log(response.data);
-      return {
-        userId: response.data.user.id,
-        isAdmin: response.data.user.isAdmin,
-      };
+  const [currentUser, setCurrentUser] = useState(() => {
+    let user = localStorage.getItem("user");
+    if (user) {
+      user = JSON.parse(user);
+      return user;
     }
+    return null;
   });
   const [isAuthenticated, setAuthenticated] = useState(() => {
     const token = localStorage.getItem("token");
@@ -28,12 +25,11 @@ export const AuthProvider = ({ children }) => {
     const checkToken = async () => {
       const token = localStorage.getItem("token");
       if (token) {
-        const response = await axios.get("/user/current", setHeader());
-        console.log(response.data);
-        setCurrentUser({
-          userId: response.data.user.id,
-          isAdmin: response.data.user.isAdmin,
-        });
+        const { userId, isAdmin } = JSON.parse(localStorage.getItem("user"));
+        setCurrentUser({ userId, isAdmin });
+      } else {
+        setCurrentUser(null);
+        setAuthenticated(null);
       }
     };
     checkToken();

@@ -33,7 +33,7 @@ const ToggleComments = ({
       setDataLoading(false);
     }
   };
-  console.log(`Comment refresh ? ${commentRefresh}`);
+
   // If new comment added, show comments
   useEffect(() => {
     if (commentRefresh) {
@@ -49,7 +49,7 @@ const ToggleComments = ({
     <React.Fragment>
       <LinkStyledButton
         onClick={() => setOpen(!open)}
-        aria-controls="comments"
+        aria-controls={`comment-${articleId}`}
         aria-expanded={open}
       >
         <i className="fa-solid fa-comments fa-lg"></i>
@@ -60,8 +60,8 @@ const ToggleComments = ({
           <span>commentaire</span>
         )}
       </LinkStyledButton>
-      <Collapse in={open} onEnter={getComments} mountOnEnter={true}>
-        <div id="comments">
+      <Collapse in={open} onEnter={getComments}>
+        <div id={`comment-${articleId}`}>
           {commentsList.map((comment) => (
             <Comment
               setCommentRefresh={setCommentRefresh}

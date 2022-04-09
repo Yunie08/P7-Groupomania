@@ -46,8 +46,11 @@ export const LinkStyledButton = styled.button`
 `;
 
 export const ProfilePic = styled.img`
-  max-width: ${(props) => (props.comment ? "40px" : "85px")};
-  max-height: ${(props) => (props.comment ? "40px" : "85px")};
+  max-width: ${(props) =>
+    props.comment ? "40px" : props.$profile ? "130px" : "85px"};
+  max-height: ${(props) =>
+    props.comment ? "40px" : props.$profile ? "130px" : "85px"};
+  margin-top: ${(props) => props.$profile && "-100px"};
 `;
 
 export const Username = styled.p`

@@ -50,7 +50,6 @@ const AddComment = ({
       initialValues={{ content: "" }}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         postComment(values);
-        console.log(`fin de addComponent: ${commentRefresh}`);
         resetForm();
       }}
       validateOnChange={false}

@@ -32,8 +32,13 @@ const LoginForm = () => {
           userId: response.data.userId,
           isAdmin: response.data.isAdmin,
         });
-
-        console.log(response.data);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            userId: response.data.userId,
+            isAdmin: response.data.isAdmin,
+          })
+        );
         navigate("/home");
       }
     } catch (err) {
