@@ -9,13 +9,30 @@ exports.getAllUser = catchAsync(async (req, res, next) => {
   res.status(200).send(users);
 });
 
-// GET USER
+// GET USER BY ID
 exports.getUser = catchAsync(async (req, res, next) => {
   const { userId } = req.params;
   const user = await User.findOne({
     where: {
       id: userId,
     },
+  });
+
+  if (!user) {
+    return next(new AppError('User not found', 404));
+  }
+
+  res.status(200).json({ user });
+});
+
+// GET CURRENT USER
+exports.getCurrentUser = catchAsync(async (req, res, next) => {
+  console.log(req.auth.userId);
+  const user = await User.findOne({
+    where: {
+      id: req.auth.userId,
+    },
+    attributes: ['id', 'isAdmin'],
   });
 
   if (!user) {
@@ -67,23 +84,6 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
     return next(new AppError('No user found with that ID', 404));
   }
   res.status(200).json({ message: 'Utilisateur supprimé' });
-});
-
-// GET CURRENT USER
-exports.getCurrentUser = catchAsync(async (req, res, next) => {
-  console.log(req.auth.userId);
-  const user = await User.findOne({
-    where: {
-      id: req.auth.userId,
-    },
-    attributes: ['id', 'isAdmin'],
-  });
-
-  if (!user) {
-    return next(new AppError('User not found', 404));
-  }
-
-  res.status(200).json({ user });
 });
 
 /*

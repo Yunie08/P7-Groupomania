@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import { Formik, Field, Form } from "formik";
@@ -7,10 +8,32 @@ import Col from "react-bootstrap/Col";
 import { StyledButton } from "../../utils/style/styles";
 import PreviewImage from "../Shared/PreviewImage";
 
+// Services and helpers
+import userService from "../../services/userService";
+import { dataFormatter } from "../../utils/helpers/dataFormatter";
+
 // Validation schema
 import { userSchema } from "../../utils/validation/userSchema";
 
 const ProfileForm = ({ profile }) => {
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const updateUser = async (values) => {
+    try {
+      const isMultipart = values?.profilePic ? true : false;
+      const data = dataFormatter(values, isMultipart);
+      const response = await userService.updateUser(
+        profile.id,
+        data,
+        isMultipart
+      );
+      navigate(`/profile/${profile.id}`);
+    } catch (err) {
+      setError(err.response.data.message);
+    }
+  };
+
   const fileRef = useRef(null);
   return (
     <Formik
@@ -24,11 +47,14 @@ const ProfileForm = ({ profile }) => {
         instagramProfile: profile.instagramProfile,
         profilePic: null,
       }}
-      onSubmit={(values, { setSubmitting }, errors) => {}}
+      onSubmit={(values, { setSubmitting }, errors) => {
+        updateUser(values);
+      }}
       validationSchema={userSchema}
     >
       {(formik, isSubmitting, values) => (
         <Form>
+          {error && <div className="text-danger text-center py-2">{error}</div>}
           <div className="form-group">
             <label htmlFor="profilePic">
               <PreviewImage
@@ -46,7 +72,7 @@ const ProfileForm = ({ profile }) => {
                 formik.setFieldValue("profilePic", event.target.files[0]);
               }}
               className={
-                formik.touched.firstname && formik.errors.firstname
+                formik.touched.profilePic && formik.errors.profilePic
                   ? "form-control is-invalid visually-hidden"
                   : "form-control visually-hidden"
               }

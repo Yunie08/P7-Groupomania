@@ -35,7 +35,7 @@ const Profile = () => {
       }
     };
     getUser();
-  }, []);
+  }, [userId]);
 
   const ProfileContent =
     userId * 1 === currentUser.userId ? (

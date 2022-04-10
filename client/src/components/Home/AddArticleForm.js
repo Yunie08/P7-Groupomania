@@ -1,33 +1,24 @@
 import { useState } from "react";
+
+// Components
 import { Formik, Field, Form } from "formik";
 import { StyledButton } from "../../utils/style/styles";
 import PreviewImage from "../Shared/PreviewImage";
 
-import { articleSchema } from "../../utils/validation/articleSchema";
-
+// Services and helpers
 import articleService from "../../services/articleService";
+import { dataFormatter } from "../../utils/helpers/dataFormatter";
+
+// Validation schema
+import { articleSchema } from "../../utils/validation/articleSchema";
 
 const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
   const [error, setError] = useState(null);
 
-  const dataFormatter = (data) => {
-    if (data?.image) {
-      const formData = new FormData();
-
-      formData.append("title", data.title);
-      formData.append("content", data.content);
-      formData.append("image", data.image);
-
-      return formData;
-    } else {
-      return data;
-    }
-  };
-
   const postArticle = async (values) => {
     try {
-      const data = dataFormatter(values);
       const isMultipart = values?.image ? true : false;
+      const data = dataFormatter(values, isMultipart);
       const response = await articleService.addArticle(data, isMultipart);
       setArticleListEdited(true);
       setModalShow(false);

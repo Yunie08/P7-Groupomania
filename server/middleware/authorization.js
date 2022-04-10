@@ -33,5 +33,3 @@ module.exports = (Model) =>
 
     next();
   });
-
-//TODO: middleware to set isAdmin

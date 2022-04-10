@@ -23,7 +23,7 @@ const userSchema = Yup.object({
 });
 
 exports.userValidation = catchAsync(async (req, res, next) => {
-  const dataToValidate = req.file ? JSON.parse(req.body.user) : req.body;
+  const dataToValidate = req.body;
   const value = await userSchema.validate(
     { ...dataToValidate },
     { abortEarly: false, stripUnknown: true }
