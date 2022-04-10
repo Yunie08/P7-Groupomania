@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 // Components
 import { Formik, Field, Form } from "formik";
@@ -11,6 +12,10 @@ import { dataFormatter } from "../../utils/helpers/dataFormatter";
 
 // Validation schema
 import { articleSchema } from "../../utils/validation/articleSchema";
+
+const Container = styled.div`
+  max-width: 400px;
+`;
 
 const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
   const [error, setError] = useState(null);
@@ -77,12 +82,12 @@ const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
           </div>
 
           {formik.values.image && (
-            <div className="w-100 d-flex justify-content-center mt-4">
+            <Container className="w-100 d-flex justify-content-center mt-4">
               <PreviewImage
                 file={formik.values.image}
                 className="image-fluid"
               />
-            </div>
+            </Container>
           )}
           <div className="form-group">
             <label htmlFor="articleImage" className="mt-3">

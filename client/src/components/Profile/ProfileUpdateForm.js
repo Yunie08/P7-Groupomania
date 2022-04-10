@@ -61,6 +61,7 @@ const ProfileForm = ({ profile }) => {
               <PreviewImage
                 src={profile.profilePic}
                 file={formik.values.profilePic}
+                type={"profile"}
               />
               <span className="sr-only">Changer de photo de profil</span>
             </LabelImage>

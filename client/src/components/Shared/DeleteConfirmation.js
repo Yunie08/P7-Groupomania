@@ -1,5 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import axios from "../../utils/api/axiosConfig";
+
+// Components
 import { StyledButton, LinkStyledButton } from "../../utils/style/styles";
 
 const ARTICLE_URL = "/article";
@@ -72,16 +74,22 @@ const DeleteConfirmation = ({
           {message}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="px-5 d-flex justify-content-center">
-        <StyledButton $outline onClick={onHide} className="me-2 rounded-pill">
-          Annuler
-        </StyledButton>
+      <Modal.Body className="px-5 d-flex justify-content-center row">
         <StyledButton
           $danger
+          $modal
           onClick={() => deleteItem()}
-          className="rounded-pill"
+          className="col-12 col-sm-6 rounded-pill mx-2 mb-2"
         >
           Confirmer
+        </StyledButton>
+        <StyledButton
+          $outline
+          $modal
+          onClick={onHide}
+          className="col-12 col-sm-6 rounded-pill mx-2 mb-2"
+        >
+          Annuler
         </StyledButton>
       </Modal.Body>
     </Modal>

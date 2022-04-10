@@ -1,9 +1,11 @@
+// Components
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import ProfilePic from "../Shared/ProfilePic";
 import SocialLink from "./SocialLink";
 import CardBase from "../Shared/CardBase";
 
+// TODO: refactor socials
 const ProfileCard = ({ profile }) => {
   return (
     <CardBase>
@@ -24,6 +26,7 @@ const ProfileCard = ({ profile }) => {
 
         {profile.bio && <p>{profile.bio}</p>}
       </Card.Header>
+
       <Card.Text className="d-flex gap-2 justify-content-center mt-4">
         {profile.linkedinProfile && (
           <SocialLink href={profile.linkedinProfile} type="linkedin" />

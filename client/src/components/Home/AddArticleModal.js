@@ -19,7 +19,7 @@ const AddArticleModal = (props) => {
           Publier un article
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="px-5">
+      <Modal.Body className="px-md-5">
         <AddArticleForm
           setModalShow={setModalShow}
           setArticleListEdited={setArticleListEdited}

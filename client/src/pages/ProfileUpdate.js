@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+
 // Context
 import { AuthContext } from "../utils/context/AuthContext";
 
@@ -9,6 +10,7 @@ import userService from "../services/userService";
 // Components
 import ProfileUpdateForm from "../components/Profile/ProfileUpdateForm";
 import CardBase from "../components/Shared/CardBase";
+import Loader from "../components/Shared/Loader";
 import { StyledButton } from "../utils/style/styles";
 
 const ProfileUpdate = () => {
@@ -41,7 +43,7 @@ const ProfileUpdate = () => {
     <main className="d-flex flex-column align-items-center">
       <h1 className="mb-5">Modifier votre profil</h1>
       {isLoading ? (
-        <p>Patience ça charge</p>
+        <Loader />
       ) : (
         <>
           <CardBase>

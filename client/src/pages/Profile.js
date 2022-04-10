@@ -9,6 +9,7 @@ import userService from "../services/userService";
 // Components
 import ProfileCard from "../components/Profile/ProfileCard";
 import { StyledButton } from "../utils/style/styles";
+import Loader from "../components/Shared/Loader";
 
 const Profile = () => {
   const [error, setError] = useState(null);
@@ -26,7 +27,7 @@ const Profile = () => {
         setProfile(response?.data?.user);
       } catch (error) {
         if (error.response?.status === "404") {
-          setError("Oups! Le profil que vous cherchez n'existe pas.");
+          setError("Oups! Le profil que vous recherchez n'existe pas.");
         } else {
           setError(error);
         }
@@ -56,7 +57,7 @@ const Profile = () => {
 
   return (
     <main className="d-flex flex-column align-items-center mt-5">
-      {isLoading ? <span>Patience ça charge</span> : ProfileContent}
+      {isLoading ? <Loader /> : ProfileContent}
     </main>
   );
 };

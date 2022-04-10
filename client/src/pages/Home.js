@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "../utils/api/axiosConfig";
+
+// Components
 import Article from "../components/Home/Article";
 import AddArticleModal from "../components/Home/AddArticleModal";
-
+import Loader from "../components/Shared/Loader";
 import { StyledButton } from "../utils/style/styles";
 
 const ARTICLE_URL = "/article";
@@ -53,7 +55,7 @@ const Home = () => {
       />
 
       {isDataLoading ? (
-        <div>Patience, ça charge</div>
+        <Loader />
       ) : (
         articlesList.map((article) => (
           <Article
