@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Card from "react-bootstrap/Card";
-import { ProfilePic, Username } from "../../utils/style/styles";
+import { Username } from "../../utils/style/styles";
+import ProfilePic from "../Shared/ProfilePic";
 import DeleteButton from "../Shared/DeleteButton";
 import PublishedTime from "./PublishedTime";
 import styled from "styled-components";
@@ -32,7 +33,7 @@ const Comment = ({
             comment
             src={data.user.profilePic}
             alt={`Photo de profil de ${data.firstname} ${data.lastname}`}
-            className="img-fluid rounded-circle"
+            type={"comment"}
           />
           <div className="col d-flex flex-column justify-content-center ms-2">
             <Username comment className="mb-0">

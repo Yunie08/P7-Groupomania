@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
-import { ProfilePic, MainCard } from "../../utils/style/styles";
+import ProfilePic from "../Shared/ProfilePic";
 import SocialLink from "./SocialLink";
 import CardBase from "../Shared/CardBase";
 
@@ -14,10 +14,9 @@ const ProfileCard = ({ profile }) => {
           </Badge>
         )}
         <ProfilePic
-          $profile
           src={profile.profilePic}
           alt={`Photo de profil de ${profile.firstname} ${profile.lastname}`}
-          className="rounded-circle img-fluid"
+          type={"profile"}
         />
         <Card.Title as="h1" className="mt-3">
           {profile.firstname} {profile.lastname}

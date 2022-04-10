@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
 
-import { ProfilePic } from "../../utils/style/styles";
+const StyledImage = styled.img`
+  max-width: 400px;
+`;
 
 const PreviewImage = ({ file, src }) => {
   const [preview, setPreview] = useState(src);
@@ -16,12 +19,9 @@ const PreviewImage = ({ file, src }) => {
   }, [file]);
 
   return (
-    <ProfilePic
-      $profile
-      src={preview}
-      alt="Aperçu photo de profil"
-      className="rounded-circle mt-3"
-    />
+    (file || src) && (
+      <StyledImage src={preview} alt="Aperçu" className="img-fluid" />
+    )
   );
 };
 

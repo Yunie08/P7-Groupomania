@@ -39,6 +39,12 @@ a {
 i {
   padding-right: 5px;
 }
+
+label {
+  &:hover {
+    cursor: pointer;
+  }
+}
 `;
 
 function GlobalStyle() {

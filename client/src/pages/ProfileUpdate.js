@@ -39,7 +39,7 @@ const ProfileUpdate = () => {
 
   return (
     <main className="d-flex flex-column align-items-center">
-      <h1>Modifier votre profil</h1>
+      <h1 className="mb-5">Modifier votre profil</h1>
       {isLoading ? (
         <p>Patience ça charge</p>
       ) : (

@@ -75,8 +75,14 @@ const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
               <div className="invalid-feedback">{formik.errors.content}</div>
             ) : null}
           </div>
+
           {formik.values.image && (
-            <PreviewImage file={formik.values.image} className="image-fluid" />
+            <div className="w-100 d-flex justify-content-center mt-4">
+              <PreviewImage
+                file={formik.values.image}
+                className="image-fluid"
+              />
+            </div>
           )}
           <div className="form-group">
             <label htmlFor="articleImage" className="mt-3">

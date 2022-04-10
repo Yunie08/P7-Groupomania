@@ -1,9 +1,8 @@
-import Image from "react-bootstrap/Image";
 import styled from "styled-components";
 
 import React from "react";
 
-const StyledImage = styled(Image)`
+const StyledImage = styled.img`
   max-width: 400px;
 `;
 

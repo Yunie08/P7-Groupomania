@@ -27,7 +27,6 @@ exports.getUser = catchAsync(async (req, res, next) => {
 
 // GET CURRENT USER
 exports.getCurrentUser = catchAsync(async (req, res, next) => {
-  console.log(req.auth.userId);
   const user = await User.findOne({
     where: {
       id: req.auth.userId,

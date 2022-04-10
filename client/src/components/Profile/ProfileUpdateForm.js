@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { StyledButton } from "../../utils/style/styles";
 import PreviewImage from "../Shared/PreviewImage";
+import LabelImage from "./LabelImage";
 
 // Services and helpers
 import userService from "../../services/userService";
@@ -53,16 +54,16 @@ const ProfileForm = ({ profile }) => {
       validationSchema={userSchema}
     >
       {(formik, isSubmitting, values) => (
-        <Form>
+        <Form className="pt-2 d-flex flex-column">
           {error && <div className="text-danger text-center py-2">{error}</div>}
-          <div className="form-group">
-            <label htmlFor="profilePic">
+          <div className="form-group text-center align-self-center position-relative">
+            <LabelImage htmlFor="profilePic">
               <PreviewImage
                 src={profile.profilePic}
                 file={formik.values.profilePic}
               />
               <span className="sr-only">Changer de photo de profil</span>
-            </label>
+            </LabelImage>
             <input
               ref={fileRef}
               id="profilePic"

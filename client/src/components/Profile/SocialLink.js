@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colors from "../../utils/style/colors";
 
+// Component Styling
 const SocialIcon = styled.i`
   color: ${colors.primary};
   &:hover {

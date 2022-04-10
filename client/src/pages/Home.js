@@ -40,7 +40,7 @@ const Home = () => {
       <h1>Un espace d'échange avec vos collègues</h1>
       <StyledButton
         $outline
-        className="rounded-pill my-4"
+        className="rounded-pill mt-4"
         onClick={() => setModalShow(true)}
       >
         Publier un article

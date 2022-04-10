@@ -7,7 +7,7 @@ export const MainCard = styled(Card)`
 
 const CardBase = ({ children }) => {
   return (
-    <MainCard className="my-5 col-md-9 col-lg-8 rounded-3 shadow px-md-2 py-2">
+    <MainCard className="col-md-9 col-lg-8 rounded-3 shadow my-5 px-md-2 py-2">
       <Card.Body className="bg-white position-relative">{children}</Card.Body>
     </MainCard>
   );

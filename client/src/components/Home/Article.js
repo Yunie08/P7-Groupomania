@@ -5,7 +5,8 @@ import ToggleComments from "./ToggleComments";
 import AddComment from "./AddComment";
 import PublishedTime from "./PublishedTime";
 import ArticleImage from "./ArticleImage";
-import { ProfilePic, Username } from "../../utils/style/styles";
+import { Username } from "../../utils/style/styles";
+import ProfilePic from "../Shared/ProfilePic";
 import LikeButton from "./LikeButton";
 import DeleteButton from "../Shared/DeleteButton";
 import CardBase from "../Shared/CardBase";
@@ -29,7 +30,7 @@ function Article({ data, articleListEdited, setArticleListEdited }) {
         <ProfilePic
           src={data.user.profilePic}
           alt={`Photo de profil de ${data.user.firstname} ${data.user.lastname}`}
-          className="img-fluid rounded-circle"
+          type={"article"}
         />
         <div className="col d-flex flex-column justify-content-center border-bottom border-3 ms-3">
           <Username className="mb-1">

@@ -35,8 +35,6 @@ export const AuthProvider = ({ children }) => {
     checkToken();
   }, [setAuthenticated]);
 
-  console.log(`Current user from AuthContext: ${currentUser?.userId}`);
-  console.log(`isAuthenticated from AuthContext: ${isAuthenticated}`);
   const value = {
     currentUser,
     setCurrentUser,
