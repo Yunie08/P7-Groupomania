@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { Formik, Field, Form } from "formik";
-import axios from "../../utils/api/axiosConfig";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { commentSchema } from "../../utils/validation/commentSchema";
-import { StyledButton } from "../../utils/style/styles";
-import styled from "styled-components";
 
-const ARTICLE_URL = "/article";
+// Service
+import commentService from "../../services/commentService";
+
+// Components
+import { Formik, Field, Form } from "formik";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { StyledButton } from "../../utils/style/styles";
+
+// Validation schema
+import { commentSchema } from "../../utils/validation/commentSchema";
+
+// Style
+import styled from "styled-components";
 
 const FormGroup = styled.div`
   textarea {
@@ -17,27 +23,15 @@ const FormGroup = styled.div`
 
 const AddComment = ({
   articleId,
-  commentRefresh,
   setCommentRefresh,
   setCommentsCount,
   commentsCount,
 }) => {
   const [error, setError] = useState(null);
 
-  const token = localStorage.getItem("token");
-
   const postComment = async ({ content }) => {
     try {
-      await axios.post(
-        `${ARTICLE_URL}/${articleId}/comment`,
-        {
-          content,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      // FIXME: !commentRefresh => true
+      await commentService.addComment(articleId, { content });
       setCommentRefresh(true);
       setCommentsCount(commentsCount + 1);
     } catch (err) {

@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Formik, Field, Form } from "formik";
-import axios from "../../utils/api/axiosConfig";
 
-// React-bootsrap components
+// Service
+import authService from "../../services/authService";
+
+// Components
+import { Formik, Field, Form } from "formik";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { StyledButton } from "../../utils/style/styles";
 
-// Yup validation schema
+// Validation schema
 import { signupSchema } from "../../utils/validation/signupSchema";
-
-const SIGNUP_URL = "/auth/signup";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -19,23 +19,10 @@ const SignupForm = () => {
   const [isRegistered, setRegistered] = useState(false);
 
   // Send registering request to API
-  // TODO: separate services in another folder
-  const signup = async ({
-    firstname,
-    lastname,
-    email,
-    password,
-    passwordConfirm,
-  }) => {
+  const signup = async (userData) => {
     try {
       setRegistered(false);
-      await axios.post(SIGNUP_URL, {
-        firstname,
-        lastname,
-        email,
-        password,
-        passwordConfirm,
-      });
+      await authService.register(userData);
       setRegistered(true);
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
@@ -53,7 +40,8 @@ const SignupForm = () => {
         passwordConfirm: "",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        signup(values);
+        const { passwordConfirm, ...userData } = values;
+        signup(userData);
       }}
       validationSchema={signupSchema}
     >

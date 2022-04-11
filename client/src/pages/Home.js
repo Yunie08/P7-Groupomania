@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "../utils/api/axiosConfig";
+
+// Services
+import articleService from "../services/articleService";
 
 // Components
 import Article from "../components/Home/Article";
 import AddArticleModal from "../components/Home/AddArticleModal";
 import Loader from "../components/Shared/Loader";
 import { StyledButton } from "../utils/style/styles";
-
-const ARTICLE_URL = "/article";
 
 const Home = () => {
   const [isDataLoading, setDataLoading] = useState();
@@ -19,10 +19,7 @@ const Home = () => {
   useEffect(() => {
     const getArticles = async () => {
       setDataLoading(true);
-      const token = localStorage.getItem("token");
-      const response = await axios.get(ARTICLE_URL, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await articleService.getAllArticles();
       setArticlesList(response.data);
       setDataLoading(false);
     };

@@ -45,11 +45,11 @@ const Comment = ({
             <DeleteButton
               componentToDelete="comment"
               articleId={data.articleId}
-              id={data.id}
+              commentId={data.id}
               setCommentRefresh={setCommentRefresh}
               commentRefresh={commentRefresh}
-              commentsCount={commentsCount}
               setCommentsCount={setCommentsCount}
+              commentsCount={commentsCount}
             />
           )}
         </Card.Header>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/api/axiosConfig";
 
+// Services
+import commentService from "../../services/commentService";
+
+// Components
 import Collapse from "react-bootstrap/Collapse";
 import Comment from "./Comment";
 import { LinkStyledButton } from "../../utils/style/styles";
-
-const ARTICLE_URL = "/article";
 
 const ToggleComments = ({
   setCommentRefresh,
@@ -18,14 +19,11 @@ const ToggleComments = ({
   const [isDataLoading, setDataLoading] = useState();
   const [error, setError] = useState(false);
   const [commentsList, setCommentsList] = useState([]);
-  const token = localStorage.getItem("token");
 
   const getComments = async () => {
     setDataLoading(true);
     try {
-      const response = await axios.get(`${ARTICLE_URL}/${articleId}/comment`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await commentService.getAllComments(articleId);
       setCommentsList(response.data);
     } catch (err) {
       setError(err.response.data.message);

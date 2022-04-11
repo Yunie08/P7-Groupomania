@@ -1,8 +1,5 @@
-import { useState, useContext, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-
-// Context
-import { AuthContext } from "../utils/context/AuthContext";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 // API request config
 import userService from "../services/userService";
@@ -19,7 +16,6 @@ const ProfileUpdate = () => {
   const [isLoading, setLoading] = useState(true);
   let { userId } = useParams();
   userId = parseInt(userId);
-  const { currentUser } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
@@ -39,7 +35,7 @@ const ProfileUpdate = () => {
       }
     };
     getUser();
-  }, []);
+  }, [userId]);
 
   return (
     <main className="d-flex flex-column align-items-center">

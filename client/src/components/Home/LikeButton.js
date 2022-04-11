@@ -1,8 +1,13 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "../../utils/api/axiosConfig";
-import { LinkStyledButton } from "../../utils/style/styles";
+
+// Context
 import { AuthContext } from "../../utils/context/AuthContext";
-const ARTICLE_URL = "/article";
+
+// Service
+import likeService from "../../services/likeService";
+
+// Components
+import { LinkStyledButton } from "../../utils/style/styles";
 
 const LikeButton = ({
   articleId,
@@ -12,7 +17,6 @@ const LikeButton = ({
   setLikedByUser,
 }) => {
   const [error, setError] = useState(false);
-  const token = localStorage.getItem("token");
   const { currentUser } = useContext(AuthContext);
 
   // Check if a user likes this article
@@ -30,9 +34,7 @@ const LikeButton = ({
   useEffect(() => {
     const getIsLiked = async () => {
       try {
-        const response = await axios.get(`${ARTICLE_URL}/${articleId}/like`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await likeService.getLike(articleId);
         const isLikedByUser = checkLikes(response.data, currentUser.userId);
         setLikedByUser(isLikedByUser);
         setLikesCount(response.data.length);
@@ -45,18 +47,9 @@ const LikeButton = ({
 
   const postLike = async () => {
     try {
-      // If the user currently likes then, will send an unlike
+      // If the user previously liked the article, we send a "false" value to cancel the like and vice-versa
       const newLikeValue = likedByUser ? false : true;
-
-      await axios.post(
-        `${ARTICLE_URL}/${articleId}/like`,
-        {
-          isLiked: newLikeValue,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await likeService.sendLike(articleId, { isLiked: newLikeValue });
       setLikedByUser(!likedByUser);
       newLikeValue
         ? setLikesCount(likesCount + 1)

@@ -1,4 +1,4 @@
-const { Like, Article, User } = require('../models');
+const { Like, Article } = require('../models');
 
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');

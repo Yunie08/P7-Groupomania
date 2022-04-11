@@ -4,8 +4,16 @@ import setHeader from "../utils/api/headerConfig";
 const ARTICLE_URL = "/article";
 
 class ArticleService {
+  getAllArticles() {
+    return axios.get(ARTICLE_URL, setHeader());
+  }
+
   addArticle(data, isMultipart) {
     return axios.post(ARTICLE_URL, data, setHeader(isMultipart));
+  }
+
+  deleteArticle(articleId) {
+    return axios.delete(`${ARTICLE_URL}/${articleId}`, setHeader());
   }
 }
 
