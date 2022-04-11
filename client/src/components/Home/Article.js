@@ -1,17 +1,19 @@
 import { useState, useContext, useEffect } from "react";
-import Card from "react-bootstrap/Card";
 
+// Context
+import { AuthContext } from "../../utils/context/AuthContext";
+
+// Components
+import Card from "react-bootstrap/Card";
+import CardBase from "../Shared/CardBase";
+import ArticleImage from "./ArticleImage";
+import ProfilePic from "../Shared/ProfilePic";
+import PublishedTime from "./PublishedTime";
+import AuthorLink from "./AuthorLink";
 import ToggleComments from "./ToggleComments";
 import AddComment from "./AddComment";
-import PublishedTime from "./PublishedTime";
-import ArticleImage from "./ArticleImage";
-import { Username } from "../../utils/style/styles";
-import ProfilePic from "../Shared/ProfilePic";
 import LikeButton from "./LikeButton";
 import DeleteButton from "../Shared/DeleteButton";
-import CardBase from "../Shared/CardBase";
-
-import { AuthContext } from "../../utils/context/AuthContext";
 
 function Article({ data, articleListEdited, setArticleListEdited }) {
   const [commentRefresh, setCommentRefresh] = useState(false);
@@ -21,9 +23,12 @@ function Article({ data, articleListEdited, setArticleListEdited }) {
   const { currentUser } = useContext(AuthContext);
   const [canEdit, setCanEdit] = useState(false);
 
+  // Check if the current user can delete the article
+  // (current user is author or admin)
   useEffect(() => {
     setCanEdit(currentUser.userId === data.user.id || currentUser.isAdmin);
   }, []);
+
   return (
     <CardBase as="article">
       <Card.Header className="bg-white border-bottom-0 d-flex">
@@ -33,9 +38,13 @@ function Article({ data, articleListEdited, setArticleListEdited }) {
           type={"article"}
         />
         <div className="col d-flex flex-column justify-content-center border-bottom border-3 ms-3">
-          <Username className="mb-1">
-            {data.user.firstname} {data.user.lastname}
-          </Username>
+          <AuthorLink
+            firstname={data.user.firstname}
+            lastname={data.user.lastname}
+            type={"article"}
+            userId={data.user.id}
+          />
+
           <PublishedTime inArticle createdAt={data.createdAt} className="m-0" />
         </div>
         {canEdit && (

@@ -32,10 +32,6 @@ h3 {
   font-weight: 600;
 }
 
-a {
-  text-decoration: none !important;
-}
-
 i {
   padding-right: 5px;
 }

@@ -12,6 +12,7 @@ export const MainCard = styled(Card)`
 `;
 
 export const StyledButton = styled(Button)`
+  text-decoration: none;
   min-width: 180px;
   max-width: ${(props) => props.$modal && "160px"};
   color: ${(props) => props.$outline && "inherit"};
@@ -44,17 +45,4 @@ export const LinkStyledButton = styled.button`
     color: ${colors.secondaryDark};
     text-decoration: underline;
   }
-`;
-
-export const ProfilePic = styled.img`
-  width: ${(props) =>
-    props.comment ? "40px" : props.$profile ? "130px" : "85px"};
-  max-height: ${(props) =>
-    props.comment ? "40px" : props.$profile ? "130px" : "85px"};
-  margin-top: ${(props) => props.$profile && "-100px"};
-`;
-
-export const Username = styled.p`
-  font-size: ${(props) => (props.comment ? "16px" : "1.2rem")};
-  font-weight: bold;
 `;
