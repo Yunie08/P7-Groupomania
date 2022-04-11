@@ -3,18 +3,20 @@ import { useParams, Link } from "react-router-dom";
 // Context
 import { AuthContext } from "../utils/context/AuthContext";
 
-// API request config
+// Service
 import userService from "../services/userService";
 
 // Components
 import ProfileCard from "../components/Profile/ProfileCard";
 import { StyledButton } from "../utils/style/styles";
+import DeleteButtonUser from "../components/Profile/DeleteButtonUser";
 import Loader from "../components/Shared/Loader";
 
 const Profile = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
-  const { userId } = useParams();
+  let { userId } = useParams();
+  userId = parseInt(userId);
   const { currentUser } = useContext(AuthContext);
 
   const [profile, setProfile] = useState(null);
@@ -38,10 +40,11 @@ const Profile = () => {
     getUser();
   }, [userId]);
 
-  const ProfileContent =
-    userId * 1 === currentUser.userId ? (
-      <>
-        <ProfileCard as="section" profile={profile} />
+  const ProfileContent = (
+    // If this is the profile of the current user, show
+    <>
+      <ProfileCard as="section" profile={profile} />
+      {userId === currentUser.userId && (
         <StyledButton
           as={Link}
           to={`/profile/${currentUser.userId}/update`}
@@ -50,10 +53,12 @@ const Profile = () => {
         >
           Modifier mon profil
         </StyledButton>
-      </>
-    ) : (
-      <ProfileCard as="section" profile={profile} />
-    );
+      )}
+      {userId !== currentUser.userId && currentUser.isAdmin && (
+        <DeleteButtonUser userId={userId} />
+      )}
+    </>
+  );
 
   return (
     <main className="d-flex flex-column align-items-center mt-5">

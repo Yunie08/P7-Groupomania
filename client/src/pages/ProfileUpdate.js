@@ -11,12 +11,14 @@ import userService from "../services/userService";
 import ProfileUpdateForm from "../components/Profile/ProfileUpdateForm";
 import CardBase from "../components/Shared/CardBase";
 import Loader from "../components/Shared/Loader";
+import DeleteButtonUser from "../components/Profile/DeleteButtonUser";
 import { StyledButton } from "../utils/style/styles";
 
 const ProfileUpdate = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
-  const { userId } = useParams();
+  let { userId } = useParams();
+  userId = parseInt(userId);
   const { currentUser } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
 
@@ -49,12 +51,9 @@ const ProfileUpdate = () => {
           <CardBase>
             <ProfileUpdateForm profile={profile} />
           </CardBase>
-
+          <DeleteButtonUser userId={userId} />
           <StyledButton $outline className="rounded-pill">
             Modifier mon mot de passe
-          </StyledButton>
-          <StyledButton $danger className="rounded-pill my-2">
-            Supprimer mon compte
           </StyledButton>
         </>
       )}

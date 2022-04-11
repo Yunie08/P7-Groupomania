@@ -1,49 +1,57 @@
-import Modal from "react-bootstrap/Modal";
-import axios from "../../utils/api/axiosConfig";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Context
+import { AuthContext } from "../../utils/context/AuthContext";
+
+// Services
+import articleService from "../../services/articleService";
+import commentService from "../../services/commentService";
+import userService from "../../services/userService";
 
 // Components
-import { StyledButton, LinkStyledButton } from "../../utils/style/styles";
-
-const ARTICLE_URL = "/article";
+import Modal from "react-bootstrap/Modal";
+import { StyledButton } from "../../utils/style/styles";
 
 const DeleteConfirmation = ({
   componentToDelete,
   articleId,
-  id,
-  commentRefresh,
-  setCommentRefresh,
+  commentId,
+  userId,
   commentsCount,
+  setCommentRefresh,
   setCommentsCount,
-  articleListEdited,
   setArticleListEdited,
   show,
   onHide,
 }) => {
-  const token = localStorage.getItem("token");
+  const { currentUser, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const deleteItem = async () => {
     try {
-      // Set url depending on if used to delete article or comment
-      const URL_TO_DELETE =
-        componentToDelete === "article"
-          ? `${ARTICLE_URL}/${articleId}`
-          : `${ARTICLE_URL}/${articleId}/comment/${id}`;
-
-      await axios.delete(URL_TO_DELETE, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
       switch (componentToDelete) {
         case "article":
+          await articleService.deleteArticle(articleId);
           setArticleListEdited(true);
           onHide();
           break;
         case "comment":
+          await commentService.deleteComment(articleId, commentId);
           setCommentRefresh(true);
           setCommentsCount(commentsCount - 1);
           break;
         case "user":
+          await userService.deleteUser(userId);
+          if (currentUser.userId === userId) {
+            logout();
+            navigate("/auth");
+          } else {
+            navigate("/home");
+          }
           break;
         default:
-          message += "cet élément";
+          throw new Error(`Veuillez préciser le type d'élément à supprimer`);
       }
     } catch (error) {}
   };
@@ -56,7 +64,7 @@ const DeleteConfirmation = ({
       message += "ce commentaire ?";
       break;
     case "user":
-      message += "ce profil ?";
+      message += "ce compte ?";
       break;
     default:
       message += "cet élément";

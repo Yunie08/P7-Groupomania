@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const authentication = require('../middleware/authentication');
+const adminAccess = require('../middleware/adminAccess');
 const authorization = require('../middleware/authorization');
 const userCtrl = require('../controllers/userController');
 const { userValidation } = require('../middleware/validation/userValidation');
@@ -23,6 +24,11 @@ router
     userValidation,
     userCtrl.updateUser
   )
-  .delete(authentication, authorization(User), userCtrl.deleteUser);
+  .delete(
+    authentication,
+    adminAccess,
+    authorization(User),
+    userCtrl.deleteUser
+  );
 
 module.exports = router;

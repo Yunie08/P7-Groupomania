@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
-import axios from "../../utils/api/axiosConfig";
+import { useState } from "react";
+
+// Components
 import { LinkStyledButton } from "../../utils/style/styles";
 import DeleteConfirmation from "./DeleteConfirmation";
 
 const DeleteButton = ({
   componentToDelete,
   articleId,
-  id,
+  commentId,
   commentRefresh,
   setCommentRefresh,
   commentsCount,
@@ -28,15 +29,12 @@ const DeleteButton = ({
       <DeleteConfirmation
         show={modalShow}
         onHide={() => setModalShow(false)}
-        setModalShow={setModalShow}
         componentToDelete={componentToDelete}
         articleId={articleId}
-        id={id}
-        setCommentRefresh={setCommentRefresh}
-        commentRefresh={commentRefresh}
+        commentId={commentId}
         commentsCount={commentsCount}
+        setCommentRefresh={setCommentRefresh}
         setCommentsCount={setCommentsCount}
-        articleListEdited={articleListEdited}
         setArticleListEdited={setArticleListEdited}
       />
     </>

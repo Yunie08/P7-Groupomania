@@ -7,8 +7,10 @@ import { AuthContext } from "../../utils/context/AuthContext";
 
 const PrivateRoutes = ({ ...restofProps }) => {
   const { currentUser } = useContext(AuthContext);
-  const { userId } = useParams();
-  return currentUser.userId === userId * 1 ? (
+  let { userId } = useParams();
+  userId = parseInt(userId);
+
+  return currentUser.userId === userId ? (
     <Outlet />
   ) : (
     <Navigate to={`/profile/${userId}`} />

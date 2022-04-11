@@ -12,7 +12,7 @@ export const MainCard = styled(Card)`
 `;
 
 export const StyledButton = styled(Button)`
-  min-width: 150px;
+  min-width: 180px;
   max-width: ${(props) => props.$modal && "160px"};
   color: ${(props) => props.$outline && "inherit"};
   background-color: ${(props) =>
