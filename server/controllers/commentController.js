@@ -17,7 +17,7 @@ exports.getAllComment = catchAsync(async (req, res, next) => {
         attributes: ['id', 'firstname', 'lastname', 'profilePic'],
       },
     ],
-    order: [['createdAt', 'DESC']],
+    order: [['createdAt', 'ASC']],
   });
   res.status(200).json(comments);
 });
