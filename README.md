@@ -25,11 +25,6 @@ From the _client_ folder:
 - Run `npm i` command to install the frontend dependencies.
 - Run `npm start` to launch the frontend server in development mode.
 
-## Frontend
-
-The frontend was provided by Openclassrooms.  
-Would you like to test the API with a UI, please follow the README instructions in the frontend folder.
-
 ## Project Overview
 
 ### Built with
@@ -46,10 +41,10 @@ Frontend
 
 ### Evaluated skills
 
-:heavy_check_mark: Authenticate and maintain user session
+:heavy_check_mark: Authenticate and maintain user session  
 :heavy_check_mark: Storing and managing data with SQL  
-:heavy_check_mark: Implementing SQL secured data storing
-:heavy_check_mark: Sending custom content to web client
+:heavy_check_mark: Implementing SQL secured data storing  
+:heavy_check_mark: Sending custom content to web client  
 :heavy_check_mark: Using a frontend framework of your choice
 
 ### Status
