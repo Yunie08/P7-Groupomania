@@ -48,9 +48,6 @@ const ProfileUpdate = () => {
             <ProfileUpdateForm profile={profile} />
           </CardBase>
           <DeleteButtonUser userId={userId} />
-          <StyledButton $outline className="rounded-pill">
-            Modifier mon mot de passe
-          </StyledButton>
         </>
       )}
     </main>
@@ -58,3 +55,10 @@ const ProfileUpdate = () => {
 };
 
 export default ProfileUpdate;
+
+// TODO:
+{
+  /* <StyledButton $outline className="rounded-pill">
+            Modifier mon mot de passe
+          </StyledButton> */
+}
