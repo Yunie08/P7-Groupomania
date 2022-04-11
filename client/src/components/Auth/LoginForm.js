@@ -1,8 +1,5 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../../utils/api/axiosConfig";
-import { Formik, Field, Form } from "formik";
-import { StyledButton } from "../../utils/style/styles";
 
 // Context
 import { AuthContext } from "../../utils/context/AuthContext";
@@ -10,35 +7,23 @@ import { AuthContext } from "../../utils/context/AuthContext";
 // Validation schema
 import { loginSchema } from "../../utils/validation/loginSchema";
 
-const LOGIN_URL = "/auth/login";
+// Services
+import authService from "../../services/authService";
+
+// Components
+import { Formik, Field, Form } from "formik";
+import { StyledButton } from "../../utils/style/styles";
 
 const LoginForm = () => {
-  const { setCurrentUser, setAuthenticated } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  // Send login request to API
-  // TODO: separate services in another folder
-  const login = async ({ email, password }) => {
+  const loginHandler = async ({ email, password }) => {
     try {
-      const response = await axios.post(LOGIN_URL, {
-        email,
-        password,
-      });
+      const response = await authService.login({ email, password });
       if (response?.data?.token) {
-        localStorage.setItem("token", response.data.token);
-        setAuthenticated(true);
-        setCurrentUser({
-          userId: response.data.userId,
-          isAdmin: response.data.isAdmin,
-        });
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            userId: response.data.userId,
-            isAdmin: response.data.isAdmin,
-          })
-        );
+        login(response.data);
         navigate("/home");
       }
     } catch (err) {
@@ -50,7 +35,7 @@ const LoginForm = () => {
     <Formik
       initialValues={{ email: "", password: "" }}
       onSubmit={(values, { setSubmitting }) => {
-        login(values);
+        loginHandler(values);
       }}
       validationSchema={loginSchema}
     >

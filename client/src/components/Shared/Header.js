@@ -1,19 +1,23 @@
 import React, { useContext } from "react";
+
+// Context
+import { AuthContext } from "../../utils/context/AuthContext";
+
+// Components
 import { Link, Outlet } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import HeaderLogo from "../../assets/icon-left-font-monochrome-white.svg";
+
+// Style
 import styled from "styled-components";
 import colors from "../../utils/style/colors";
-
-import { AuthContext } from "../../utils/context/AuthContext";
 
 const NavbarStyled = styled(Navbar)`
   background-color: #072049ff !important;
 `;
-
 const Logo = styled(Image)`
   max-width: 250px;
 `;
@@ -33,15 +37,8 @@ const NavStyled = styled(Nav)`
 `;
 
 function MainHeader() {
-  const { currentUser, setCurrentUser, setAuthenticated } =
-    useContext(AuthContext);
-  const logout = () => {
-    setCurrentUser(null);
-    setAuthenticated(false);
-    localStorage.clear();
-  };
+  const { currentUser, logout } = useContext(AuthContext);
 
-  //TODO: Change style implementation
   return (
     <>
       <NavbarStyled

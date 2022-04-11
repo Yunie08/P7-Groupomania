@@ -1,12 +1,9 @@
 import { createContext, useState, useEffect } from "react";
 
-// API requests config
-import axios from "../api/axiosConfig";
-import setHeader from "../api/headerConfig";
-
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
+  // Initialization of values depending on values in localStorage
   const [currentUser, setCurrentUser] = useState(() => {
     let user = localStorage.getItem("user");
     if (user) {
@@ -20,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     return token !== null;
   });
 
-  // Check if token in local storage
+  // Persist context values on refresh
   useEffect(() => {
     const checkToken = async () => {
       const token = localStorage.getItem("token");
@@ -29,17 +26,42 @@ export const AuthProvider = ({ children }) => {
         setCurrentUser({ userId, isAdmin });
       } else {
         setCurrentUser(null);
-        setAuthenticated(null);
+        setAuthenticated(false);
       }
     };
     checkToken();
   }, [setAuthenticated]);
 
+  // Login user
+  const login = (data) => {
+    localStorage.setItem("token", data.token);
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        userId: data.userId,
+        isAdmin: data.isAdmin,
+      })
+    );
+    setAuthenticated(true);
+    setCurrentUser({
+      userId: data.userId,
+      isAdmin: data.isAdmin,
+    });
+  };
+
+  // Logout user
+  const logout = () => {
+    setAuthenticated(false);
+    setCurrentUser(null);
+    localStorage.clear();
+  };
+
+  // Values provided by context
   const value = {
     currentUser,
-    setCurrentUser,
     isAuthenticated,
-    setAuthenticated,
+    login,
+    logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
