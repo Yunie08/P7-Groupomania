@@ -67,6 +67,5 @@ exports.login = catchAsync(async (req, res, next) => {
   });
 });
 
-// TODO: LOGOUT
 // TODO: FORGOTTEN PASSWORD
 // TODO: UPDATE PASSWORD

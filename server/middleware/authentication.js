@@ -13,20 +13,13 @@ module.exports = (req, res, next) => {
     } else {
       throw new Error('Requête non authentifiée');
     }
+
+    // Check token validity
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     const { userId } = decodedToken;
     req.auth = { userId };
-    // if the userId in the token correspond to the userId provided in the request body
-    if (
-      (req.body.userId || req.body.userId === '') &&
-      req.body.userId !== userId
-    ) {
-      throw new Error('Requête non autorisée');
-    } else {
-      // proceed to next middleware
-      next();
-    }
+    next();
   } catch (error) {
-    res.status(403).json({ message: error.message });
+    res.status(401).json({ message: error.message });
   }
 };
