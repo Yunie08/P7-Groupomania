@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Contexts
 import { AuthProvider } from "./utils/context/AuthContext";
 
+import { AxiosInterceptor } from "./utils/api/axiosConfig";
+
 // Components
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
@@ -21,6 +23,7 @@ function App() {
     <React.Fragment>
       <React.StrictMode>
         <AuthProvider>
+          <AxiosInterceptor />
           <Router>
             <GlobalStyle />
             <Routes>

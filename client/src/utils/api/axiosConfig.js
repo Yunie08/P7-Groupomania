@@ -1,4 +1,9 @@
+import { useState, useEffect, useContext } from "react";
+import TokenExpiredMessage from "../../components/Auth/TokenExpiredMessage";
 import axios from "axios";
+
+// Context
+import { AuthContext } from "../context/AuthContext";
 
 // Axios configuration
 const customAxios = axios.create({
@@ -7,22 +12,36 @@ const customAxios = axios.create({
 });
 
 // Response interceptor configuration
-customAxios.interceptors.response.use(
-  // If the response is a success, we return it as is
-  function (response) {
-    return response;
-  },
-  // If the response is an error we handle it
-  function (error) {
-    // In case of a 401 unauthorized request
-    // This means our token is either expired or malformed
-    // We log the user out
-    if (error.response.status === 401) {
-      localStorage.clear();
-      window.location = "/auth";
-    }
-    return Promise.reject(error);
-  }
-);
+const AxiosInterceptor = () => {
+  const [isTokenExpired, setTokenExpired] = useState(false);
+  const { logout } = useContext(AuthContext);
+
+  useEffect(() => {
+    const resInterceptor = (response) => {
+      return response;
+    };
+
+    const errInterceptor = (error) => {
+      if (error.response.status === 401) {
+        setTokenExpired(true);
+        logout();
+      }
+
+      return Promise.reject(error);
+    };
+
+    const interceptor = customAxios.interceptors.response.use(
+      resInterceptor,
+      errInterceptor
+    );
+
+    return () => customAxios.interceptors.response.eject(interceptor);
+  }, []);
+
+  return (
+    isTokenExpired && <TokenExpiredMessage setTokenExpired={setTokenExpired} />
+  );
+};
 
 export default customAxios;
+export { AxiosInterceptor };
