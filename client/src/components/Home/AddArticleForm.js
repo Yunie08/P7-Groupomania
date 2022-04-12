@@ -24,7 +24,7 @@ const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
     try {
       const isMultipart = values?.image ? true : false;
       const data = dataFormatter(values, isMultipart);
-      const response = await articleService.addArticle(data, isMultipart);
+      await articleService.addArticle(data, isMultipart);
       setArticleListEdited(true);
       setModalShow(false);
     } catch (err) {

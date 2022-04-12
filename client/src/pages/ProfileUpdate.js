@@ -10,13 +10,15 @@ import CardBase from "../components/Shared/CardBase";
 import Loader from "../components/Shared/Loader";
 import DeleteButtonUser from "../components/Profile/DeleteButtonUser";
 import { StyledButton } from "../utils/style/styles";
+import UpdatePasswordModal from "../components/Profile/UpdatePasswordModal";
 
 const ProfileUpdate = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
+  const [modalShow, setModalShow] = useState(false);
+  const [profile, setProfile] = useState(null);
   let { userId } = useParams();
   userId = parseInt(userId);
-  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -47,6 +49,19 @@ const ProfileUpdate = () => {
           <CardBase>
             <ProfileUpdateForm profile={profile} />
           </CardBase>
+          <StyledButton
+            onClick={() => setModalShow(true)}
+            $outline
+            className="rounded-pill"
+          >
+            Modifier mon mot de passe
+          </StyledButton>
+          <UpdatePasswordModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            setModalShow={setModalShow}
+            userId={userId}
+          />
           <DeleteButtonUser userId={userId} />
         </>
       )}
@@ -55,10 +70,3 @@ const ProfileUpdate = () => {
 };
 
 export default ProfileUpdate;
-
-// TODO:
-{
-  /* <StyledButton $outline className="rounded-pill">
-            Modifier mon mot de passe
-          </StyledButton> */
-}

@@ -1,6 +1,5 @@
+// Components
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import axios from "../../utils/api/axiosConfig";
 import AddArticleForm from "./AddArticleForm";
 
 const AddArticleModal = (props) => {
@@ -11,11 +10,11 @@ const AddArticleModal = (props) => {
       {...rest}
       as="section"
       size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
+      aria-labelledby="add-article-modal"
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title as="h2" id="contained-modal-title-vcenter">
+        <Modal.Title as="h2" id="add-article-modal">
           Publier un article
         </Modal.Title>
       </Modal.Header>

@@ -1,7 +1,7 @@
 import axios from "../utils/api/axiosConfig";
 import setHeader from "../utils/api/headerConfig";
 
-const USER_URL = "/user";
+const USER_URL = "/users";
 
 class UserService {
   getCurrentUser() {
@@ -13,7 +13,15 @@ class UserService {
   }
 
   updateUser(userId, data, isMultipart) {
-    return axios.put(`${USER_URL}/${userId}`, data, setHeader(isMultipart));
+    return axios.put(
+      `${USER_URL}/${userId}/profile`,
+      data,
+      setHeader(isMultipart)
+    );
+  }
+
+  updateUserPassword(userId, data) {
+    return axios.put(`${USER_URL}/${userId}/password`, data, setHeader());
   }
 
   deleteUser(userId) {
