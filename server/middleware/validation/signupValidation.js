@@ -6,16 +6,16 @@ const { passwordPattern, namePattern } = require('../../utils/regexValidation');
 const signupSchema = Yup.object({
   email: Yup.string()
     .trim()
-    .email('Adresse email non valide')
-    .required('Adresse email obligatoire'),
+    .email('Email non valide')
+    .required('Adresse email requise'),
   firstname: Yup.string()
     .trim()
     .matches(namePattern, 'Prénom invalide')
-    .required('Prénom obligatoire'),
+    .required('Prénom requis'),
   lastname: Yup.string()
     .trim()
     .matches(namePattern, 'Nom invalide')
-    .required('Nom obligatoire'),
+    .required('Nom requis'),
   password: Yup.string().trim().matches(passwordPattern).required(),
   passwordConfirm: Yup.string()
     .oneOf(

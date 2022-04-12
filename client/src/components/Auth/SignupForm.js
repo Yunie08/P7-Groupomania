@@ -41,12 +41,14 @@ const SignupForm = () => {
       }}
       onSubmit={(values, { setSubmitting }) => {
         const { passwordConfirm, ...userData } = values;
+        setSubmitting(true);
         signup(userData);
+        setSubmitting(false);
       }}
       validationSchema={signupSchema}
     >
-      {(formik, isSubmitting) => (
-        <Form>
+      {(formik, isSubmitting, setFieldError) => (
+        <Form onClick={() => setError(null)}>
           <Row>
             {isRegistered && (
               <div className="text-success text-center py-2">
@@ -165,8 +167,12 @@ const SignupForm = () => {
           <div className="form-group d-flex flex-column align-items-center">
             <StyledButton
               type="submit"
-              className="btn btn-primary mt-4 rounded-pill mb-2"
+              disabled={isSubmitting}
+              className="btn btn-primary mt-3 rounded-pill"
             >
+              {isSubmitting && (
+                <span className="spinner-border spinner-border-sm mr-1"></span>
+              )}
               S'inscrire
             </StyledButton>
           </div>

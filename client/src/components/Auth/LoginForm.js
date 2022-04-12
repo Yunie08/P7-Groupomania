@@ -40,7 +40,7 @@ const LoginForm = () => {
       validationSchema={loginSchema}
     >
       {(formik, isSubmitting) => (
-        <Form>
+        <Form onClick={() => setError(null)}>
           {error && <div className="text-danger text-center py-2">{error}</div>}
           <div className="form-group">
             <label htmlFor="loginEmail">Email</label>
@@ -53,7 +53,6 @@ const LoginForm = () => {
                   : "form-control"
               }
               type="text"
-              onClick={() => setError(null)}
             />
             {formik.touched.email && formik.errors.email ? (
               <div className="invalid-feedback">{formik.errors.email}</div>
@@ -73,7 +72,6 @@ const LoginForm = () => {
                   : "form-control"
               }
               type="password"
-              onClick={() => setError(null)}
             />
             {formik.touched.password && formik.errors.password ? (
               <div className="invalid-feedback">{formik.errors.password}</div>

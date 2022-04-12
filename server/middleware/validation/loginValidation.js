@@ -3,8 +3,8 @@ const Yup = require('yup');
 const catchAsync = require('../../utils/catchAsync');
 
 const loginSchema = Yup.object({
-  email: Yup.string().trim().email().required('Email obligatoire'),
-  password: Yup.string().trim().required('Mot de passe obligatoire'),
+  email: Yup.string().trim().email().required('Adresse email requise'),
+  password: Yup.string().trim().required('Mot de passe requis'),
 });
 
 exports.loginValidation = catchAsync(async (req, res, next) => {

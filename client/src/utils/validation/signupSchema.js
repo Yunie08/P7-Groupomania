@@ -6,27 +6,27 @@ import { namePattern, passwordPattern } from "./validationRegex";
 export const signupSchema = Yup.object({
   email: Yup.string()
     .trim()
-    .email("Adresse email non valide")
-    .required("Adresse email obligatoire"),
+    .email("Email non valide")
+    .required("Adresse email requise"),
   firstname: Yup.string()
     .trim()
     .matches(namePattern, "Prénom invalide")
-    .required("Prénom obligatoire"),
+    .required("Prénom requis"),
   lastname: Yup.string()
     .trim()
     .matches(namePattern, "Nom invalide")
-    .required("Nom obligatoire"),
+    .required("Nom requis"),
   password: Yup.string()
     .trim()
     .matches(
       passwordPattern,
-      "Le mot de passe doit contenir un minimum de 8 caractères dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial (!@#$%^&*)"
+      "Doit contenir au minimum 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial (!@#$%^&*)"
     )
-    .required("Mot de passe obligatoire"),
+    .required("Mot de passe requis"),
   passwordConfirm: Yup.string()
     .oneOf(
       [Yup.ref("password"), null],
       "Les mots de passe ne correspondent pas"
     )
-    .required("Confirmation de mot de passe obligatoire "),
+    .required("Confirmation de mot de passe requis "),
 });
