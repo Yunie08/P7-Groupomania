@@ -1,9 +1,7 @@
 import * as Yup from "yup";
 
 // Regex patterns
-const namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-const passwordPattern =
-  /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+import { namePattern, passwordPattern } from "./validationRegex";
 
 export const signupSchema = Yup.object({
   email: Yup.string()

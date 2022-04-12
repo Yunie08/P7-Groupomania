@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 // Regex patterns
-const namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+import { namePattern } from "./validationRegex";
 
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
 
