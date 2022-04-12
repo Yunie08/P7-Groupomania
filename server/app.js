@@ -22,8 +22,8 @@ app.use(bodyParser.json({ limit: '1mb' }));
 // ROUTES
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/article', articleRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/articles', articleRoutes);
 
 // ERROR HANDLING
 // Route not defined

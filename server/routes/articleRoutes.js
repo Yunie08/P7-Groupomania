@@ -43,7 +43,7 @@ router
   );
 
 // Comments and Likes
-router.use('/:articleId/comment', commentRoutes);
-router.use('/:articleId/like', likeRoutes);
+router.use('/:articleId/comments', commentRoutes);
+router.use('/:articleId/likes', likeRoutes);
 
 module.exports = router;

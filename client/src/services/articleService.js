@@ -1,7 +1,7 @@
 import axios from "../utils/api/axiosConfig";
 import setHeader from "../utils/api/headerConfig";
 
-const ARTICLE_URL = "/article";
+const ARTICLE_URL = "/articles";
 
 class ArticleService {
   getAllArticles() {
