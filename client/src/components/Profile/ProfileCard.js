@@ -10,9 +10,9 @@ const ProfileCard = ({ profile }) => {
   return (
     <CardBase>
       <Card.Header className="bg-white d-flex flex-column align-items-center position-relative">
-        {profile.isAdmin && (
+        {profile.role !== "user" && (
           <Badge className="position-absolute top-0 end-0 bg-secondary">
-            Admin
+            {profile.role === "admin" ? "Admin" : "Modérateur"}
           </Badge>
         )}
         <ProfilePic

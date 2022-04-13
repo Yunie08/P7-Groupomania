@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-const { User } = require('../models');
+const { User, Article, Comment, Sequelize } = require('../models');
 
 // GET ALL USERS
 exports.getAllUser = catchAsync(async (req, res, next) => {
@@ -115,4 +115,46 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   res
     .status(200)
     .json({ status: 'success', message: 'Le mot de passe a été mis à jour' });
+});
+
+// GET ARTICLES FROM USER
+exports.getArticlesFromUser = catchAsync(async (req, res, next) => {
+  const { userId } = req.params;
+  const articles = await Article.findAll({
+    where: {
+      userId: userId,
+    },
+    attributes: [
+      'id',
+      'title',
+      'content',
+      'image',
+      'createdAt',
+      [
+        Sequelize.fn('COUNT', Sequelize.col('Comment.articleId')),
+        'commentsCount',
+      ],
+    ],
+
+    group: ['id'],
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'firstname', 'lastname', 'profilePic'],
+      },
+      {
+        model: Comment,
+        as: 'comment',
+        attributes: [],
+      },
+    ],
+    order: [['createdAt', 'DESC']],
+  });
+
+  if (!articles) {
+    return next(new AppError('Aucun article pour le moment.', 400));
+  }
+
+  res.status(200).json(articles);
 });

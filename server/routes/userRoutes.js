@@ -35,6 +35,10 @@ router
     userCtrl.updatePassword
   );
 router
+  .route('/:userId/articles')
+  .get(authentication, userCtrl.getArticlesFromUser);
+
+router
   .route('/:userId')
   .get(authentication, userCtrl.getUser)
   .delete(

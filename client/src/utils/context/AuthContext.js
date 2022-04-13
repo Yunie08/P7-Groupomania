@@ -22,8 +22,8 @@ export const AuthProvider = ({ children }) => {
     const checkToken = async () => {
       const token = localStorage.getItem("token");
       if (token) {
-        const { userId, isAdmin } = JSON.parse(localStorage.getItem("user"));
-        setCurrentUser({ userId, isAdmin });
+        const { userId, role } = JSON.parse(localStorage.getItem("user"));
+        setCurrentUser({ userId, role });
       } else {
         setCurrentUser(null);
         setAuthenticated(false);
@@ -39,13 +39,13 @@ export const AuthProvider = ({ children }) => {
       "user",
       JSON.stringify({
         userId: data.userId,
-        isAdmin: data.isAdmin,
+        role: data.role,
       })
     );
     setAuthenticated(true);
     setCurrentUser({
       userId: data.userId,
-      isAdmin: data.isAdmin,
+      role: data.role,
     });
   };
 
