@@ -1,38 +1,13 @@
-import React, { useEffect, useState } from "react";
-
-// Services
-import articleService from "../services/articleService";
+import { useState } from "react";
 
 // Components
-import Article from "../components/Home/Article";
 import AddArticleModal from "../components/Home/AddArticleModal";
-import Loader from "../components/Shared/Loader";
 import { StyledButton } from "../utils/style/styles";
+import ArticlesList from "../components/Shared/ArticlesList";
 
 const Home = () => {
-  const [isDataLoading, setDataLoading] = useState();
-  const [error, setError] = useState(false);
-  const [articlesList, setArticlesList] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [articleListEdited, setArticleListEdited] = useState(true);
-
-  useEffect(() => {
-    const getArticles = async () => {
-      setDataLoading(true);
-      const response = await articleService.getAllArticles();
-      setArticlesList(response.data);
-      setDataLoading(false);
-    };
-    if (articleListEdited) {
-      getArticles();
-    }
-    setArticleListEdited(false);
-  }, [articleListEdited]);
-
-  if (error) {
-    setError(error);
-    return <span>{error}</span>;
-  }
 
   return (
     <main className="d-flex flex-column align-items-center">
@@ -51,18 +26,10 @@ const Home = () => {
         setArticleListEdited={setArticleListEdited}
       />
 
-      {isDataLoading ? (
-        <Loader />
-      ) : (
-        articlesList.map((article) => (
-          <Article
-            key={`article-${article.id}`}
-            data={article}
-            articleListEdited={articleListEdited}
-            setArticleListEdited={setArticleListEdited}
-          />
-        ))
-      )}
+      <ArticlesList
+        articleListEdited={articleListEdited}
+        setArticleListEdited={setArticleListEdited}
+      />
     </main>
   );
 };

@@ -1,11 +1,8 @@
-import { useContext } from "react";
-
-// Context
-import { AuthContext } from "../../utils/context/AuthContext";
+// Hooks
+import useCanDelete from "../../utils/hooks/useCanDelete";
 
 // Components
 import Card from "react-bootstrap/Card";
-import { Username } from "../../utils/style/styles";
 import AuthorLink from "./AuthorLink";
 import ProfilePic from "../Shared/ProfilePic";
 import DeleteButton from "../Shared/DeleteButton";
@@ -26,10 +23,8 @@ const Comment = ({
   commentsCount,
   setCommentsCount,
 }) => {
-  const { currentUser } = useContext(AuthContext);
-
-  // TODO: refactor delete button logic
-  const canEdit = currentUser.userId === data.userId || currentUser.isAdmin;
+  const userId = data.user.id;
+  const canDelete = useCanDelete(userId, ["moderator", "admin"]);
 
   return (
     <StyledCard className="shadow-sm my-3 ">
@@ -50,7 +45,7 @@ const Comment = ({
             />
             <PublishedTime createdAt={data.createdAt} className="m-0" />
           </div>
-          {canEdit && (
+          {canDelete && (
             <DeleteButton
               componentToDelete="comment"
               articleId={data.articleId}

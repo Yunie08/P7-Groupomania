@@ -27,6 +27,10 @@ class UserService {
   deleteUser(userId) {
     return axios.delete(`${USER_URL}/${userId}`, setHeader());
   }
+
+  getArticlesFromUser(userId) {
+    return axios.get(`${USER_URL}/${userId}/articles`, setHeader());
+  }
 }
 
 export default new UserService();

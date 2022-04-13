@@ -8,11 +8,9 @@ const DeleteButton = ({
   componentToDelete,
   articleId,
   commentId,
-  commentRefresh,
   setCommentRefresh,
   commentsCount,
   setCommentsCount,
-  articleListEdited,
   setArticleListEdited,
 }) => {
   const [modalShow, setModalShow] = useState(false);

@@ -1,7 +1,7 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 
-// Context
-import { AuthContext } from "../../utils/context/AuthContext";
+// Hooks
+import useCanDelete from "../../utils/hooks/useCanDelete";
 
 // Components
 import Card from "react-bootstrap/Card";
@@ -15,19 +15,13 @@ import AddComment from "./AddComment";
 import LikeButton from "./LikeButton";
 import DeleteButton from "../Shared/DeleteButton";
 
-function Article({ data, articleListEdited, setArticleListEdited }) {
+function Article({ data, setArticleListEdited }) {
   const [commentRefresh, setCommentRefresh] = useState(false);
   const [commentsCount, setCommentsCount] = useState(data.commentsCount);
   const [likesCount, setLikesCount] = useState(data.likesCount);
   const [likedByUser, setLikedByUser] = useState();
-  const { currentUser } = useContext(AuthContext);
-  const [canEdit, setCanEdit] = useState(false);
-
-  // Check if the current user can delete the article
-  // (current user is author or admin)
-  useEffect(() => {
-    setCanEdit(currentUser.userId === data.user.id || currentUser.isAdmin);
-  }, []);
+  const userId = data.user.id;
+  const canDelete = useCanDelete(userId, ["moderator", "admin"]);
 
   return (
     <CardBase as="article">
@@ -47,11 +41,10 @@ function Article({ data, articleListEdited, setArticleListEdited }) {
 
           <PublishedTime inArticle createdAt={data.createdAt} className="m-0" />
         </div>
-        {canEdit && (
+        {canDelete && (
           <DeleteButton
             componentToDelete="article"
             articleId={data.id}
-            articleListEdited={articleListEdited}
             setArticleListEdited={setArticleListEdited}
           />
         )}

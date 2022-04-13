@@ -8,9 +8,10 @@ import userService from "../services/userService";
 
 // Components
 import ProfileCard from "../components/Profile/ProfileCard";
-import { StyledButton } from "../utils/style/styles";
+import { StyledButton, LinkStyledButton } from "../utils/style/styles";
 import DeleteButtonUser from "../components/Profile/DeleteButtonUser";
 import Loader from "../components/Shared/Loader";
+import ArticlesList from "../components/Shared/ArticlesList";
 
 const Profile = () => {
   const [error, setError] = useState(null);
@@ -18,9 +19,10 @@ const Profile = () => {
   let { userId } = useParams();
   userId = parseInt(userId);
   const { currentUser } = useContext(AuthContext);
+  const [articleListEdited, setArticleListEdited] = useState(true);
 
   const [profile, setProfile] = useState(null);
-
+  const isOwner = userId === currentUser.userId;
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -40,29 +42,39 @@ const Profile = () => {
     getUser();
   }, [userId]);
 
-  const ProfileContent = (
-    // If this is the profile of the current user, show
-    <>
-      <ProfileCard as="section" profile={profile} />
-      {userId === currentUser.userId && (
-        <StyledButton
-          as={Link}
-          to={`/profile/${currentUser.userId}/update`}
-          $outline
-          className="rounded-pill text-center py-1"
-        >
-          Modifier mon profil
-        </StyledButton>
-      )}
-      {userId !== currentUser.userId && currentUser.isAdmin && (
-        <DeleteButtonUser userId={userId} />
-      )}
-    </>
-  );
-
   return (
     <main className="d-flex flex-column align-items-center mt-5">
-      {isLoading ? <Loader /> : ProfileContent}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <ProfileCard as="section" profile={profile} />
+          {isOwner && (
+            <StyledButton
+              as={Link}
+              to={`/profile/${currentUser.userId}/update`}
+              $outline
+              className="rounded-pill text-center py-1 mb-5"
+            >
+              Modifier mon profil
+            </StyledButton>
+          )}
+          {!isOwner && currentUser.role === "admin" && (
+            <DeleteButtonUser userId={userId} />
+          )}
+          <h2>
+            {isOwner
+              ? "Tous mes articles"
+              : `Tous les articles de ${profile.firstname}`}
+          </h2>
+          <ArticlesList
+            articleListEdited={articleListEdited}
+            setArticleListEdited={setArticleListEdited}
+            filter={"byUser"}
+            userId={userId}
+          />
+        </>
+      )}
     </main>
   );
 };
