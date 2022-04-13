@@ -16,8 +16,9 @@ module.exports = (req, res, next) => {
 
     // Check token validity
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { userId } = decodedToken;
-    req.auth = { userId };
+    const { userId, role } = decodedToken;
+
+    req.auth = { userId, role };
     next();
   } catch (error) {
     res.status(401).json({ message: error.message });

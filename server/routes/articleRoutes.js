@@ -6,7 +6,7 @@ const commentRoutes = require('./commentRoutes');
 const likeRoutes = require('./likeRoutes');
 
 const authentication = require('../middleware/authentication');
-const adminAccess = require('../middleware/adminAccess');
+const grantAccess = require('../middleware/grantAccess');
 const authorization = require('../middleware/authorization');
 const multer = require('../middleware/multer');
 const {
@@ -37,7 +37,7 @@ router
   )
   .delete(
     authentication,
-    adminAccess,
+    grantAccess('moderator', 'admin'),
     authorization(Article),
     articleController.deleteArticle
   );

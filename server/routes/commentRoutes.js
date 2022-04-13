@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 
 const authentication = require('../middleware/authentication');
-const adminAccess = require('../middleware/adminAccess');
+const grantAccess = require('../middleware/grantAccess');
 const authorization = require('../middleware/authorization');
 const commentController = require('../controllers/commentController');
 
@@ -28,7 +28,7 @@ router
   )
   .delete(
     authentication,
-    adminAccess,
+    grantAccess('moderator', 'admin'),
     authorization(Comment),
     commentController.deleteComment
   );

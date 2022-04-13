@@ -9,7 +9,7 @@ module.exports = {
           email: 'ambre.gorias@gmail.com',
           password:
             '$2b$10$4SF7v0DYGeIbP2jTtISdRuHpDR9v8lSfcASDlFM6WsQ7Sv/t8cWRW',
-          isAdmin: true,
+          role: 'admin',
           firstname: 'Ambre',
           lastname: 'Gorias',
           profilePic: 'http://localhost:8080/images/profil_AG1648852830840.jpg',
@@ -25,7 +25,7 @@ module.exports = {
           email: 'heloise@gmail.com',
           password:
             '$2b$10$UHRaBNrferUhvqHLYNgyTeqKM1EhZzgJOlJSx2tooAEjLC8eIk20O',
-          isAdmin: false,
+          role: 'moderator',
           firstname: 'Heloïse',
           lastname: 'Liaut',
           profilePic: 'http://localhost:8080/images/user21648853910661.jpg',
@@ -41,7 +41,7 @@ module.exports = {
           email: 'pierre@gmail.com',
           password:
             '$2b$10$FCiDFaWNCWLh6a/QebKl8.YS.SfHmpw3vyDrryuQcLE04O9YDLay6',
-          isAdmin: false,
+          role: 'user',
           firstname: 'Pierre',
           lastname: 'Duschesnes',
           profilePic: 'http://localhost:8080/images/default-profile.png',

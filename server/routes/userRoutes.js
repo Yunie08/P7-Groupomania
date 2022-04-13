@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const authentication = require('../middleware/authentication');
-const adminAccess = require('../middleware/adminAccess');
+const grantAccess = require('../middleware/grantAccess');
 const authorization = require('../middleware/authorization');
 const userCtrl = require('../controllers/userController');
 const { userValidation } = require('../middleware/validation/userValidation');
@@ -39,7 +39,7 @@ router
   .get(authentication, userCtrl.getUser)
   .delete(
     authentication,
-    adminAccess,
+    grantAccess('admin'),
     authorization(User),
     userCtrl.deleteUser
   );

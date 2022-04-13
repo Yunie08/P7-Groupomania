@@ -32,7 +32,7 @@ exports.getCurrentUser = catchAsync(async (req, res, next) => {
     where: {
       id: req.auth.userId,
     },
-    attributes: ['id', 'isAdmin'],
+    attributes: ['id', 'role'],
   });
 
   if (!user) {

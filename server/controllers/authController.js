@@ -60,10 +60,14 @@ exports.login = catchAsync(async (req, res, next) => {
   // send authentication token
   res.status(200).json({
     userId: user.id,
-    isAdmin: user.isAdmin,
-    token: jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET, {
-      expiresIn: process.env.TOKEN_EXPIRES_IN,
-    }),
+    role: user.role,
+    token: jwt.sign(
+      { userId: user.id, role: user.role },
+      process.env.TOKEN_SECRET,
+      {
+        expiresIn: process.env.TOKEN_EXPIRES_IN,
+      }
+    ),
   });
 });
 
