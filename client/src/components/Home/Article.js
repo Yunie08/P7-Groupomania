@@ -6,14 +6,12 @@ import useCanDelete from "../../utils/hooks/useCanDelete";
 // Components
 import Card from "react-bootstrap/Card";
 import CardBase from "../Shared/CardBase";
+import CardHeader from "../Shared/CardHeader";
+import DeleteButton from "../Shared/DeleteButton";
 import ArticleImage from "./ArticleImage";
-import ProfilePic from "../Shared/ProfilePic";
-import PublishedTime from "./PublishedTime";
-import AuthorLink from "./AuthorLink";
+import LikeButton from "./LikeButton";
 import ToggleComments from "./ToggleComments";
 import AddComment from "./AddComment";
-import LikeButton from "./LikeButton";
-import DeleteButton from "../Shared/DeleteButton";
 
 function Article({ data, setArticleListEdited }) {
   const [commentRefresh, setCommentRefresh] = useState(false);
@@ -25,22 +23,7 @@ function Article({ data, setArticleListEdited }) {
 
   return (
     <CardBase as="article">
-      <Card.Header className="bg-white border-bottom-0 d-flex">
-        <ProfilePic
-          src={data.user.profilePic}
-          alt={`Photo de profil de ${data.user.firstname} ${data.user.lastname}`}
-          type={"article"}
-        />
-        <div className="col d-flex flex-column justify-content-center border-bottom border-3 ms-3">
-          <AuthorLink
-            firstname={data.user.firstname}
-            lastname={data.user.lastname}
-            type={"article"}
-            userId={data.user.id}
-          />
-
-          <PublishedTime inArticle createdAt={data.createdAt} className="m-0" />
-        </div>
+      <CardHeader type="article" data={data}>
         {canDelete && (
           <DeleteButton
             componentToDelete="article"
@@ -48,7 +31,8 @@ function Article({ data, setArticleListEdited }) {
             setArticleListEdited={setArticleListEdited}
           />
         )}
-      </Card.Header>
+      </CardHeader>
+
       <div className="px-md-4 d-flex flex-column">
         <Card.Title as="h2" className="my-3">
           {data.title}
@@ -59,7 +43,7 @@ function Article({ data, setArticleListEdited }) {
           {data.content}
         </Card.Text>
       </div>
-      <Card.Footer className="bg-white border-top-0 px-3 pt-3">
+      <Card.Footer className="bg-white border-top-0 px-0 px-md-3 pt-3">
         <LikeButton
           articleId={data.id}
           likesCount={likesCount}

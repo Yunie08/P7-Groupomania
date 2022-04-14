@@ -260,7 +260,7 @@ const ProfileForm = ({ profile }) => {
               type="submit"
               className="btn btn-primary mt-4 rounded-pill mb-2"
             >
-              Mettre à jour mon profil
+              Confirmer les modifications
             </StyledButton>
           </div>
         </Form>

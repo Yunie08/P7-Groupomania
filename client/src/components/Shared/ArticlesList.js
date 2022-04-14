@@ -34,11 +34,11 @@ const ArticlesList = ({
       }
       setDataLoading(false);
     };
-    if (articleListEdited) {
+    if (articleListEdited || filter === "byUser") {
       getArticles();
     }
     setArticleListEdited(false);
-  }, [articleListEdited]);
+  }, [articleListEdited, userId]);
 
   if (error) {
     setError(error);

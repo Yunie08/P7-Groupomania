@@ -8,7 +8,7 @@ import userService from "../services/userService";
 
 // Components
 import ProfileCard from "../components/Profile/ProfileCard";
-import { StyledButton, LinkStyledButton } from "../utils/style/styles";
+import { StyledButton } from "../utils/style/styles";
 import DeleteButtonUser from "../components/Profile/DeleteButtonUser";
 import Loader from "../components/Shared/Loader";
 import ArticlesList from "../components/Shared/ArticlesList";
@@ -43,7 +43,7 @@ const Profile = () => {
   }, [userId]);
 
   return (
-    <main className="d-flex flex-column align-items-center mt-5">
+    <main className="d-flex flex-column align-items-center mt-5 py-5">
       {isLoading ? (
         <Loader />
       ) : (
@@ -54,7 +54,7 @@ const Profile = () => {
               as={Link}
               to={`/profile/${currentUser.userId}/update`}
               $outline
-              className="rounded-pill text-center py-1 mb-5"
+              className="rounded-pill text-center py-1 my-3"
             >
               Modifier mon profil
             </StyledButton>
@@ -62,7 +62,7 @@ const Profile = () => {
           {!isOwner && currentUser.role === "admin" && (
             <DeleteButtonUser userId={userId} />
           )}
-          <h2>
+          <h2 className="mt-5 mb-3">
             {isOwner
               ? "Tous mes articles"
               : `Tous les articles de ${profile.firstname}`}

@@ -12,6 +12,13 @@ import DeleteButtonUser from "../components/Profile/DeleteButtonUser";
 import { StyledButton } from "../utils/style/styles";
 import UpdatePasswordModal from "../components/Profile/UpdatePasswordModal";
 
+// Style
+import styled from "styled-components";
+
+const ProfileUpdateTitle = styled.h1`
+  margin-bottom: 90px;
+`;
+
 const ProfileUpdate = () => {
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
@@ -40,8 +47,8 @@ const ProfileUpdate = () => {
   }, [userId]);
 
   return (
-    <main className="d-flex flex-column align-items-center">
-      <h1 className="mb-5">Modifier votre profil</h1>
+    <main className="d-flex flex-column align-items-center py-3">
+      <ProfileUpdateTitle>Modifier votre profil</ProfileUpdateTitle>
       {isLoading ? (
         <Loader />
       ) : (

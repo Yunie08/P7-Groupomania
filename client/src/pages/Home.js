@@ -10,11 +10,11 @@ const Home = () => {
   const [articleListEdited, setArticleListEdited] = useState(true);
 
   return (
-    <main className="d-flex flex-column align-items-center">
+    <main className="d-flex flex-column align-items-center py-3">
       <h1>Un espace d'échange avec vos collègues</h1>
       <StyledButton
         $outline
-        className="rounded-pill mt-4"
+        className="rounded-pill my-4"
         onClick={() => setModalShow(true)}
       >
         Publier un article
