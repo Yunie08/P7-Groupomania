@@ -6,13 +6,7 @@ const AddArticleModal = (props) => {
   const { setModalShow, setArticleListEdited, ...rest } = props;
 
   return (
-    <Modal
-      {...rest}
-      as="section"
-      size="lg"
-      aria-labelledby="add-article-modal"
-      centered
-    >
+    <Modal {...rest} size="lg" aria-labelledby="add-article-modal" centered>
       <Modal.Header closeButton>
         <Modal.Title as="h2" id="add-article-modal">
           Publier un article

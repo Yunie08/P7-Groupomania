@@ -1,4 +1,6 @@
 const multer = require('multer');
+const sharp = require('sharp');
+const fs = require('fs');
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
@@ -35,6 +37,12 @@ const upload = multer({
   limits: { fileSize: maxSize },
 }).single('image');
 
-module.exports = (req, res, next) => {
-  upload(req, res, (err) => (err ? res.status(400).json(err) : next()));
+module.exports = async (req, res, next) => {
+  upload(req, res, (err) => {
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      next();
+    }
+  });
 };

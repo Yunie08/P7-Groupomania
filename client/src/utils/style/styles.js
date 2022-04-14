@@ -13,7 +13,7 @@ export const MainCard = styled(Card)`
 
 export const StyledButton = styled(Button)`
   text-decoration: none;
-  min-width: 180px;
+  min-width: ${(props) => !props.$submit && "180px"};
   max-width: ${(props) => props.$modal && "160px"};
   color: ${(props) => props.$outline && "inherit"};
   background-color: ${(props) =>
@@ -44,5 +44,16 @@ export const LinkStyledButton = styled.button`
   &:hover {
     color: ${colors.secondaryDark};
     text-decoration: underline;
+  }
+`;
+
+export const SendButton = styled(Button)`
+  background-color: ${primaryColor};
+  border-color: transparent;
+  border-width: 2px;
+  &:hover {
+    background-color: transparent;
+    border-color: ${secondaryDarkColor};
+    color: ${secondaryDarkColor};
   }
 `;
