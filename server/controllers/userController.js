@@ -47,8 +47,8 @@ exports.updateUser = catchAsync(async (req, res, next) => {
   const updatedData = req.body;
   const { userId } = req.params;
 
-  const imageUrl = req.file
-    ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  const imageUrl = req.files.profilePic
+    ? `${req.protocol}://${req.get('host')}/images/user/${req.file.filename}`
     : undefined;
 
   const user = await User.update(

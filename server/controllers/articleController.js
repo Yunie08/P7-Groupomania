@@ -46,8 +46,8 @@ exports.createArticle = catchAsync(async (req, res, next) => {
   const { title, content } = req.body;
 
   // If an image is attached, provide image URL
-  const imageUrl = req.file
-    ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  const imageUrl = req.files.image
+    ? `${req.protocol}://${req.get('host')}/images/article/${req.file.filename}`
     : undefined;
 
   const article = await Article.create({

@@ -25,8 +25,8 @@ export const userSchema = Yup.object({
     .nullable()
     .test(
       "FILE_SIZE",
-      "L'image doit faire moins de 2Mo",
-      (value) => !value || (value && value?.size <= 2097152)
+      "L'image doit faire moins de 3Mo",
+      (value) => !value || (value && value?.size <= 3 * 1024 * 1024)
     )
     .test(
       "FILE_FORMAT",

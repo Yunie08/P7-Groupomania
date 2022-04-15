@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React from "react";
 
 const ImageContainer = styled.div`
-  max-width: 400px;
+  max-width: 450px;
 `;
 
 const ArticleImage = ({ title, source }) => {

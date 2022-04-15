@@ -11,6 +11,7 @@ const {
   passwordValidation,
 } = require('../middleware/validation/passwordValidation');
 const multer = require('../middleware/multer');
+const sharp = require('../middleware/sharp');
 
 const { User } = require('../models');
 
@@ -22,6 +23,7 @@ router
     authentication,
     authorization(User),
     multer,
+    sharp,
     userValidation,
     userCtrl.updateUser
   );

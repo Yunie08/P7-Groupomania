@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import colors from "../../utils/style/colors";
 
 const LabelStyled = styled.label`
   width: 130px;
   height: 130px;
   margin-top: -100px;
   position: relative;
+
   &::after {
     font: var(--fa-font-solid);
     content: "\f030";

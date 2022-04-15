@@ -9,6 +9,7 @@ const authentication = require('../middleware/authentication');
 const grantAccess = require('../middleware/grantAccess');
 const authorization = require('../middleware/authorization');
 const multer = require('../middleware/multer');
+const sharp = require('../middleware/sharp');
 const {
   articleValidation,
 } = require('../middleware/validation/articleValidation');
@@ -22,6 +23,7 @@ router
   .post(
     authentication,
     multer,
+    sharp,
     articleValidation,
     articleController.createArticle
   );
