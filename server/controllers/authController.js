@@ -6,6 +6,7 @@ const AppError = require('../utils/appError');
 
 const { User } = require('../models');
 
+// TODO: clean
 // SIGNUP
 exports.signup = catchAsync(async (req, res, next) => {
   const hash = await bcrypt.hash(req.body.password, 10);
@@ -59,8 +60,6 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // send authentication token
   res.status(200).json({
-    userId: user.id,
-    role: user.role,
     token: jwt.sign(
       { userId: user.id, role: user.role },
       process.env.TOKEN_SECRET,

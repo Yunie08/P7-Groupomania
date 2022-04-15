@@ -1,29 +1,35 @@
 import { createContext, useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  // Initialization of values depending on values in localStorage
+  const token = localStorage.getItem("token");
+
+  // Initialization of authentification values
   const [currentUser, setCurrentUser] = useState(() => {
-    let user = localStorage.getItem("user");
-    if (user) {
-      user = JSON.parse(user);
-      return user;
+    // If a token is stored in the local storage
+    if (token) {
+      // we extract the user data from the decoded token and store it in the currentUser state
+      const decoded = jwt_decode(token);
+      return { userId: decoded.userId, role: decoded.role };
     }
+    // If there is no token, currentUser is set to null
     return null;
   });
+
+  // If there is a token, the user is authenticated
   const [isAuthenticated, setAuthenticated] = useState(() => {
-    const token = localStorage.getItem("token");
     return token !== null;
   });
 
   // Persist context values on refresh
   useEffect(() => {
     const checkToken = async () => {
-      const token = localStorage.getItem("token");
       if (token) {
-        const { userId, role } = JSON.parse(localStorage.getItem("user"));
+        const { userId, role } = jwt_decode(token);
         setCurrentUser({ userId, role });
+        setAuthenticated(true);
       } else {
         setCurrentUser(null);
         setAuthenticated(false);
@@ -34,18 +40,14 @@ export const AuthProvider = ({ children }) => {
 
   // Login user
   const login = (data) => {
+    const { userId, role } = jwt_decode(data.token);
+
     localStorage.setItem("token", data.token);
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        userId: data.userId,
-        role: data.role,
-      })
-    );
+
     setAuthenticated(true);
     setCurrentUser({
-      userId: data.userId,
-      role: data.role,
+      userId: userId,
+      role: role,
     });
   };
 
@@ -56,7 +58,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.clear();
   };
 
-  // Values provided by context
+  // Values provided by this AuthContext
   const value = {
     currentUser,
     isAuthenticated,
