@@ -14,6 +14,7 @@ import ProfileUpdate from "./pages/ProfileUpdate";
 import MainHeader from "./components/Shared/Header";
 import ProtectedRoutes from "./components/Shared/ProtectedRoutes";
 import PrivateRoutes from "./components/Shared/PrivateRoutes";
+import PageNotFound from "./pages/PageNotFound";
 
 // Style
 import GlobalStyle from "./utils/style/GlobalStyle";
@@ -30,6 +31,7 @@ function App() {
               <Route path="/auth" element={<Auth />} />
               <Route element={<ProtectedRoutes />}>
                 <Route element={<MainHeader />}>
+                  <Route path="/home" element={<Home />} />
                   <Route path="/profile/:userId" element={<Profile />} />
                   <Route element={<PrivateRoutes />}>
                     <Route
@@ -37,7 +39,7 @@ function App() {
                       element={<ProfileUpdate />}
                     />
                   </Route>
-                  <Route path="*" element={<Home />} />
+                  <Route path="*" element={<PageNotFound />} />
                 </Route>
               </Route>
             </Routes>

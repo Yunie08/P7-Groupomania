@@ -12,9 +12,10 @@ import { StyledButton } from "../utils/style/styles";
 import DeleteButtonUser from "../components/Profile/DeleteButtonUser";
 import Loader from "../components/Shared/Loader";
 import ArticlesList from "../components/Shared/ArticlesList";
+import PageNotFound from "./PageNotFound";
 
 const Profile = () => {
-  const [error, setError] = useState(null);
+  const [ApiError, setError] = useState(null);
   const [isLoading, setLoading] = useState(true);
   let { userId } = useParams();
   userId = parseInt(userId);
@@ -30,8 +31,8 @@ const Profile = () => {
         const response = await userService.getUser(userId);
         setProfile(response?.data?.user);
       } catch (error) {
-        if (error.response?.status === "404") {
-          setError("Oups! Le profil que vous recherchez n'existe pas.");
+        if (error.response?.status === 404) {
+          setError(error.response?.status);
         } else {
           setError(error);
         }
@@ -42,6 +43,7 @@ const Profile = () => {
     getUser();
   }, [userId]);
 
+  if (ApiError === 404) return <PageNotFound />;
   return (
     <main className="d-flex flex-column align-items-center mt-5 py-5">
       {isLoading ? (
@@ -65,7 +67,7 @@ const Profile = () => {
           <h2 className="mt-5 mb-3">
             {isOwner
               ? "Tous mes articles"
-              : `Tous les articles de ${profile.firstname}`}
+              : `Tous les articles de ${profile?.firstname}`}
           </h2>
           <ArticlesList
             articleListEdited={articleListEdited}
