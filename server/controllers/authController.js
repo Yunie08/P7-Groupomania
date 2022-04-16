@@ -1,23 +1,36 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const CryptoJS = require('crypto-js');
 
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 const { User } = require('../models');
 
-// TODO: clean
+const key = CryptoJS.enc.Hex.parse(process.env.ENCRYPT_SECRET);
+
 // SIGNUP
 exports.signup = catchAsync(async (req, res, next) => {
+  const { email, ...userData } = req.body;
+
+  // Hash password before storage in database
   const hash = await bcrypt.hash(req.body.password, 10);
-  const { passwordConfirm, role, ...userData } = req.body;
+
+  // Encrypt user email beofre storage in database
+  const encryptedEmail = CryptoJS.AES.encrypt(email, key, {
+    mode: CryptoJS.mode.ECB,
+  }).toString();
+
+  console.log(encryptedEmail);
   const [user, created] = await User.findOrCreate({
-    where: { email: userData.email },
+    where: { email: encryptedEmail },
     defaults: {
       ...userData,
+      email: encryptedEmail,
       password: hash,
     },
   });
+
   if (!created) {
     return next(
       new AppError(
@@ -31,18 +44,21 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 // LOGIN
 exports.login = catchAsync(async (req, res, next) => {
-  const userEmail = req.body.email;
+  const { email } = req.body;
+
+  // Encrypt email before comparison with store email in database
+  const encryptedEmail = CryptoJS.AES.encrypt(email, key, {
+    mode: CryptoJS.mode.ECB,
+  }).toString();
+
   const user = await User.findOne({
     where: {
-      email: userEmail,
+      email: encryptedEmail,
     },
   });
   // if user exists
   if (!user) {
-    // return next(new AppError('Email incorrect', 401));
-    return res
-      .status(401)
-      .json({ message: 'Combinaison email / mot de passe invalide' });
+    return next(new AppError('Combinaison email / mot de passe invalide', 401));
   }
 
   const passwordIsValid = await bcrypt.compare(
@@ -52,10 +68,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // and password is valid
   if (!passwordIsValid) {
-    // return next(new AppError('Mot de passe incorrect', 401
-    return res
-      .status(401)
-      .json({ message: 'Combinaison email / mot de passe invalide' });
+    return next(new AppError('Combinaison email / mot de passe invalide', 401));
   }
 
   // send authentication token
@@ -69,6 +82,3 @@ exports.login = catchAsync(async (req, res, next) => {
     ),
   });
 });
-
-// TODO: FORGOTTEN PASSWORD
-// TODO: UPDATE PASSWORD

@@ -26,7 +26,11 @@ const SignupForm = () => {
       setRegistered(true);
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      setError(err.response.data.message);
+      if (err.response?.status === 400) {
+        setError(err.response.data.message);
+      } else {
+        setError("Oups! Veuillez réessayer.");
+      }
     }
   };
 
