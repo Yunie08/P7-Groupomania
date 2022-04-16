@@ -13,8 +13,8 @@ Fullstack implementation of an entreprise social network
 
 From the _server_ folder:
 
-- Remove the .example extension from the .env file and fill the `DB_USERNAME` and `DB_PASSWORD` fields with your MySQL infos.
-- Run `npm i` command to install the backend dependencies.
+- Remove the .sample extension from the .env file and fill the `DB_USERNAME` and `DB_PASSWORD` fields with your MySQL infos.
+- Run `npm install` command to install the backend dependencies.
 - Run `npm run db-init` command to initialize the MySql database and fill it with mock data.
 - Run `npm start` command to launch the API
 
@@ -22,7 +22,7 @@ From the _server_ folder:
 
 From the _client_ folder:
 
-- Run `npm i` command to install the frontend dependencies.
+- Run `npm install` command to install the frontend dependencies.
 - Run `npm start` to launch the frontend server in development mode.
 
 ## Project Overview
