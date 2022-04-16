@@ -27,7 +27,11 @@ const LoginForm = () => {
         navigate("/home");
       }
     } catch (err) {
-      setError(err?.response?.data?.message);
+      if (err.response.status === 429) {
+        setError("Trop de tentatives de connexion, réessayez dans 15 minutes");
+      } else {
+        setError(err?.response?.data?.message);
+      }
     }
   };
 
