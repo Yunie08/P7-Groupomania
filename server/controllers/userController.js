@@ -6,7 +6,9 @@ const { User, Article, Comment, Sequelize } = require('../models');
 
 // GET ALL USERS
 exports.getAllUser = catchAsync(async (req, res, next) => {
-  const users = await User.findAll();
+  const users = await User.findAll({
+    attributes: { exclude: ['email', 'password', 'createdAt', 'updatedAt'] },
+  });
   res.status(200).send(users);
 });
 
@@ -17,6 +19,7 @@ exports.getUser = catchAsync(async (req, res, next) => {
     where: {
       id: userId,
     },
+    attributes: { exclude: ['email', 'password', 'createdAt', 'updatedAt'] },
   });
 
   if (!user) {
@@ -47,7 +50,7 @@ exports.updateUser = catchAsync(async (req, res, next) => {
   const updatedData = req.body;
   const { userId } = req.params;
 
-  const imageUrl = req.files.profilePic
+  const imageUrl = req.file
     ? `${req.protocol}://${req.get('host')}/images/user/${req.file.filename}`
     : undefined;
 

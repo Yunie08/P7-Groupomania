@@ -65,36 +65,6 @@ exports.createArticle = catchAsync(async (req, res, next) => {
   });
 });
 
-// UPDATE ARTICLE
-// TODO: utility function to remove old pictures
-// TODO: refactor file handling
-exports.updateArticle = catchAsync(async (req, res, next) => {
-  const updatedData = req.body;
-  const { articleId } = req.params;
-
-  const imageUrl = req.file
-    ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    : undefined;
-
-  const article = await Article.update(
-    { ...updatedData, image: imageUrl },
-    { where: { id: articleId }, returning: true, plain: true }
-  );
-
-  if (article[1] === 0) {
-    return next(
-      new AppError("Aucun article correspondant à cet ID n'a été trouvé", 404)
-    );
-  }
-  // FIXME: article always return null ?
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: article,
-    },
-  });
-});
-
 // DELETE ARTICLE
 exports.deleteArticle = catchAsync(async (req, res, next) => {
   const { articleId } = req.params;

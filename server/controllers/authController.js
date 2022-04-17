@@ -21,7 +21,6 @@ exports.signup = catchAsync(async (req, res, next) => {
     mode: CryptoJS.mode.ECB,
   }).toString();
 
-  console.log(encryptedEmail);
   const [user, created] = await User.findOrCreate({
     where: { email: encryptedEmail },
     defaults: {

@@ -30,13 +30,6 @@ router
 
 router
   .route('/:articleId')
-  .put(
-    authentication,
-    authorization(Article),
-    multer,
-    articleValidation,
-    articleController.updateArticle
-  )
   .delete(
     authentication,
     grantAccess('moderator', 'admin'),
