@@ -39,6 +39,7 @@ function App() {
                       element={<ProfileUpdate />}
                     />
                   </Route>
+                  <Route path="/" element={<Home />} />
                   <Route path="*" element={<PageNotFound />} />
                 </Route>
               </Route>
