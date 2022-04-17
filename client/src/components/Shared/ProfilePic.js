@@ -20,7 +20,7 @@ const ProfilePic = ({ src, alt, type }) => {
       $type={type}
       className="rounded-circle overflow-hidden bg-white"
     >
-      <img src={src} alt={alt} className="img-fluid " />
+      <img src={src} alt={alt} className="img-fluid" />
     </ImageContainer>
   );
 };

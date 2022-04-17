@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "../../utils/style/colors";
 
 const LabelStyled = styled.label`
   width: 130px;
@@ -34,7 +35,7 @@ const LabelImage = ({ children, htmlFor }) => {
     <>
       <LabelStyled
         htmlFor={htmlFor}
-        className="d-inline-block rounded-circle overflow-hidden border border-2 border-dark"
+        className="d-inline-block rounded-circle overflow-hidden border border-2 border-dark bg-light"
       >
         {children}
       </LabelStyled>

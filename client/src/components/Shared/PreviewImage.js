@@ -10,6 +10,7 @@ const StyledImage = styled.img`
   object-fit: ${(props) => props.$type === "profile" && "cover"};
   height: ${(props) => props.$type === "profile" && "130px"};
   width: ${(props) => props.$type === "profile" && "130px"};
+  background-color: #fff;
 `;
 
 const PreviewImage = ({ file, src, type }) => {

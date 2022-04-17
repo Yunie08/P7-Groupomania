@@ -19,7 +19,7 @@ module.exports = catchAsync(async (req, res, next) => {
     const extension = MIME_TYPES[file.mimetype];
     const filename = `${name}${Date.now()}.${extension}`;
 
-    const dirnames = ['user', 'images'];
+    const dirnames = ['user', 'article'];
 
     // if the folders do not exist, we create them
     await Promise.all(
@@ -31,7 +31,7 @@ module.exports = catchAsync(async (req, res, next) => {
     );
 
     // Sharp configuration
-    const { resizeOptions } = req.files.profilePic
+    const resizeOptions = req.files.profilePic
       ? { width: 260, height: 260 }
       : { width: 1300, withoutEnlargement: true };
 

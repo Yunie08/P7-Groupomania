@@ -37,11 +37,13 @@ const ProfileForm = ({ profile }) => {
       initialValues={{
         firstname: profile.firstname,
         lastname: profile.lastname,
-        bio: profile.bio,
-        linkedinProfile: profile.linkedinProfile,
-        twitterProfile: profile.twitterProfile,
-        facebookProfile: profile.facebookProfile,
-        instagramProfile: profile.instagramProfile,
+        bio: profile.bio ? profile.bio : "",
+        linkedinProfile: profile.linkedinProfile ? profile.linkedinProfile : "",
+        twitterProfile: profile.twitterProfile ? profile.twitterProfile : "",
+        facebookProfile: profile.facebookProfile ? profile.facebookProfile : "",
+        instagramProfile: profile.instagramProfile
+          ? profile.instagramProfile
+          : "",
         profilePic: null,
       }}
       onSubmit={(values, { setSubmitting }, errors) => {
@@ -51,7 +53,6 @@ const ProfileForm = ({ profile }) => {
     >
       {(formik, isSubmitting, values) => (
         <Form className="pt-2 d-flex flex-column">
-          {error && <div className="text-danger text-center py-2">{error}</div>}
           <div className="form-group text-center align-self-center position-relative">
             <LabelImage htmlFor="profilePic">
               <PreviewImage
@@ -199,7 +200,7 @@ const ProfileForm = ({ profile }) => {
             </Col>
           </Row>
 
-          <Row>
+          <Row className="mb-3">
             <Col md={6}>
               <div className="form-group">
                 <label htmlFor="facebookProfile" className="mt-3">
@@ -250,11 +251,11 @@ const ProfileForm = ({ profile }) => {
               </div>
             </Col>
           </Row>
-
+          {error && <div className="text-danger text-center py-2">{error}</div>}
           <div className="form-group d-flex flex-column align-items-center">
             <StyledButton
               type="submit"
-              className="btn btn-primary mt-4 rounded-pill mb-2"
+              className="btn btn-primary rounded-pill my-2"
             >
               Confirmer les modifications
             </StyledButton>
