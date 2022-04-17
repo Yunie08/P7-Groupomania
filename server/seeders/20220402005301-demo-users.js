@@ -6,7 +6,7 @@ module.exports = {
       'users',
       [
         {
-          email: 'aQGyg8Hnzq1sGWfipGsxLw==',
+          email: 'inOqvnuL1nJ3s/neTSQki1cCcBppsGmFeavT/HAi42Q=',
           password:
             '$2b$10$4SF7v0DYGeIbP2jTtISdRuHpDR9v8lSfcASDlFM6WsQ7Sv/t8cWRW',
           role: 'admin',
@@ -23,7 +23,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          email: 'hxxV/Am293RLk2E/Pc0XOeVrdcnq42Pai54kTkPGzQk=',
+          email: 'HdMshk78RZcCk5orqOWT+ge0nP0R35tyKWZ/qIrFbEY=',
           password:
             '$2b$10$UHRaBNrferUhvqHLYNgyTeqKM1EhZzgJOlJSx2tooAEjLC8eIk20O',
           role: 'moderator',
@@ -40,7 +40,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          email: 'U7nsauXlTAG8OlIoyBuNWLIhEeien9WW3/z75Fikpfw=',
+          email: 'dOBvKyaypp6nXXFXgkqYLCOVHMXPEmd44ZmA2PYqkcE=',
           password:
             '$2b$10$FCiDFaWNCWLh6a/QebKl8.YS.SfHmpw3vyDrryuQcLE04O9YDLay6',
           role: 'user',

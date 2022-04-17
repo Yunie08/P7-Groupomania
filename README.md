@@ -1,6 +1,6 @@
 # Groupomania | Openclassrooms P7 - Fullstack project
 
-Fullstack implementation of an entreprise social network
+Fullstack implementation of a corporate social network
 
 ## Getting started
 
@@ -11,19 +11,24 @@ Fullstack implementation of an entreprise social network
 
 ### 2- Backend installation
 
-From the _server_ folder:
+From the _server_ directory:
 
 - Remove the .sample extension from the .env file and fill the `DB_USERNAME` and `DB_PASSWORD` fields with your MySQL infos.
 - Run `npm install` command to install the backend dependencies.
-- Run `npm run db-init` command to initialize the MySql database and fill it with mock data.
+- Run `npm run db-init` command to initialize the MySql database and populate it with mock data.
 - Run `npm start` command to launch the API
 
 ### 3- Frontend installation
 
-From the _client_ folder:
+From the _client_ directory:
 
 - Run `npm install` command to install the frontend dependencies.
 - Run `npm start` to launch the frontend server in development mode.
+
+### 4- Demo accounts (admin & moderator)
+
+If you would like to login as an administrator or a moderator, please use the demo accounts.  
+Login details are given in the .env file in the _server_ directory.
 
 ## Project Overview
 
