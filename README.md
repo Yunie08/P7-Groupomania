@@ -1,6 +1,6 @@
 # Groupomania | Openclassrooms P7 - Fullstack project
 
-Fullstack implementation of a corporate social network
+Fullstack implementation of an corporate social network
 
 ## Getting started
 
@@ -17,6 +17,14 @@ From the _server_ directory:
 - Run `npm install` command to install the backend dependencies.
 - Run `npm run db-init` command to initialize the MySql database and populate it with mock data.
 - Run `npm start` command to launch the API
+
+At this point the server should be running on port 8080 and should see the following message in your terminal :
+
+```bash
+Listening on port 8080
+...
+connected to database...
+```
 
 ### 3- Frontend installation
 
