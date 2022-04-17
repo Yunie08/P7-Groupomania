@@ -23,14 +23,8 @@ const ProfileForm = ({ profile }) => {
   const updateUser = async (values) => {
     try {
       const isMultipart = values?.profilePic ? true : false;
-      console.log(`is multipart? ${isMultipart}`);
       const data = dataFormatter(values, isMultipart);
-      console.log(data);
-      const response = await userService.updateUser(
-        profile.id,
-        data,
-        isMultipart
-      );
+      await userService.updateUser(profile.id, data, isMultipart);
       navigate(`/profile/${profile.id}`);
     } catch (err) {
       setError(err.response.data.message);

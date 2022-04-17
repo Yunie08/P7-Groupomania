@@ -5,40 +5,46 @@ import ProfilePic from "../Shared/ProfilePic";
 import SocialLink from "./SocialLink";
 import CardBase from "../Shared/CardBase";
 
-// TODO: refactor socials
+// Role translating table
+const roles = {
+  admin: "Admin",
+  moderator: "Modérateur",
+};
+
 const ProfileCard = ({ profile }) => {
+  const { id, role, firstname, lastname, bio, profilePic, ...socials } =
+    profile;
+
   return (
     <CardBase>
       <Card.Header className="bg-white d-flex flex-column align-items-center position-relative">
-        {profile.role !== "user" && (
+        {role !== "user" && (
           <Badge className="position-absolute top-0 end-0 bg-secondary">
-            {profile.role === "admin" ? "Admin" : "Modérateur"}
+            {roles[role]}
           </Badge>
         )}
         <ProfilePic
-          src={profile.profilePic}
-          alt={`Photo de profil de ${profile.firstname} ${profile.lastname}`}
+          src={profilePic}
+          alt={`Photo de profil de ${firstname} ${lastname}`}
           type={"profile"}
         />
         <Card.Title as="h1" className="mt-3">
-          {profile.firstname} {profile.lastname}
+          {firstname} {lastname}
         </Card.Title>
 
-        {profile.bio && <p>{profile.bio}</p>}
+        {bio && <p>{bio}</p>}
       </Card.Header>
 
       <Card.Text className="d-flex gap-2 justify-content-center mt-4">
-        {profile.linkedinProfile && (
-          <SocialLink href={profile.linkedinProfile} type="linkedin" />
-        )}
-        {profile.twitterProfile && (
-          <SocialLink href={profile.twitterProfile} type="twitter" />
-        )}
-        {profile.instagramProfile && (
-          <SocialLink href={profile.instagramProfile} type="instagram" />
-        )}
-        {profile.facebookProfile && (
-          <SocialLink href={profile.facebookProfile} type="facebook" />
+        {Object.entries(socials).map(
+          (social, index) =>
+            social[1] && (
+              <SocialLink
+                key={`${social[0]}-${id}`}
+                href={social[1]}
+                type={`${social[0]}`.slice(0, -7)}
+              />
+            )
         )}
       </Card.Text>
     </CardBase>
