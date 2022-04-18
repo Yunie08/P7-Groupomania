@@ -29,8 +29,7 @@ const LoginForm = () => {
     } catch (err) {
       if (err.response.status === 429) {
         setError("Trop de tentatives de connexion, réessayez dans 15 minutes");
-      }
-      if (err.response.status === 401) {
+      } else if (err.response.status === 401) {
         setError(err?.response?.data?.message);
       } else {
         setError("Oups! Veuillez réessayer plus tard.");
