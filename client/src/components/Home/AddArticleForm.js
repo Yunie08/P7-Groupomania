@@ -81,13 +81,13 @@ const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
             {formik.touched.content && formik.errors.content ? (
               <div className="invalid-feedback">{formik.errors.content}</div>
             ) : null}
+            {formik.values.image && (
+              <Container className="w-100 mt-4 mx-auto d-flex align-items-center">
+                <PreviewImage file={formik.values.image} type={"article"} />
+              </Container>
+            )}
           </div>
 
-          {formik.values.image && (
-            <Container className="w-100 d-flex justify-content-center mt-4">
-              <PreviewImage file={formik.values.image} type={"article"} />
-            </Container>
-          )}
           <div className="form-group">
             <label htmlFor="articleImage" className="mt-3">
               Image <small>(option)</small>

@@ -4,7 +4,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <Spinner animation="border" role="statut" className="m-5">
+    <Spinner animation="border" role="statut" className="my-5 mx-auto">
       <span className="visually-hidden">Chargement en cours...</span>
     </Spinner>
   );
