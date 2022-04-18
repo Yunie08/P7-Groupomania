@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 // Context
 import { AuthContext } from "../../utils/context/AuthContext";
@@ -38,6 +39,13 @@ const NavStyled = styled(Nav)`
 
 function MainHeader() {
   const { currentUser, logout } = useContext(AuthContext);
+  // once ready it returns the 'window.location' object
+  const location = useLocation();
+  const [url, setUrl] = useState(null);
+  // When location is read indicate which link should be active
+  useEffect(() => {
+    setUrl(location.pathname);
+  }, [location]);
 
   return (
     <>
@@ -55,13 +63,21 @@ function MainHeader() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <NavStyled className="ms-auto">
-              <Nav.Link as={Link} eventKey={1} to="/home">
+              <Nav.Link
+                as={Link}
+                eventKey={1}
+                to="/home"
+                active={false}
+                className={url === "/home" && "active"}
+              >
                 Accueil
               </Nav.Link>
               <Nav.Link
                 as={Link}
                 eventKey={2}
                 to={`/profile/${currentUser.userId}`}
+                active={false}
+                className={url && url.startsWith("/profile") && "active"}
               >
                 Profil
               </Nav.Link>
