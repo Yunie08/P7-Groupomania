@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 const TokenExpiredMessage = ({ setTokenExpired }) => {
   const [show, setShow] = useState(true);
 
+  // when modal is closed, we reinitialize tokenExpired to false
   useEffect(() => {
     !show && setTokenExpired(false);
   }, [show]);

@@ -40,7 +40,7 @@ const AxiosInterceptor = () => {
         logout();
       }
 
-      return Promise.reject(error);
+      throw error;
     };
 
     const interceptor = customAxios.interceptors.response.use(
