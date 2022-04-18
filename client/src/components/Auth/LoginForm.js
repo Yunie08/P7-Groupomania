@@ -27,10 +27,12 @@ const LoginForm = () => {
         navigate("/home");
       }
     } catch (err) {
-      if (err.response.status === 429) {
+      if (err.response?.status === 429) {
         setError("Trop de tentatives de connexion, réessayez dans 15 minutes");
-      } else if (err.response.status === 401) {
-        setError(err?.response?.data?.message);
+      } else if (err.response?.status === 401) {
+        setError(err.response?.data?.message);
+      } else if (!err.status) {
+        setError("Oups, problème de réseau!");
       } else {
         setError("Oups! Veuillez réessayer plus tard.");
       }

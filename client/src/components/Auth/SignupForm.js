@@ -26,10 +26,12 @@ const SignupForm = () => {
       setRegistered(true);
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      if (err.response?.status === 400) {
+      if (err.response?.status && err.response?.status === 400) {
         setError(err.response.data.message);
+      } else if (!err.status) {
+        setError("Oups, problème de réseau!");
       } else {
-        setError("Oups! Veuillez réessayer.");
+        setError("Oups! Veuillez réessayer plus tard.");
       }
     }
   };
