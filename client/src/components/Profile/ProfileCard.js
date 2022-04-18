@@ -37,7 +37,7 @@ const ProfileCard = ({ profile }) => {
 
       <Card.Text className="d-flex gap-2 justify-content-center mt-4">
         {Object.entries(socials).map(
-          (social, index) =>
+          (social) =>
             social[1] && (
               <SocialLink
                 key={`${social[0]}-${id}`}

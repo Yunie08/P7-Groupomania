@@ -8,30 +8,32 @@ module.exports = (Model) =>
   catchAsync(async (req, res, next) => {
     const reqUserId = req.auth.userId;
     const hasAccess = req.auth.isAuthorized;
-    let documentId;
-    // Depending on the type of document the user is trying to access to, we specify the parameter to check
+    let objectId;
+
+    // Depending on the object the user is trying to have access to, we specify the parameter to check
     if (Model === User) {
-      documentId = req.params.userId;
+      objectId = req.params.userId;
     } else if (Model === Article) {
-      documentId = req.params.articleId;
+      objectId = req.params.articleId;
     } else if (Model === Comment) {
-      documentId = req.params.commentId;
+      objectId = req.params.commentId;
     }
 
-    // We query the document the user is willing to access to in the database
-    const document = await Model.findOne({
+    // We query the document the user is willing to access in the database
+    const object = await Model.findOne({
       where: {
-        id: documentId,
+        id: objectId,
       },
     });
-    if (!document) {
+    if (!object) {
       return next(new AppError('Aucun élément trouvé avec cet ID', 404));
     }
 
     // Configuration of the id we want to check, depending on Model
-    const ownerId = Model === User ? document.id : document.userId;
+    const ownerId = Model === User ? object.id : object.userId;
 
-    // The user can access to the resource if they are the owner of the resource or have granted access
+    // The user can only have access to the resource if they are the owner of the resource
+    // or if their role grant them access to it
     if (ownerId !== reqUserId && !hasAccess) {
       return next(new AppError('Requête non autorisée', 403));
     }

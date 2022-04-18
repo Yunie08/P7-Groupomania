@@ -39,10 +39,12 @@ const NavStyled = styled(Nav)`
 
 function MainHeader() {
   const { currentUser, logout } = useContext(AuthContext);
-  // once ready it returns the 'window.location' object
+
+  // once readyn, returns the 'window.location' object
   const location = useLocation();
   const [url, setUrl] = useState(null);
-  // When location is read indicate which link should be active
+
+  // When location is read, indicate which link should be active
   useEffect(() => {
     setUrl(location.pathname);
   }, [location]);

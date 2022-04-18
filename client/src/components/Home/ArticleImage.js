@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import React from "react";
-
 const ImageContainer = styled.div`
   max-width: 450px;
 `;

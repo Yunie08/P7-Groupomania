@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.clear();
   };
 
-  // Values provided by this AuthContext
+  // Values and functions provided by this AuthContext
   const value = {
     currentUser,
     isAuthenticated,

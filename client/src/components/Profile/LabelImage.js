@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import colors from "../../utils/style/colors";
 
 const LabelStyled = styled.label`
   width: 130px;

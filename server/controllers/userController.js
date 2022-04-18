@@ -50,6 +50,7 @@ exports.updateUser = catchAsync(async (req, res, next) => {
   const updatedData = req.body;
   const { userId } = req.params;
 
+  // If no image is attached, imageUrl is set to undefined to avoid overwritting current image
   const imageUrl = req.file
     ? `${req.protocol}://${req.get('host')}/images/user/${req.file.filename}`
     : undefined;
@@ -67,12 +68,10 @@ exports.updateUser = catchAsync(async (req, res, next) => {
       )
     );
   }
-  // FIXME: article always return null ?
+
   res.status(200).json({
     status: 'success',
-    data: {
-      data: user,
-    },
+    message: "Le profil de l'utilisateur à été mis à jour",
   });
 });
 

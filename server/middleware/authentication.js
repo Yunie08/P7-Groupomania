@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
   try {
     let token;
-    // if an authentification token is provided
+    // Check if an authentification token is provided
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith('Bearer')
@@ -14,10 +14,11 @@ module.exports = (req, res, next) => {
       throw new Error('Requête non authentifiée');
     }
 
-    // Check token validity
+    // Check authentication token validity
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     const { userId, role } = decodedToken;
 
+    // Append userId and role to the request
     req.auth = { userId, role };
     next();
   } catch (error) {

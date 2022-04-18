@@ -5,14 +5,10 @@ import commentService from "../../services/commentService";
 
 // Components
 import { Formik, Field, Form } from "formik";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { StyledButton } from "../../utils/style/styles";
 
 // Validation schema
 import { commentSchema } from "../../utils/validation/commentSchema";
-
-// Style
-import styled from "styled-components";
 
 const AddComment = ({
   articleId,
@@ -25,6 +21,7 @@ const AddComment = ({
   const postComment = async ({ content }) => {
     try {
       await commentService.addComment(articleId, { content });
+      // Refresh comments list and toggle list if previously closed
       setCommentRefresh(true);
       setCommentsCount(commentsCount + 1);
     } catch (err) {
@@ -35,7 +32,7 @@ const AddComment = ({
   return (
     <Formik
       initialValues={{ content: "" }}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
+      onSubmit={(values, { resetForm }) => {
         postComment(values);
         resetForm();
       }}

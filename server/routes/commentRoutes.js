@@ -1,12 +1,17 @@
 const express = require('express');
 
+// Controller
+const commentController = require('../controllers/commentController');
+
+// Nested router
 const router = express.Router({ mergeParams: true });
 
+// Middlewares
 const authentication = require('../middleware/authentication');
 const grantAccess = require('../middleware/grantAccess');
 const authorization = require('../middleware/authorization');
-const commentController = require('../controllers/commentController');
 
+// Required models for authorization middleware
 const { Comment } = require('../models');
 
 const {
@@ -15,17 +20,11 @@ const {
 
 router
   .route('/')
-  .post(authentication, commentController.createComment)
+  .post(authentication, commentValidation, commentController.createComment)
   .get(authentication, commentController.getAllComment);
 
 router
   .route('/:commentId')
-  .put(
-    authentication,
-    authorization(Comment),
-    commentValidation,
-    commentController.updateComment
-  )
   .delete(
     authentication,
     grantAccess('moderator', 'admin'),

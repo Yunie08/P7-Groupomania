@@ -22,6 +22,7 @@ const ProfileForm = ({ profile }) => {
 
   const updateUser = async (values) => {
     try {
+      // Formatting data if an image is attached
       const isMultipart = values?.profilePic ? true : false;
       const data = dataFormatter(values, isMultipart);
       await userService.updateUser(profile.id, data, isMultipart);
@@ -46,12 +47,12 @@ const ProfileForm = ({ profile }) => {
           : "",
         profilePic: null,
       }}
-      onSubmit={(values, { setSubmitting }, errors) => {
+      onSubmit={(values) => {
         updateUser(values);
       }}
       validationSchema={userSchema}
     >
-      {(formik, isSubmitting, values) => (
+      {(formik) => (
         <Form className="pt-2 d-flex flex-column">
           <div className="form-group text-center align-self-center position-relative">
             <LabelImage htmlFor="profilePic">

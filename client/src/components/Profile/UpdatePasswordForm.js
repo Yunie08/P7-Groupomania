@@ -18,9 +18,13 @@ const UpdatePasswordForm = ({ setModalShow, userId }) => {
     try {
       await userService.updateUserPassword(userId, values);
       setPasswordUpdated(true);
-      setTimeout(() => setModalShow(false), 3000);
+      setTimeout(() => setModalShow(false), 2000);
     } catch (err) {
-      setError(err.response.data.message);
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("Oups! Veuillez réessayer plus tard");
+      }
     }
   };
 
@@ -31,7 +35,7 @@ const UpdatePasswordForm = ({ setModalShow, userId }) => {
         updatedPassword: "",
         updatedPasswordConfirm: "",
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values) => {
         handleSubmit(values);
       }}
       validationSchema={passwordSchema}

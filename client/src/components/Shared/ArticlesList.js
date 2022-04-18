@@ -23,8 +23,10 @@ const ArticlesList = ({
     const getArticles = async () => {
       setDataLoading(true);
       let response;
+      // For the profile page, we fetch the articles from a specific user
       if (filter && filter === "byUser") {
         response = await userService.getArticlesFromUser(userId);
+        // From the home pagen we fetch all the articles
       } else {
         response = await articleService.getAllArticles();
       }
@@ -34,6 +36,7 @@ const ArticlesList = ({
       }
       setDataLoading(false);
     };
+    // The list is refetched when the user adds a new article or visits a profile
     if (articleListEdited || filter === "byUser") {
       getArticles();
     }

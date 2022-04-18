@@ -18,7 +18,7 @@ From the _server_ directory:
 - Run `npm run db-init` command to initialize the MySql database and populate it with mock data.
 - Run `npm start` command to launch the API
 
-At this point the server should be running on port 8080 and should see the following message in your terminal :
+At this point the server should be running on port 8080 and the following messages should be displayed in your terminal :
 
 ```bash
 Listening on port 8080
@@ -32,6 +32,8 @@ From the _client_ directory:
 
 - Run `npm install` command to install the frontend dependencies.
 - Run `npm start` to launch the frontend server in development mode.
+
+At this point, the application should automatically start running in your web browser.
 
 ### 4- Demo accounts (admin & moderator)
 

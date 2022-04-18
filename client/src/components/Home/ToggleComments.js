@@ -16,30 +16,25 @@ const ToggleComments = ({
   setCommentsCount,
 }) => {
   const [open, setOpen] = useState(false);
-  const [isDataLoading, setDataLoading] = useState();
   const [error, setError] = useState(false);
   const [commentsList, setCommentsList] = useState([]);
 
   const getComments = async () => {
-    setDataLoading(true);
     try {
       const response = await commentService.getAllComments(articleId);
       setCommentsList(response.data);
     } catch (err) {
       setError(err.response.data.message);
-    } finally {
-      setDataLoading(false);
     }
   };
 
-  // If new comment added, show comments
+  // If the user publishes a new comment, we toggle the comment list open
   useEffect(() => {
     if (commentRefresh) {
       getComments();
       !open && commentRefresh && setOpen(true);
       setCommentRefresh(false);
     }
-
     return () => setCommentRefresh(false);
   }, [commentRefresh]);
 

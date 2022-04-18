@@ -41,29 +41,6 @@ exports.createComment = catchAsync(async (req, res, next) => {
   res.status(201).json({ status: 'success', data: comment });
 });
 
-// UPDATE COMMENT
-exports.updateComment = catchAsync(async (req, res, next) => {
-  const updatedData = req.body;
-  const { commentId } = req.params;
-
-  const comment = await Comment.update(
-    { ...updatedData },
-    { where: { id: commentId }, returning: true, plain: true }
-  );
-
-  if (comment[1] === 0) {
-    return next(new AppError('No comment found with that ID', 404));
-  }
-
-  // FIXME: article always return null ?
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: comment,
-    },
-  });
-});
-
 // DELETE COMMENT
 exports.deleteComment = catchAsync(async (req, res, next) => {
   const { commentId } = req.params;

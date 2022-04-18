@@ -19,7 +19,7 @@ const LikeButton = ({
   const [error, setError] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
-  // Check if a user likes this article
+  // Check if current user likes this article
   const checkLikes = (likes, user) => {
     let isLikedByUser = false;
     likes.forEach((like) => {
@@ -30,7 +30,7 @@ const LikeButton = ({
     return isLikedByUser;
   };
 
-  // Get list of users liking article
+  // Get number of user liking the article
   useEffect(() => {
     const getIsLiked = async () => {
       try {
@@ -39,7 +39,7 @@ const LikeButton = ({
         setLikedByUser(isLikedByUser);
         setLikesCount(response.data.length);
       } catch (err) {
-        console.log(err);
+        setError(err);
       }
     };
     getIsLiked();
@@ -50,7 +50,10 @@ const LikeButton = ({
       // If the user previously liked the article, we send a "false" value to cancel the like and vice-versa
       const newLikeValue = likedByUser ? false : true;
       await likeService.sendLike(articleId, { isLiked: newLikeValue });
+      // Toggle like button color
       setLikedByUser(!likedByUser);
+      // If we sent a 'true' value (ie. the user liked the article) : likesCount incremented
+      // If we sent a 'false' value (ie. the user unliked the article) : likesCount decremented
       newLikeValue
         ? setLikesCount(likesCount + 1)
         : setLikesCount(likesCount - 1);

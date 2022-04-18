@@ -2,9 +2,14 @@ const express = require('express');
 
 const router = express.Router();
 
+// Nested routes
 const commentRoutes = require('./commentRoutes');
 const likeRoutes = require('./likeRoutes');
 
+// Controllers
+const articleController = require('../controllers/articleController');
+
+// Middlewares
 const authentication = require('../middleware/authentication');
 const grantAccess = require('../middleware/grantAccess');
 const authorization = require('../middleware/authorization');
@@ -13,7 +18,8 @@ const sharp = require('../middleware/sharp');
 const {
   articleValidation,
 } = require('../middleware/validation/articleValidation');
-const articleController = require('../controllers/articleController');
+
+// Required models for authorization middleware
 const { Article } = require('../models');
 
 // Articles
@@ -37,7 +43,7 @@ router
     articleController.deleteArticle
   );
 
-// Comments and Likes
+// Nested Comments and Likes routes
 router.use('/:articleId/comments', commentRoutes);
 router.use('/:articleId/likes', likeRoutes);
 

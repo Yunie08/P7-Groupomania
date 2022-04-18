@@ -10,9 +10,12 @@ const PrivateRoutes = ({ ...restofProps }) => {
   let { userId } = useParams();
   userId = parseInt(userId);
 
+  // If the current user is the owner of the profile
+  // they have access to the profile update page
   return currentUser.userId === userId ? (
     <Outlet />
   ) : (
+    // otherwise they are redirected to the profile page
     <Navigate to={`/profile/${userId}`} />
   );
 };

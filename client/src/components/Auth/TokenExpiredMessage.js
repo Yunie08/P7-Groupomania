@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+
+// Components
 import Modal from "react-bootstrap/Modal";
 
 const TokenExpiredMessage = ({ setTokenExpired }) => {

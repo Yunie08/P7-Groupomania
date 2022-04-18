@@ -1,9 +1,13 @@
 const express = require('express');
 
+// Nested router
 const router = express.Router({ mergeParams: true });
 
-const auth = require('../middleware/authentication');
+// Controllers
 const likeController = require('../controllers/likeController');
+
+// Middlewares
+const auth = require('../middleware/authentication');
 
 router
   .route('/')

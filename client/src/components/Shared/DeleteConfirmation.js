@@ -13,6 +13,7 @@ import userService from "../../services/userService";
 import Modal from "react-bootstrap/Modal";
 import { StyledButton } from "../../utils/style/styles";
 
+// Delete confirmation modal used for all the delete actions
 const DeleteConfirmation = ({
   componentToDelete,
   articleId,
@@ -30,6 +31,7 @@ const DeleteConfirmation = ({
 
   const deleteItem = async () => {
     try {
+      // Different actions depending on deleted resource
       switch (componentToDelete) {
         case "article":
           await articleService.deleteArticle(articleId);
@@ -55,6 +57,8 @@ const DeleteConfirmation = ({
       }
     } catch (error) {}
   };
+
+  // Customized confirmation message depending on deleted resource
   let message = "Voulez-vous vraiment supprimer ";
   switch (componentToDelete) {
     case "article":

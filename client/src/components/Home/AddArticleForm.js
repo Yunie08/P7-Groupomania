@@ -22,9 +22,11 @@ const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
 
   const postArticle = async (values) => {
     try {
+      // Data formatting if image
       const isMultipart = values?.image ? true : false;
       const data = dataFormatter(values, isMultipart);
       await articleService.addArticle(data, isMultipart);
+      // Trigger ArticleList refresh
       setArticleListEdited(true);
       setModalShow(false);
     } catch (err) {
