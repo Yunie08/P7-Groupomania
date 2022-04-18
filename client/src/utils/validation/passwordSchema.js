@@ -9,13 +9,11 @@ export const passwordSchema = Yup.object({
     .trim()
     .matches(
       passwordPattern,
-      "Doit contenir au minimum 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial (!@#$%^&*)"
+      "Doit contenir au minimum 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 symbole (!@#$%^&*)"
     )
-    .required("Nouveau mode passe requis"),
-  updatedPasswordConfirm: Yup.string()
-    .oneOf(
-      [Yup.ref("updatedPassword"), null],
-      "Les mots de passe ne correspondent pas"
-    )
-    .strip(),
+    .required("Nouveau mot de passe requis"),
+  updatedPasswordConfirm: Yup.string().oneOf(
+    [Yup.ref("updatedPassword"), null],
+    "Les mots de passe ne correspondent pas"
+  ),
 });

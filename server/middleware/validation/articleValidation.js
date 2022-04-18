@@ -10,9 +10,9 @@ const articleSchema = Yup.object({
     .required('Veuillez renseigner un titre'),
   content: Yup.string()
     .trim()
-    .min(20, 'Le titre doit contenir au moins 20 caractères')
+    .min(15, 'Le titre doit contenir au moins 15 caractères')
     .max(5000, 'Le titre doit contenir moins de 5000 caractères')
-    .required('Veuillez renseigner du contenu texte'),
+    .required('Veuillez renseigner du contenu pour votre article'),
 });
 
 exports.articleValidation = catchAsync(async (req, res, next) => {

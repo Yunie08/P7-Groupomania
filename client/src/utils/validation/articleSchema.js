@@ -10,7 +10,7 @@ export const articleSchema = Yup.object({
     .required("Veuillez renseigner un titre"),
   content: Yup.string()
     .trim()
-    .min(20, "L'article doit contenir au moins 20 caractères")
+    .min(15, "L'article doit contenir au moins 15 caractères")
     .max(5000, "L'article doit contenir moins de 5000 caractères")
     .required("Veuillez renseigner du contenu pour votre article"),
   image: Yup.mixed()

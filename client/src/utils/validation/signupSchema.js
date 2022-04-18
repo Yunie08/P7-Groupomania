@@ -10,17 +10,17 @@ export const signupSchema = Yup.object({
     .required("Adresse email requise"),
   firstname: Yup.string()
     .trim()
-    .matches(namePattern, "Prénom invalide")
+    .matches(namePattern, "Prénom non valide")
     .required("Prénom requis"),
   lastname: Yup.string()
     .trim()
-    .matches(namePattern, "Nom invalide")
+    .matches(namePattern, "Nom non valide")
     .required("Nom requis"),
   password: Yup.string()
     .trim()
     .matches(
       passwordPattern,
-      "Doit contenir au minimum 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial (!@#$%^&*)"
+      "Doit contenir au minimum 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 symbole (!@#$%^&*)"
     )
     .required("Mot de passe requis"),
   passwordConfirm: Yup.string()
