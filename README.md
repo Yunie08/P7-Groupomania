@@ -13,7 +13,7 @@ Fullstack implementation of an corporate social network
 
 From the _server_ directory:
 
-- Remove the .sample extension from the .env file and fill the `DB_USERNAME` and `DB_PASSWORD` fields with your MySQL infos.
+- Remove the .sample extension from the .env file and fill the `DB_USERNAME` and `DB_PASSWORD` fields with your MySQL login infos.
 - Run `npm install` command to install the backend dependencies.
 - Run `npm run db-init` command to initialize the MySql database and populate it with mock data.
 - Run `npm start` command to launch the API
