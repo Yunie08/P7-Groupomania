@@ -31,7 +31,7 @@ const Profile = () => {
         const response = await userService.getUser(userId);
         setProfile(response?.data?.user);
       } catch (error) {
-        if (error.response?.status === 404) {
+        if (error.response?.status === 404 || error.response?.status === 500) {
           setError(error.response?.status);
         } else {
           setError(error);
@@ -47,6 +47,8 @@ const Profile = () => {
   return (
     <main className="d-flex flex-column align-items-center mt-5 py-5">
       {isLoading ? (
+        <Loader />
+      ) : ApiError === 500 ? (
         <Loader />
       ) : (
         <>

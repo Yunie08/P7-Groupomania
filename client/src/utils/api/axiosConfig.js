@@ -7,9 +7,13 @@ import { AuthContext } from "../context/AuthContext";
 // Components
 import TokenExpiredMessage from "../../components/Auth/TokenExpiredMessage";
 
+const getHost = () => {
+  return process.env.REACT_APP_BASE_URL_PROD || "http://localhost:8080/api";
+};
+
 // Axios configuration
 const customAxios = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: getHost(),
   timeout: 10000,
 });
 
