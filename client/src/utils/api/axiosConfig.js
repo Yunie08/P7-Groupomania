@@ -7,9 +7,14 @@ import { AuthContext } from "../context/AuthContext";
 // Components
 import TokenExpiredMessage from "../../components/Auth/TokenExpiredMessage";
 
+const getBaseUrl = () => {
+  return process.env.REACT_APP_BASE_URL
+    ? process.env.REACT_APP_BASE_URL
+    : "http://localhost:8080/api";
+};
 // Axios configuration
 const customAxios = axios.create({
-  baseURL: "https://groupomania-heroku-api.herokuapp.com/api",
+  baseURL: getBaseUrl(),
   timeout: 10000,
 });
 
@@ -33,7 +38,7 @@ const AxiosInterceptor = () => {
           error.response.request.responseURL ===
             "http://localhost:8080/api/auth/login" ||
           error.response.request.responseURL ===
-            "https://groupomania-heroku-api.herokuapp.com/api"
+            `${process.env.REACT_APP_BASE_URL}/auth/login`
         )
       ) {
         // it means that the json web token is expired or malformed
