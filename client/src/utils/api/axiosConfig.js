@@ -13,7 +13,7 @@ const getHost = () => {
 
 // Axios configuration
 const customAxios = axios.create({
-  baseURL: getHost(),
+  baseURL: process.env.REACT_APP_BASE_URL_PROD,
   timeout: 10000,
 });
 
