@@ -46,7 +46,7 @@ module.exports = {
           role: 'user',
           firstname: 'Pierre',
           lastname: 'Duschesnes',
-          profilePic: 'http://localhost:8080/images/user/default-profile.png',
+          profilePic: 'https://i.ibb.co/QNr5SJL/default-profile.png',
           linkedinProfile: 'https://www.linkedin.com/',
           twitterProfile: 'https://www.linkedin.com/',
           facebookProfile: '',

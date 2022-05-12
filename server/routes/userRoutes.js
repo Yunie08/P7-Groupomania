@@ -15,6 +15,7 @@ const {
 } = require('../middleware/validation/passwordValidation');
 const multer = require('../middleware/multer');
 const sharp = require('../middleware/sharp');
+const cloudinary = require('../middleware/cloudinary');
 
 // Required models for authorization middleware
 const { User } = require('../models');
@@ -27,7 +28,7 @@ router
     authentication,
     authorization(User),
     multer,
-    sharp,
+    cloudinary,
     userValidation,
     userCtrl.updateUser
   );
