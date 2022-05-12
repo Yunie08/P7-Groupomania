@@ -6,14 +6,13 @@ module.exports = {
       'users',
       [
         {
-          email: 'inOqvnuL1nJ3s/neTSQki1cCcBppsGmFeavT/HAi42Q=',
+          email: 'g61WIeHVEFDk/HGspj1ZwNr1O84WZnMmUGgnOOE29wY=',
           password:
-            '$2b$10$4SF7v0DYGeIbP2jTtISdRuHpDR9v8lSfcASDlFM6WsQ7Sv/t8cWRW',
+            '$2b$10$qiE6JA39dc56CR4ozPOV7e5In0meUTGkP5Eh4Bq.2WjQodnxw7yg2',
           role: 'admin',
           firstname: 'Amy',
           lastname: 'Garcia',
-          profilePic:
-            'http://localhost:8080/images/user/seed-user11650100624104.jpg',
+          profilePic: 'https://i.ibb.co/X3v1BZj/seed-user11650100624104.jpg',
           linkedinProfile: 'https://www.linkedin.com/',
           twitterProfile: 'https://www.twitter.com/',
           facebookProfile: 'https://www.facebook.com/',
@@ -21,16 +20,16 @@ module.exports = {
           bio: "A mon bureau, les pieds dans l'eau",
           createdAt: new Date(),
           updatedAt: new Date(),
+          id: 1,
         },
         {
-          email: 'HdMshk78RZcCk5orqOWT+ge0nP0R35tyKWZ/qIrFbEY=',
+          email: 'GXjXZIFYfLuKsMMomZOayy1rYpSyECI8vYmkJj44EiY=',
           password:
-            '$2b$10$UHRaBNrferUhvqHLYNgyTeqKM1EhZzgJOlJSx2tooAEjLC8eIk20O',
+            '$2b$10$/vZiAoa6QUxCVWBngyDBd.dv5Sul9kdM5cTxXwrAjQtFVlcbqLNp.',
           role: 'moderator',
           firstname: 'Heloïse',
           lastname: 'Liaut',
-          profilePic:
-            'http://localhost:8080/images/user/seed-user21650100892532.png',
+          profilePic: 'https://i.ibb.co/PTHX3RB/seed-user21650100892532.png',
           linkedinProfile: 'https://www.linkedin.com/',
           twitterProfile: '',
           facebookProfile: '',
@@ -38,11 +37,12 @@ module.exports = {
           bio: 'Travailler pour vivre et non pas vivre pour travailler',
           createdAt: new Date(),
           updatedAt: new Date(),
+          id: 2,
         },
         {
-          email: 'dOBvKyaypp6nXXFXgkqYLCOVHMXPEmd44ZmA2PYqkcE=',
+          email: 'fA0gYdDlSkK7RTzKOi6GX3q8A3+c+YDS51dTuYp/c1Q=',
           password:
-            '$2b$10$FCiDFaWNCWLh6a/QebKl8.YS.SfHmpw3vyDrryuQcLE04O9YDLay6',
+            '$2b$10$qNlfIUOObRRrRKxXzjVc1eoK3.SHXzBOLsTmJCEzi7BuNCw48UMVi',
           role: 'user',
           firstname: 'Pierre',
           lastname: 'Duschesnes',
@@ -54,6 +54,7 @@ module.exports = {
           bio: "Passionné d'aviation.",
           createdAt: new Date(),
           updatedAt: new Date(),
+          id: 3,
         },
       ],
       {}

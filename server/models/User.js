@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       profilePic: {
         type: DataTypes.STRING,
-        defaultValue: 'http://localhost:8080/images/user/default-profile.png',
+        defaultValue: 'https://i.ibb.co/QNr5SJL/default-profile.png',
       },
       linkedinProfile: DataTypes.STRING,
       twitterProfile: DataTypes.STRING,
