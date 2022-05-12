@@ -51,9 +51,7 @@ exports.updateUser = catchAsync(async (req, res, next) => {
   const { userId } = req.params;
 
   // If no image is attached, imageUrl is set to undefined to avoid overwritting current image
-  const imageUrl = req.file
-    ? `${req.protocol}://${req.get('host')}/images/user/${req.file.filename}`
-    : undefined;
+  const imageUrl = req.file ? req.file.url : undefined;
 
   const user = await User.update(
     { ...updatedData, profilePic: imageUrl },

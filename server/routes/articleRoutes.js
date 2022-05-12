@@ -18,6 +18,7 @@ const sharp = require('../middleware/sharp');
 const {
   articleValidation,
 } = require('../middleware/validation/articleValidation');
+const cloudinary = require('../middleware/cloudinary');
 
 // Required models for authorization middleware
 const { Article } = require('../models');
@@ -29,7 +30,7 @@ router
   .post(
     authentication,
     multer,
-    sharp,
+    cloudinary,
     articleValidation,
     articleController.createArticle
   );
