@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import colors from "./colors";
 
 import Button from "react-bootstrap/Button";
@@ -63,7 +63,7 @@ export const SendButton = styled(Button)`
   }
 `;
 
-const backgroundPosition = styled.css`
+const backgroundPosition = css`
   background-position: bottom -80px right -80px;
   background-attachment: fixed;
   background-size: 300px auto;
