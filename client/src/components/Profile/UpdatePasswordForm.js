@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // Components
 import { Formik, Field, Form } from "formik";
-import { StyledButton } from "../../utils/style/styles";
+import FetchButton from "../Shared/FetchButton";
 
 // Services and helpers
 import userService from "../../services/userService";
@@ -13,9 +13,11 @@ import { passwordSchema } from "../../utils/validation/passwordSchema";
 const UpdatePasswordForm = ({ setModalShow, userId }) => {
   const [error, setError] = useState(null);
   const [passwordUpdated, setPasswordUpdated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (values) => {
     try {
+      setIsLoading(true);
       await userService.updateUserPassword(userId, values);
       setPasswordUpdated(true);
       setTimeout(() => setModalShow(false), 2000);
@@ -25,6 +27,8 @@ const UpdatePasswordForm = ({ setModalShow, userId }) => {
       } else {
         setError("Oups! Veuillez réessayer plus tard");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -112,12 +116,14 @@ const UpdatePasswordForm = ({ setModalShow, userId }) => {
           </div>
 
           <div className="form-group d-flex flex-column align-items-center">
-            <StyledButton
+            <FetchButton
               type="submit"
+              isLoading={isLoading}
+              loaderType="button"
               className="btn btn-primary mt-4 rounded-pill mb-2"
             >
               Envoyer
-            </StyledButton>
+            </FetchButton>
           </div>
         </Form>
       )}

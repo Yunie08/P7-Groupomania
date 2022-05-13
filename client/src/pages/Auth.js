@@ -11,6 +11,7 @@ import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 
 // Components
+import { MainAuth } from "../utils/style/styles";
 import LoginForm from "../components/Auth/LoginForm";
 import SignupForm from "../components/Auth/SignupForm";
 import { MainCard } from "../utils/style/styles";
@@ -31,7 +32,7 @@ const TabsStyled = styled(Tabs)`
 
 function Auth() {
   return (
-    <main className="d-md-flex justify-content-center align-items-center vh-100">
+    <MainAuth className="d-md-flex justify-content-center align-items-center vh-100">
       <MainCard className="rounded-3 shadow px-md-4 mt-4">
         <Card.Body>
           <Row className="py-md-4">
@@ -67,7 +68,7 @@ function Auth() {
           </Row>
         </Card.Body>
       </MainCard>
-    </main>
+    </MainAuth>
   );
 }
 

@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import userService from "../services/userService";
 
 // Components
+import { Main } from "../utils/style/styles";
 import ProfileUpdateForm from "../components/Profile/ProfileUpdateForm";
 import CardBase from "../components/Shared/CardBase";
 import Loader from "../components/Shared/Loader";
@@ -17,6 +18,12 @@ import styled from "styled-components";
 
 const ProfileUpdateTitle = styled.h1`
   margin-bottom: 90px;
+`;
+
+const MainProfileUpdate = styled(Main)`
+  button {
+    width: 250px;
+  }
 `;
 
 const ProfileUpdate = () => {
@@ -47,7 +54,7 @@ const ProfileUpdate = () => {
   }, [userId]);
 
   return (
-    <main className="d-flex flex-column align-items-center py-3">
+    <MainProfileUpdate className="d-flex flex-column align-items-center py-3">
       <ProfileUpdateTitle>Modifier votre profil</ProfileUpdateTitle>
       {isLoading ? (
         <Loader />
@@ -72,7 +79,7 @@ const ProfileUpdate = () => {
           <DeleteButtonUser userId={userId} />
         </>
       )}
-    </main>
+    </MainProfileUpdate>
   );
 };
 

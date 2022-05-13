@@ -8,7 +8,7 @@ import authService from "../../services/authService";
 import { Formik, Field, Form } from "formik";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { StyledButton } from "../../utils/style/styles";
+import FetchButton from "../Shared/FetchButton";
 
 // Validation schema
 import { signupSchema } from "../../utils/validation/signupSchema";
@@ -16,11 +16,13 @@ import { signupSchema } from "../../utils/validation/signupSchema";
 const SignupForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setRegistered] = useState(false);
 
   // Send registering request to API
   const signup = async (userData) => {
     try {
+      setIsLoading(true);
       setRegistered(false);
       await authService.register(userData);
       setRegistered(true);
@@ -33,6 +35,8 @@ const SignupForm = () => {
       } else {
         setError("Oups! Veuillez réessayer plus tard.");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -47,9 +51,7 @@ const SignupForm = () => {
       }}
       onSubmit={(values, { setSubmitting }) => {
         const { passwordConfirm, ...userData } = values;
-        setSubmitting(true);
         signup(userData);
-        setSubmitting(false);
       }}
       validationSchema={signupSchema}
     >
@@ -171,16 +173,14 @@ const SignupForm = () => {
           </div>
 
           <div className="form-group d-flex flex-column align-items-center">
-            <StyledButton
+            <FetchButton
               type="submit"
-              disabled={isSubmitting}
+              isLoading={isLoading}
+              loaderType="button"
               className="btn btn-primary mt-3 rounded-pill"
             >
-              {isSubmitting && (
-                <span className="spinner-border spinner-border-sm mr-1"></span>
-              )}
               S'inscrire
-            </StyledButton>
+            </FetchButton>
           </div>
         </Form>
       )}

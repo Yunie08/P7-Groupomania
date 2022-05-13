@@ -5,7 +5,7 @@ import commentService from "../../services/commentService";
 
 // Components
 import { Formik, Field, Form } from "formik";
-import { StyledButton } from "../../utils/style/styles";
+import FetchButton from "../Shared/FetchButton";
 
 // Validation schema
 import { commentSchema } from "../../utils/validation/commentSchema";
@@ -17,15 +17,19 @@ const AddComment = ({
   commentsCount,
 }) => {
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const postComment = async ({ content }) => {
     try {
+      setIsLoading(true);
       await commentService.addComment(articleId, { content });
       // Refresh comments list and toggle list if previously closed
       setCommentRefresh(true);
       setCommentsCount(commentsCount + 1);
     } catch (err) {
       setError(err.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -64,10 +68,16 @@ const AddComment = ({
             {error && <div className="invalid-feedback">{error}</div>}
           </div>
 
-          <StyledButton $submit $outline type="submit">
+          <FetchButton
+            isLoading={isLoading}
+            loaderType="button"
+            $submit
+            $outline
+            type="submit"
+          >
             <span className="sr-only">Envoyer le commentaire</span>
             <i className="fa-solid fa-paper-plane" aria-hidden="true"></i>
-          </StyledButton>
+          </FetchButton>
         </Form>
       )}
     </Formik>

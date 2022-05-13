@@ -4,6 +4,9 @@ import colors from "./colors";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+import backgroundIcon from "../../assets/icon-light.svg";
+import backgroundIconWhite from "../../assets/icon-white.svg";
+
 const primaryColor = colors.primary;
 const secondaryDarkColor = colors.secondaryDark;
 
@@ -15,6 +18,8 @@ export const StyledButton = styled(Button)`
   text-decoration: none;
   min-width: ${(props) => !props.$submit && "180px"};
   max-width: ${(props) => props.$modal && "160px"};
+  width: ${(props) => props.$submit && "45px"};
+  height: ${(props) => (props.$submit ? "auto" : "45px")};
   color: ${(props) => props.$outline && "inherit"};
   background-color: ${(props) =>
     props.$outline ? "transparent" : primaryColor};
@@ -56,4 +61,35 @@ export const SendButton = styled(Button)`
     border-color: ${secondaryDarkColor};
     color: ${secondaryDarkColor};
   }
+`;
+
+const backgroundPosition = styled.css`
+  background-position: bottom -80px right -80px;
+  background-attachment: fixed;
+  background-size: 300px auto;
+
+  @media screen and (min-width: 768px) {
+    background-size: 500px auto;
+    background-position: bottom -190px right -150px;
+  }
+  @media screen and (min-width: 992px) {
+    background-size: 650px auto;
+    background-position: bottom -250px right -200px;
+  }
+
+  @media screen and (min-width: 1400px) {
+    background-size: 750px auto;
+    background-position: bottom -290px right -230px;
+  }
+`;
+
+export const Main = styled.main`
+  min-height: 90vh;
+  background: url(${backgroundIcon}) no-repeat;
+  ${backgroundPosition}
+`;
+
+export const MainAuth = styled(Main)`
+  background: url(${backgroundIconWhite}) no-repeat, ${primaryColor};
+  ${backgroundPosition}
 `;

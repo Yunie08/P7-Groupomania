@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import colors from "./colors";
-import backgroundIcon from "../../assets/icon.svg";
 
 const StyledGlobalStyle = createGlobalStyle`
 
@@ -8,14 +7,6 @@ body {
   min-height: 100vh;
   font-family: "TruenoLight", Arial, Helvetica, sans-serif;
   color: ${colors.primary};
-  background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.7)
-    ),
-   url(${backgroundIcon}) no-repeat;
-  background-position: bottom -300px right -300px;
-  background-attachment: fixed;
 }
 
 h1 {

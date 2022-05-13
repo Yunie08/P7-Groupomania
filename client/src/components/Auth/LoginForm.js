@@ -13,14 +13,17 @@ import authService from "../../services/authService";
 // Components
 import { Formik, Field, Form } from "formik";
 import { StyledButton } from "../../utils/style/styles";
+import FetchButton from "../Shared/FetchButton";
 
 const LoginForm = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const loginHandler = async ({ email, password }) => {
     try {
+      setIsLoading(true);
       const response = await authService.login({ email, password });
       if (response?.data?.token) {
         login(response.data);
@@ -36,6 +39,8 @@ const LoginForm = () => {
       } else {
         setError("Oups! Veuillez réessayer plus tard.");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -87,12 +92,14 @@ const LoginForm = () => {
           </div>
 
           <div className="form-group d-flex flex-column align-items-center">
-            <StyledButton
+            <FetchButton
               type="submit"
+              isLoading={isLoading}
+              loaderType="button"
               className="btn btn-primary mt-4 rounded-pill mb-2"
             >
               Se connecter
-            </StyledButton>
+            </FetchButton>
           </div>
         </Form>
       )}

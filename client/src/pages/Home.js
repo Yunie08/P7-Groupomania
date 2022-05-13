@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 // Components
+import { Main } from "../utils/style/styles";
 import AddArticleModal from "../components/Home/AddArticleModal";
 import { StyledButton } from "../utils/style/styles";
 import ArticlesList from "../components/Shared/ArticlesList";
@@ -10,7 +11,7 @@ const Home = () => {
   const [articleListEdited, setArticleListEdited] = useState(true);
 
   return (
-    <main className="d-flex flex-column align-items-center py-3">
+    <Main className="d-flex flex-column align-items-center py-3">
       <h1>Un espace d'échange avec vos collègues</h1>
       <StyledButton
         $outline
@@ -30,7 +31,7 @@ const Home = () => {
         articleListEdited={articleListEdited}
         setArticleListEdited={setArticleListEdited}
       />
-    </main>
+    </Main>
   );
 };
 

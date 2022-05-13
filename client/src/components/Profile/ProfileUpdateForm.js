@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { StyledButton } from "../../utils/style/styles";
+import FetchButton from "../Shared/FetchButton";
 import PreviewImage from "../Shared/PreviewImage";
 import LabelImage from "./LabelImage";
 
@@ -18,10 +18,12 @@ import { userSchema } from "../../utils/validation/userSchema";
 
 const ProfileForm = ({ profile }) => {
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const updateUser = async (values) => {
     try {
+      setIsLoading(true);
       // Formatting data if an image is attached
       const isMultipart = values?.profilePic ? true : false;
       const data = dataFormatter(values, isMultipart);
@@ -29,6 +31,8 @@ const ProfileForm = ({ profile }) => {
       navigate(`/profile/${profile.id}`);
     } catch (err) {
       setError(err.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -254,12 +258,14 @@ const ProfileForm = ({ profile }) => {
           </Row>
           {error && <div className="text-danger text-center py-2">{error}</div>}
           <div className="form-group d-flex flex-column align-items-center">
-            <StyledButton
+            <FetchButton
               type="submit"
+              isLoading={isLoading}
+              loaderType="button"
               className="btn btn-primary rounded-pill my-2"
             >
               Confirmer les modifications
-            </StyledButton>
+            </FetchButton>
           </div>
         </Form>
       )}

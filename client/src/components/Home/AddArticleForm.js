@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // Components
 import { Formik, Field, Form } from "formik";
-import { StyledButton } from "../../utils/style/styles";
+import FetchButton from "../Shared/FetchButton";
 import PreviewImage from "../Shared/PreviewImage";
 
 // Services and helpers
@@ -19,9 +19,11 @@ const Container = styled.div`
 
 const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const postArticle = async (values) => {
     try {
+      setIsLoading(true);
       // Data formatting if image
       const isMultipart = values?.image ? true : false;
       const data = dataFormatter(values, isMultipart);
@@ -31,6 +33,8 @@ const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
       setModalShow(false);
     } catch (err) {
       setError(err.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -113,12 +117,14 @@ const AddArticleForm = ({ setModalShow, setArticleListEdited }) => {
           </div>
 
           <div className="form-group d-flex flex-column align-items-center">
-            <StyledButton
+            <FetchButton
               type="submit"
+              isLoading={isLoading}
+              loaderType="button"
               className="btn btn-primary mt-4 rounded-pill mb-2"
             >
               Publier
-            </StyledButton>
+            </FetchButton>
           </div>
         </Form>
       )}

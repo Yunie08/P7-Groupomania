@@ -7,6 +7,7 @@ import { AuthContext } from "../utils/context/AuthContext";
 import userService from "../services/userService";
 
 // Components
+import { Main } from "../utils/style/styles";
 import ProfileCard from "../components/Profile/ProfileCard";
 import { StyledButton } from "../utils/style/styles";
 import DeleteButtonUser from "../components/Profile/DeleteButtonUser";
@@ -45,7 +46,7 @@ const Profile = () => {
 
   if (ApiError === 404) return <PageNotFound />;
   return (
-    <main className="d-flex flex-column align-items-center mt-5 py-5">
+    <Main className="d-flex flex-column align-items-center mt-5 py-5">
       {isLoading ? (
         <Loader />
       ) : ApiError === 500 ? (
@@ -58,7 +59,7 @@ const Profile = () => {
               as={Link}
               to={`/profile/${currentUser.userId}/update`}
               $outline
-              className="rounded-pill text-center py-1 my-3"
+              className="rounded-pill d-flex align-items-center justify-content-center"
             >
               Modifier mon profil
             </StyledButton>
@@ -79,7 +80,7 @@ const Profile = () => {
           />
         </>
       )}
-    </main>
+    </Main>
   );
 };
 
