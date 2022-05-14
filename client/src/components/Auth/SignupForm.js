@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Context
+import { AuthContext } from "../../utils/context/AuthContext";
 
 // Service
 import authService from "../../services/authService";
@@ -14,6 +17,7 @@ import FetchButton from "../Shared/FetchButton";
 import { signupSchema } from "../../utils/validation/signupSchema";
 
 const SignupForm = () => {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +30,14 @@ const SignupForm = () => {
       setRegistered(false);
       await authService.register(userData);
       setRegistered(true);
-      setTimeout(() => navigate("/login"), 2000);
+      const response = await authService.login({
+        email: userData.email,
+        password: userData.password,
+      });
+      if (response?.data?.token) {
+        login(response.data);
+        setTimeout(() => navigate("/home"), 2000);
+      }
     } catch (err) {
       if (err.response?.status && err.response?.status === 400) {
         setError(err.response.data.message);
@@ -49,18 +60,18 @@ const SignupForm = () => {
         password: "",
         passwordConfirm: "",
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values) => {
         const { passwordConfirm, ...userData } = values;
         signup(userData);
       }}
       validationSchema={signupSchema}
     >
-      {(formik, isSubmitting, setFieldError) => (
+      {(formik) => (
         <Form onClick={() => setError(null)}>
           <Row>
             {isRegistered && (
               <div className="text-success text-center py-2">
-                Compte créé ! Vous allez être redirigé pour vous connecter.
+                Compte créé avec succès !
               </div>
             )}
             {error && (
