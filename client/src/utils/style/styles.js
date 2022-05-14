@@ -90,6 +90,7 @@ export const Main = styled.main`
 `;
 
 export const MainAuth = styled(Main)`
+  height: 100vh;
   background: url(${backgroundIconWhite}) no-repeat, ${primaryColor};
   ${backgroundPosition}
 `;
