@@ -20,7 +20,7 @@ export const signupSchema = Yup.object({
     .trim()
     .matches(
       passwordPattern,
-      "Doit contenir au minimum 8 caractères dont 1 majuscule, 1 minuscule, 1 chiffre et 1 symbole (!@#$%^&*)"
+      "Doit contenir au minimum 8 caractères dont 1 majuscule, 1 minuscule et 1 chiffre"
     )
     .required("Mot de passe requis"),
   passwordConfirm: Yup.string()
